@@ -1,4 +1,3 @@
-#include "replay.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -6,6 +5,8 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <vector>
+
+#include "replay.h"
 
 // send `libpath` to worker waiting on `sockpath` and get response
 response runOneTest(std::string sockpath, std::string libpath)
@@ -21,7 +22,6 @@ response runOneTest(std::string sockpath, std::string libpath)
   addr.sun_family = AF_UNIX;
   sockpath.copy(addr.sun_path, sockpath.size());
   addr.sun_path[sockpath.size()] = '\0';
-
 
   if (connect(sock, (sockaddr *)(&addr), sizeof(addr)) < 0) {
     close(sock);
@@ -85,10 +85,10 @@ int main(int argc, char **argv)
   auto libname = argv[1];
   auto responses = runAllTests(tests, libname);
 
-  for (const auto& response : responses) {
+  for (const auto& resp : responses) {
     std::cout << "===========================================" << std::endl;
-    std::cout << response.msg << std::endl;
-    std::cout << response.dist << std::endl;
-    std::cout << response.success << std::endl;
+    std::cout << resp.msg << std::endl;
+    std::cout << resp.dist << std::endl;
+    std::cout << resp.success << std::endl;
   }
 }

@@ -19,8 +19,6 @@
 
 #define KILL '\0'
 
-#define LIBPATH_MAX_LEN 100
-
 #define CANT_LOAD_LIB "unable to open library"
 #define CANT_LOAD_FUNC "unable to load function from library"
 
@@ -80,9 +78,9 @@ static inline void dump_worker_data(const char *sock_path)
 	fclose(out_file);
 } 
 
-size_t get_byte_dist(char a, char b)
+size_t get_byte_dist(uint8_t a, uint8_t b)
 {
-	return __builtin_popcount(a ^ b);
+	return __builtin_popcount((unsigned int)(a ^ b));
 }
 
 size_t get_mem_dist(void *a, void *b, size_t size)
@@ -90,7 +88,7 @@ size_t get_mem_dist(void *a, void *b, size_t size)
 	size_t i;
 	size_t dist = 0;
 	for (i = 0; i < size; i++) {
-		dist += get_byte_dist(((char *)a)[i], ((char *)b)[i]);
+		dist += get_byte_dist(((uint8_t *)a)[i], ((uint8_t *)b)[i]);
 	}
 
 	return dist;
