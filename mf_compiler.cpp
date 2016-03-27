@@ -1,10 +1,10 @@
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Mangler.h>
 #include <llvm/Support/raw_ostream.h>
-#include <llvm/Codegen/MachineFunction.h>
-#include <llvm/Codegen/AsmPrinter.h>
-#include <llvm/Codegen/MachineModuleInfo.h>
-#include <llvm/Codegen/MachineFunctionInitializer.h>
+#include <llvm/CodeGen/MachineFunction.h>
+#include <llvm/CodeGen/AsmPrinter.h>
+#include <llvm/CodeGen/MachineModuleInfo.h>
+#include <llvm/CodeGen/MachineFunctionInitializer.h>
 #include <llvm/MC/MCAsmInfo.h>
 #include <llvm/MC/MCContext.h>
 #include <llvm/MC/MCInstrInfo.h>
@@ -72,7 +72,13 @@ struct CopyMFInitializer : MachineFunctionInitializer {
   bool initializeMachineFunction(MachineFunction &MF) {
     //NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
     // move instructions from `TheMF` to `MF`
-    MF.splice(MF.begin(), TheMF->begin());
+    if (MF.getFunction() == TheMF->getFunction()) {
+      while (!TheMF->empty()) {
+        auto MBB = &TheMF->front();
+        TheMF->remove(MBB);
+        MF.push_front(MBB);
+      }
+    }
     return false;
   }
 };
@@ -93,7 +99,7 @@ bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutF
   CopyMFInitializer MFInit(MF);
   
   legacy::PassManager PM;
-  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_AssemblyFile, true, AsmPrinterId, nullptr, AsmPrinterId, &MFInit);
+  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_ObjectFile, true, AsmPrinterId, nullptr, nullptr, &MFInit);
   PM.run(M);
 
   Out.keep();

@@ -14,9 +14,9 @@
 #include <llvm/IR/Type.h>
 #include <llvm/Bitcode/BitcodeWriterPass.h>
 #include <llvm/Support/raw_ostream.h>
-#include <llvm/Codegen/MachineFunction.h>
-#include <llvm/Codegen/AsmPrinter.h>
-#include <llvm/Codegen/MachineModuleInfo.h>
+#include <llvm/CodeGen/MachineFunction.h>
+#include <llvm/CodeGen/AsmPrinter.h>
+#include <llvm/CodeGen/MachineModuleInfo.h>
 #include "llvm/MC/MCAsmInfo.h"
 #include "llvm/MC/MCContext.h"
 #include "llvm/MC/MCInstrInfo.h"
@@ -69,6 +69,8 @@
 #include "llvm/Target/TargetSubtargetInfo.h"
 #include <llvm/Transforms/Utils/CodeExtractor.h>
 #include "llvm/Support/TargetSelect.h"
+
+// TODO cleanup includes
 
 #include <string>
 
