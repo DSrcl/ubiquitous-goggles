@@ -4,6 +4,7 @@
 #include <llvm/Codegen/MachineFunction.h>
 #include <llvm/Codegen/AsmPrinter.h>
 #include <llvm/Codegen/MachineModuleInfo.h>
+#include <llvm/Codegen/MachineFunctionInitializer.h>
 #include <llvm/MC/MCAsmInfo.h>
 #include <llvm/MC/MCContext.h>
 #include <llvm/MC/MCInstrInfo.h>
@@ -16,6 +17,7 @@
 #include <llvm/Support/SystemUtils.h>
 #include <llvm/Support/FileSystem.h>
 #include <llvm/IR/LegacyPassManager.h>
+
 
 #include <string>
 #include <memory>
@@ -61,15 +63,40 @@ AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename, TargetMachi
   return Printer;
 }
 
+struct CopyMFInitializer : MachineFunctionInitializer {
+  MachineFunction *TheMF;
+  CopyMFInitializer(MachineFunction &MF) {
+    TheMF = &MF;
+  }
+
+  bool initializeMachineFunction(MachineFunction &MF) {
+    //NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
+    // move instructions from `TheMF` to `MF`
+    MF.splice(MF.begin(), TheMF->begin());
+    return false;
+  }
+};
+
 // return true if success
 bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM)
 {
   auto Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer) return false;
 
-  Printer->EmitStartOfAsmFile(M);
-  Printer->runOnMachineFunction(MF);
-  Printer->EmitEndOfAsmFile(M);
+  std::error_code EC;
+  tool_output_file Out(OutFilename, EC, sys::fs::F_None);
+  if (EC) return false;
+  auto &OS = Out.os();
+  
+  auto AsmPrinterId = Printer->getPassID();
+  
+  CopyMFInitializer MFInit(MF);
+  
+  legacy::PassManager PM;
+  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_AssemblyFile, true, AsmPrinterId, nullptr, AsmPrinterId, &MFInit);
+  PM.run(M);
+
+  Out.keep();
 
   return true;
 }

@@ -117,7 +117,6 @@ int main()
 
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
-  /*
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
   auto MII = TM->getMCInstrInfo();
@@ -130,7 +129,6 @@ int main()
   }
   auto Ret = BuildMI(MF, DebugLoc(), MII->get(i)).getInstr();
   MBB->push_back(Ret);
-  */
 
   compileToObjectFile(*M, MF, "x.o", TM.get());
 }
