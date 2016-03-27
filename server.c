@@ -39,7 +39,7 @@ int max_client;
 
 int is_parent = 1;
 
-void *_server_stack_top;
+void *_server_stack_top, *_server_heap_bottom;
 
 static inline struct response *make_error(char *msg)
 { 
@@ -49,11 +49,12 @@ static inline struct response *make_error(char *msg)
 	return resp;
 }
 
-static inline struct response *make_report(size_t dist)
+static inline struct response *make_report(size_t stack_dist, size_t heap_dist)
 { 
 	struct response *resp = malloc(sizeof (struct response));
 	resp->success = 1;
-	resp->dist = dist;
+	resp->stack_dist = stack_dist;
+	resp->heap_dist = heap_dist;
 	return resp;
 }
 
@@ -96,15 +97,22 @@ size_t get_mem_dist(void *a, void *b, size_t size)
 
 uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 { 
-	void *stack_bottom;
+	void *stack_bottom, *heap_top;
 	GET_STACKBOUND(stack_bottom);
+	heap_top = sbrk(0);
 
-	size_t stack_size = _server_stack_top - stack_bottom;
-	void *shared_mem = mmap(NULL, stack_size+sizeof (sem_t),
+	size_t stack_size = _server_stack_top - stack_bottom,
+		   heap_size = heap_top - _server_heap_bottom;
+
+	// layout of `shared_mem` = |sem| stack | heap |
+	void *shared_mem = mmap(NULL, heap_size+stack_size+sizeof (sem_t),
 			PROT_READ|PROT_WRITE, MAP_SHARED|MAP_ANON, -1, 0);
+
 	assert(shared_mem && "failed to mmap");
 	sem_t *sem = shared_mem;
-	void *target_stack = shared_mem + sizeof (sem_t);
+	void *target_stack = shared_mem + sizeof (sem_t),
+		 *target_heap = target_stack + stack_size;
+
 	sem_init(sem, 1, 0);
 
 	static int invo = 0;
@@ -173,9 +181,10 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
                 // run the function
                 _stub_rewrite_call(rewrite); 
 
-				size_t dist = get_mem_dist(stack_bottom, target_stack, stack_size);
+				size_t stack_dist = get_mem_dist(stack_bottom, target_stack, stack_size),
+					   heap_dist = get_mem_dist(_server_heap_bottom, target_heap, heap_size);
 				
-                respond(cli_fd, make_report(dist));
+                respond(cli_fd, make_report(stack_dist, heap_dist));
             }
 
             memset(msg, 0, sizeof msg);
@@ -191,8 +200,13 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 		// this will finally be transformed into `int ret = orig_func(...)`
         int ret = _stub_target_call(orig_func);
 		
-		// copy mem[bottom:top] to the shared memory
+		// copy stack[bottom:top] to the shared memory
 		memcpy(target_stack, stack_bottom, stack_size);
+
+		if (heap_size) {
+			// copy heap[bottom:top] to shared memory
+			memcpy(target_heap, _server_heap_bottom, heap_size);
+		}
 
 		// let go of the child process
 		sem_post(sem);
@@ -203,6 +217,8 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 
 void _server_init()
 {
+	_server_heap_bottom = sbrk(0);
+
     const char *max_client_str = getenv("MAX_CLIENT");
     if (!max_client_str) {
         max_client = DEFAULT_MAX_CLIENT;

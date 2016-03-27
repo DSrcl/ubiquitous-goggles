@@ -5,7 +5,8 @@
 
 struct response {
 	char msg[LIBPATH_MAX_LEN+100];
-	size_t dist;
+	size_t stack_dist;
+  size_t heap_dist;
 	int success;
 };
 

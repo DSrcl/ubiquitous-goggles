@@ -87,8 +87,9 @@ int main(int argc, char **argv)
 
   for (const auto& resp : responses) {
     std::cout << "===========================================" << std::endl;
-    std::cout << resp.msg << std::endl;
-    std::cout << resp.dist << std::endl;
-    std::cout << resp.success << std::endl;
+    std::cout << "error: " << resp.msg << std::endl;
+    std::cout << "stack dist: " << resp.stack_dist << std::endl;
+    std::cout << "heap dist: " << resp.heap_dist << std::endl;
+    std::cout << "success: " << resp.success << std::endl;
   }
 }
