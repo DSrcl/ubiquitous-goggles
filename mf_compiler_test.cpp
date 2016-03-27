@@ -117,16 +117,20 @@ int main()
 
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
+  /*
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
   auto MII = TM->getMCInstrInfo();
   assert(MII);
   unsigned i;
   for (i = 0; i < MII->getNumOpcodes(); i++) { 
-    if (MII->get(i).isReturn()) break;
+    if (std::string(MII->getName(i)) == "RETQ") {
+      break;
+    }
   }
-  auto Ret = BuildMI(MF, DebugLoc(), MII->get(i));
+  auto Ret = BuildMI(MF, DebugLoc(), MII->get(i)).getInstr();
   MBB->push_back(Ret);
+  */
 
   compileToObjectFile(*M, MF, "x.o", TM.get());
 }

@@ -1,7 +1,6 @@
 #LIBS = support irreader ipo bitwriter bitreader codegen mc
-LIBS = all
 LDFLAGS = $(shell llvm-config --ldflags --system-libs --libs $(LIBS) | sed 's/-DNDEBUG//g')
-CXXFLAGS = $(shell llvm-config --cxxflags | sed 's/-DNDEBUG//g')
+CXXFLAGS = $(shell llvm-config --cxxflags | sed 's/-DNDEBUG//g') -g
 CXX = clang++
 
 .PHONY: all clean
@@ -12,7 +11,7 @@ server.bc: server.c common.h
 	clang -c -O3 -emit-llvm -o $@ $<
 
 mf_compiler_test: mf_compiler.o mf_compiler_test.o
-	$(CXX) $(LDFLAGS) -o $@ $^
+	$(CXX) $^ $(LDFLAGS) -o $@ -g
 
 clean:
-	rm -f server.bc create-server worker-data.txt
+	rm -f server.bc create-server worker-data.txt *.o

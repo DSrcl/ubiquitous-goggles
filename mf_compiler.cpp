@@ -1,19 +1,21 @@
 #include <llvm/IR/Module.h>
+#include <llvm/IR/Mangler.h>
 #include <llvm/Support/raw_ostream.h>
 #include <llvm/Codegen/MachineFunction.h>
 #include <llvm/Codegen/AsmPrinter.h>
 #include <llvm/Codegen/MachineModuleInfo.h>
-#include "llvm/MC/MCAsmInfo.h"
-#include "llvm/MC/MCContext.h"
-#include "llvm/MC/MCInstrInfo.h"
-#include "llvm/MC/MCStreamer.h"
-#include "llvm/MC/MCSubtargetInfo.h"
+#include <llvm/MC/MCAsmInfo.h>
+#include <llvm/MC/MCContext.h>
+#include <llvm/MC/MCInstrInfo.h>
+#include <llvm/MC/MCStreamer.h>
+#include <llvm/MC/MCSubtargetInfo.h>
 #include <llvm/Target/TargetMachine.h>
 #include <llvm/Target/TargetLoweringObjectFile.h>
 #include <llvm/Support/TargetRegistry.h>
 #include <llvm/Support/ToolOutputFile.h>
 #include <llvm/Support/SystemUtils.h>
 #include <llvm/Support/FileSystem.h>
+#include <llvm/IR/LegacyPassManager.h>
 
 #include <string>
 #include <memory>
@@ -21,7 +23,7 @@
 using namespace llvm;
 
 // magic
-AsmPrinter *getAsmPrinter(const std::string &OutFilename, TargetMachine *TM)
+AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename, TargetMachine *TM)
 {
   const auto MII = TM->getMCInstrInfo();
   const auto MRI = TM->getMCRegisterInfo();
@@ -50,19 +52,24 @@ AsmPrinter *getAsmPrinter(const std::string &OutFilename, TargetMachine *TM)
       T, *Context, *MAB, OS, MCE, STI, Options.MCOptions.MCRelaxAll,
       /*DWARFMustBeAtTheEnd*/ true));
 
-  return TM->getTarget().createAsmPrinter(*TM, std::move(AsmStreamer));
+  auto Printer = TM->getTarget().createAsmPrinter(*TM, std::move(AsmStreamer));
+  Printer->MMI = MMI;
+  Printer->Mang = new Mangler();
+  TM->getObjFileLowering()->Initialize(*Context, *TM);
+  Printer->OutStreamer->InitSections(false);
+
+  return Printer;
 }
 
 // return true if success
 bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM)
 {
-  auto Printer = getAsmPrinter(OutFilename, TM);
+  auto Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer) return false;
 
   Printer->EmitStartOfAsmFile(M);
-  MF.dump();
   Printer->runOnMachineFunction(MF);
   Printer->EmitEndOfAsmFile(M);
-  Printer->doFinalization(M);
+
   return true;
 }
