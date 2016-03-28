@@ -67,15 +67,15 @@ uint32_t _stub_rewrite_call(uint32_t (*)());
 // send response to the client and kill current process
 static inline void *respond(int fd, struct response *resp)
 { 
-    write(fd, resp, sizeof (struct response));
-    free(resp);
-    exit(0);
+	write(fd, resp, sizeof (struct response));
+	free(resp);
+	exit(0);
 }
 
 static inline void dump_worker_data(const char *sock_path)
 { 
-    FILE *out_file = fopen(OUT_FILENAME, "a");
-    fprintf(out_file, "%s\n", sock_path);
+	FILE *out_file = fopen(OUT_FILENAME, "a");
+	fprintf(out_file, "%s\n", sock_path);
 	fclose(out_file);
 } 
 
@@ -121,85 +121,85 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 	invo++;
 	can_spawn = is_parent && invo <= MAX_WORKER;
 
-    char msg[LIBPATH_MAX_LEN]; 
-    memset(msg, 0, sizeof msg);
+	char msg[LIBPATH_MAX_LEN]; 
+	memset(msg, 0, sizeof msg);
 
-    char sock_path[100] = "/tmp/tuning-XXXXXX";
-    if (can_spawn) {
-        mkdtemp(sock_path);
-        strcat(sock_path, "/socket");
-    }
-    
-    if (can_spawn && fork()) { // body of worker process
+	char sock_path[100] = "/tmp/tuning-XXXXXX";
+	if (can_spawn) {
+		mkdtemp(sock_path);
+		strcat(sock_path, "/socket");
+	}
+
+	if (can_spawn && fork()) { // body of worker process
 		sem_wait(sem);
-        is_parent = 0;
+		is_parent = 0;
 
-        daemon(1, 0);
-        struct sockaddr_un addr;
-        int sockfd;
+		daemon(1, 0);
+		struct sockaddr_un addr;
+		int sockfd;
 
-        if ((sockfd=socket(AF_UNIX, SOCK_STREAM, 0)) == - 1) {
-            exit(-1);
-        }
+		if ((sockfd=socket(AF_UNIX, SOCK_STREAM, 0)) == - 1) {
+			exit(-1);
+		}
 
-        memset(&addr, 0, sizeof (addr));
-        addr.sun_family = AF_UNIX;
-        strncpy(addr.sun_path, sock_path, (sizeof (addr.sun_path))-1);
+		memset(&addr, 0, sizeof (addr));
+		addr.sun_family = AF_UNIX;
+		strncpy(addr.sun_path, sock_path, (sizeof (addr.sun_path))-1);
 
-        if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
-            exit(-1);
-        }
+		if (bind(sockfd, (struct sockaddr *)&addr, sizeof(addr)) == -1) {
+			exit(-1);
+		}
 
-        if (listen(sockfd, max_client) == -1) {
-            exit(-1);
-        }
+		if (listen(sockfd, max_client) == -1) {
+			exit(-1);
+		}
 
-        for (;;) {
-            int cli_fd;
-            if ((cli_fd=accept(sockfd, NULL, NULL)) == -1) {
-                continue;
-            }
-
-            if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 0) {
+		for (;;) {
+			int cli_fd;
+			if ((cli_fd=accept(sockfd, NULL, NULL)) == -1) {
 				continue;
 			}
 
-            // read control byte and see if needs to kill current worker
-            if (!msg[0]) {
-                close(cli_fd);
-                break;
-            }
+			if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 0) {
+				continue;
+			}
 
-            if (fork()) { 
-                // lookup the function from shared library
-                void *lib = dlopen(msg, RTLD_NOW);
-                if (!lib) respond(cli_fd, make_error(CANT_LOAD_LIB));
+			// read control byte and see if needs to kill current worker
+			if (!msg[0]) {
+				close(cli_fd);
+				break;
+			}
 
-                uint32_t (*rewrite)() = dlsym(lib, funcname); 
-                if (!rewrite) respond(cli_fd, make_error(CANT_LOAD_FUNC));
+			if (fork()) { 
+				// lookup the function from shared library
+				void *lib = dlopen(msg, RTLD_NOW);
+				if (!lib) respond(cli_fd, make_error(CANT_LOAD_LIB));
 
-                // run the function
-                _stub_rewrite_call(rewrite); 
+				uint32_t (*rewrite)() = dlsym(lib, funcname); 
+				if (!rewrite) respond(cli_fd, make_error(CANT_LOAD_FUNC));
+
+				// run the function
+				_stub_rewrite_call(rewrite); 
 
 				size_t stack_dist = get_mem_dist(stack_bottom, target_stack, stack_size),
 					   heap_dist = get_mem_dist(_server_heap_bottom, target_heap, heap_size);
-				
-                respond(cli_fd, make_report(stack_dist, heap_dist));
-            }
 
-            memset(msg, 0, sizeof msg);
-            close(cli_fd);
-        }
-        unlink(sock_path);
-        exit(0);
-    } else { // body of parent process 
-        if (can_spawn) {
-            dump_worker_data(sock_path);
-        }
+				respond(cli_fd, make_report(stack_dist, heap_dist));
+			}
+
+			memset(msg, 0, sizeof msg);
+			close(cli_fd);
+		}
+		unlink(sock_path);
+		exit(0);
+	} else { // body of parent process 
+		if (can_spawn) {
+			dump_worker_data(sock_path);
+		}
 
 		// this will finally be transformed into `int ret = orig_func(...)`
-        int ret = _stub_target_call(orig_func);
-		
+		int ret = _stub_target_call(orig_func);
+
 		// copy stack[bottom:top] to the shared memory
 		memcpy(target_stack, stack_bottom, stack_size);
 
@@ -212,23 +212,23 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 		sem_post(sem);
 
 		return ret;
-    }
+	}
 }
 
 void _server_init()
 {
 	_server_heap_bottom = sbrk(0);
 
-    const char *max_client_str = getenv("MAX_CLIENT");
-    if (!max_client_str) {
-        max_client = DEFAULT_MAX_CLIENT;
-    } else { 
-        max_client = atoi(max_client_str);
-        if (!max_client) {
-            fprintf(stderr, "invalid $MAX_CLIENT\n");
-            exit(-1);
-        }
-    }
+	const char *max_client_str = getenv("MAX_CLIENT");
+	if (!max_client_str) {
+		max_client = DEFAULT_MAX_CLIENT;
+	} else { 
+		max_client = atoi(max_client_str);
+		if (!max_client) {
+			fprintf(stderr, "invalid $MAX_CLIENT\n");
+			exit(-1);
+		}
+	}
 
 	remove(OUT_FILENAME);
 }
