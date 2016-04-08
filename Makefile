@@ -6,7 +6,7 @@ CXX = clang++
 .PHONY: all clean
 
 OBJS = mf_compiler.o mf_instrument.o
-TESTS = mf_compiler_test
+TESTS = mf_compiler_test 
 TOOLS = create-server replay-cli
 
 all: $(TOOLS) $(OBJS) $(TESTS)

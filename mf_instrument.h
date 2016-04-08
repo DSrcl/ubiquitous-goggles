@@ -3,12 +3,13 @@
 
 #include <llvm/MC/MCRegisterInfo.h>
 
+
 /*
-MachineFunction *emitDumpRegs(Triple::ArchType Arch,
-                              const std::vector<unsigned> &Regs,
-                              GlobalVariable *RegInfo,
-                              GlobalVariable *RegData)
-                              */
+MachineInstr *storeRegToAlignedAddr(MachineFunction &MF, unsigned SrcReg,
+                                    MachineOperand &Addr,
+                                    const TargetRegisterClass *RC) const override;
+                                    */
+
 class Instrumenter {
 protected:
   llvm::TargetMachine *TM;
@@ -40,6 +41,10 @@ public:
   }
 
   virtual void instrumentToReturn(llvm::MachineFunction &MF, int64_t JmpbfuAddr) const = 0;
+
+  void dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MB, std::vector<unsigned> &Regs);
+
+  static unsigned align(unsigned Addr, unsigned Alignment);
 };
 
 class X86_64Instrumenter : public Instrumenter {

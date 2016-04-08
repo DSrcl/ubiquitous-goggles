@@ -4,6 +4,7 @@
 bool compileToObjectFile(llvm::Module &M,
                          llvm::MachineFunction &MF,
                          const std::string &OutFilename,
-                         llvm::TargetMachine *TM);
+                         llvm::TargetMachine *TM,
+                         bool PrintAsm=false);
 
 #endif

@@ -84,7 +84,7 @@ struct CopyMFInitializer : MachineFunctionInitializer {
 };
 
 // return true if success
-bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM)
+bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM, bool PrintAssemly)
 {
   auto Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer) return false;
@@ -97,9 +97,11 @@ bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutF
   auto AsmPrinterId = Printer->getPassID();
   
   CopyMFInitializer MFInit(MF);
+
+  auto FileType = PrintAssemly ? LLVMTargetMachine::CGFT_AssemblyFile : LLVMTargetMachine::CGFT_ObjectFile;
   
   legacy::PassManager PM;
-  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_AssemblyFile, true, AsmPrinterId, nullptr, nullptr, &MFInit);
+  TM->addPassesToEmitFile(PM, OS, FileType, true, AsmPrinterId, nullptr, nullptr, &MFInit);
   PM.run(M);
 
   Out.keep();

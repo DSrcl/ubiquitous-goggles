@@ -121,9 +121,12 @@ int main()
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
   auto MBB = MF.CreateMachineBasicBlock();
-  errs() << "reached here\n";
+  auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
-  getInstrumenter(TM.get())->instrumentToReturn(MF, 0x1043601b0);
+  //std::vector<unsigned> Regs{ 35, 36 };
+  std::vector<unsigned> Regs{ 19, 20 };
+  Instrumenter->dumpRegisters(*M, *MBB, Regs);
+  Instrumenter->instrumentToReturn(MF, 0x10e2841b0);
 
-  compileToObjectFile(*M, MF, "x.o", TM.get());
+  compileToObjectFile(*M, MF, "x.s", TM.get(), true);
 }
