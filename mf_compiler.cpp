@@ -99,7 +99,7 @@ bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutF
   CopyMFInitializer MFInit(MF);
   
   legacy::PassManager PM;
-  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_ObjectFile, true, AsmPrinterId, nullptr, nullptr, &MFInit);
+  TM->addPassesToEmitFile(PM, OS, LLVMTargetMachine::CGFT_AssemblyFile, true, AsmPrinterId, nullptr, nullptr, &MFInit);
   PM.run(M);
 
   Out.keep();

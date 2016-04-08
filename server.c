@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <sys/mman.h>
 #include <semaphore.h>
+#include <setjmp.h>
 #include <assert.h>
 
 #include "common.h"
@@ -23,6 +24,7 @@
 #define CANT_LOAD_FUNC "unable to load function from library"
 
 #define OUT_FILENAME "worker-data.txt"
+#define JB_FILENAME "jmp_buf.txt"
 #define MAXFD 256
 #define DEFAULT_MAX_CLIENT 4
 #define MAX_WORKER 32
@@ -38,6 +40,8 @@ void _server_init() __attribute__ ((constructor));
 int max_client; 
 
 int is_parent = 1;
+
+static jmp_buf jb;
 
 void *_server_stack_top, *_server_heap_bottom;
 
@@ -134,7 +138,7 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 		sem_wait(sem);
 		is_parent = 0;
 
-		daemon(1, 0);
+		//daemon(1, 0);
 		struct sockaddr_un addr;
 		int sockfd;
 
@@ -178,8 +182,11 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 				uint32_t (*rewrite)() = dlsym(lib, funcname); 
 				if (!rewrite) respond(cli_fd, make_error(CANT_LOAD_FUNC));
 
-				// run the function
-				_stub_rewrite_call(rewrite); 
+				int ret;
+				if ((ret=setjmp(jb)) == 0)  {
+					// run the function
+					_stub_rewrite_call(rewrite); 
+				}
 
 				size_t stack_dist = get_mem_dist(stack_bottom, target_stack, stack_size),
 					   heap_dist = get_mem_dist(_server_heap_bottom, target_heap, heap_size);
@@ -231,4 +238,6 @@ void _server_init()
 	}
 
 	remove(OUT_FILENAME);
+	FILE *buf_out = fopen(JB_FILENAME, "w");
+	fprintf(buf_out, "%p\n", &jb);
 }

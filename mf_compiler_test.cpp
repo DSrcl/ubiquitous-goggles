@@ -75,6 +75,7 @@
 #include <string>
 
 #include "mf_compiler.h"
+#include "mf_instrument.h"
 
 using namespace llvm;
 
@@ -120,17 +121,9 @@ int main()
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
   auto MBB = MF.CreateMachineBasicBlock();
+  errs() << "reached here\n";
   MF.push_back(MBB);
-  auto MII = TM->getMCInstrInfo();
-  assert(MII);
-  unsigned i;
-  for (i = 0; i < MII->getNumOpcodes(); i++) { 
-    if (std::string(MII->getName(i)) == "RETQ") {
-      break;
-    }
-  }
-  auto Ret = BuildMI(MF, DebugLoc(), MII->get(i)).getInstr();
-  MBB->push_back(Ret);
+  getInstrumenter(TM.get())->instrumentToReturn(MF, 0x1043601b0);
 
   compileToObjectFile(*M, MF, "x.o", TM.get());
 }
