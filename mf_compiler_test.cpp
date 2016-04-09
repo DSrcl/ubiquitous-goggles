@@ -128,5 +128,5 @@ int main()
   Instrumenter->dumpRegisters(*M, *MBB, Regs);
   Instrumenter->instrumentToReturn(MF, 0x10e2841b0);
 
-  compileToObjectFile(*M, MF, "x.s", TM.get(), true);
+  compileToObjectFile(*M, MF, "x.o", TM.get(), false);
 }

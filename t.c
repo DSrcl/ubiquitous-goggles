@@ -5,5 +5,5 @@ void foo(int x);
 
 void add()
 {
-	foo(42);
+	*(int *)0xdeadbeef = 10;
 }

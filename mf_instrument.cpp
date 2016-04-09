@@ -23,6 +23,7 @@
 #include <llvm/Target/TargetInstrInfo.h>
 #include <llvm/CodeGen/MachineInstrBuilder.h>
 #include <llvm/CodeGen/MachineOperand.h>
+#include <llvm/CodeGen/MachineMemOperand.h>
 
 #include "mf_instrument.h"
 
@@ -49,6 +50,7 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment)
 
 // * declare `reg_data(uint8[])` in `M`
 // * declare `reg_info(struct{ size_t offset, size}[])` in `M`
+// * declare `num_regs`
 // * emit code to dump `Regs` at the end of `MBB`
 void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, std::vector<unsigned> &Regs)
 {
@@ -57,6 +59,12 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
  
   // list of (offset, size)
   std::vector<std::pair<unsigned, unsigned>> RegInfo(Regs.size());
+  std::vector<Constant *> RegInfoInitializer(Regs.size());
+
+  auto *RegInfoTy = StructType::get(Ctx, "struct.RegInfo");
+  auto *Int64Ty = Type::getInt64Ty(Ctx);
+  RegInfoTy->setBody(std::vector<Type *> {Int64Ty, Int64Ty});
+  
 
   unsigned CurOffset = 0;
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
@@ -66,6 +74,8 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
     CurOffset = align(CurOffset, RC.getAlignment());
     RegInfo[i].first = CurOffset;
     RegInfo[i].second = RegSize;
+    RegInfoInitializer[i] = ConstantStruct::get(RegInfoTy,
+                                                std::vector<Constant *> {ConstantInt::get(Int64Ty, CurOffset), ConstantInt::get(Int64Ty, RegSize)});
     CurOffset += RegSize;
     errs() << "!!! size of register " << MRI->getName(Reg) << " : " << RegSize << "\n";
   }
@@ -78,17 +88,34 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
   auto *RegData = new GlobalVariable(M, RegDataTy, false,
                                      GlobalVariable::ExternalLinkage,
                                      ConstantAggregateZero::get(RegDataTy),
-                                     "reg_data");
+                                     "_ug_reg_data");
 
+  auto *RegInfoArrTy = ArrayType::get(RegInfoTy, Regs.size());
+  // declare `reg_info`
+  new GlobalVariable(M, RegInfoArrTy, true /* constant */,
+                     GlobalVariable::ExternalLinkage,
+                     ConstantArray::get(RegInfoArrTy, RegInfoInitializer),
+                     "_ug_reg_info");
+
+  // declare `num_regs`
+  new GlobalVariable(M, Int64Ty, true,
+                     GlobalVariable::ExternalLinkage,
+                     ConstantInt::get(Int64Ty, Regs.size()),
+                     "_ug_num_regs");
+  
   auto *MF = MBB.getParent();
   auto &Subtarget = MF->getSubtarget();
   auto *TII = Subtarget.getInstrInfo();
   auto *TRI = Subtarget.getRegisterInfo();
+  // load address of `reg_data` into %RSP
+  unsigned RSP = getRegister("R15");
+  auto *LoadAddr = TII->getGlobalPICAddr(*MF, RSP, &MF->getTarget(), RegData);
+  MBB.push_back(LoadAddr);
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
     unsigned Reg = Regs[i];
     unsigned Offset = RegInfo[i].first;
-    auto Addr = MachineOperand::CreateGA(RegData, Offset);
-    auto *Store = TII->storeRegToAlignedAddr(*MF, Reg, Addr, TRI->getMinimalPhysRegClass(Reg));
+    auto *RC = TRI->getMinimalPhysRegClass(Reg);
+    auto *Store = TII->storeReg(*MF, Reg, RSP, Offset, RC);
     MBB.push_back(Store);
   }
 }
