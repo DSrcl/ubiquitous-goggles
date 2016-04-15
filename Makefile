@@ -6,10 +6,13 @@ CXX = clang++
 .PHONY: all clean
 
 OBJS = mf_compiler.o mf_instrument.o
+BC = server.bc
 TESTS = mf_compiler_test 
-TOOLS = create-server replay-cli
+TOOLS = create-server replay-cli ug
 
-all: $(TOOLS) $(OBJS) $(TESTS)
+all: $(TOOLS) $(OBJS) $(TESTS) $(BC)
+
+ug: $(OBJS)
 
 server.bc: server.c common.h
 	clang -c -O3 -emit-llvm -o $@ $<

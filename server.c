@@ -15,6 +15,7 @@
 #include <setjmp.h>
 #include <assert.h>
 
+#include "regs.h"
 #include "common.h"
 #include "replay.h"
 
@@ -34,6 +35,13 @@
 #ifdef X86_64
 #define GET_STACKBOUND(BOUND) asm("movq %%rbp, %0" :"=r"(BOUND))
 #endif
+
+// target reg_data
+extern uint8_t _ug_reg_data[];
+// target reg_info
+extern struct reg_info _ug_reg_info[];
+// dump target registers
+extern void dump_registers();
 
 void _server_init() __attribute__ ((constructor));
 
@@ -99,6 +107,24 @@ size_t get_mem_dist(void *a, void *b, size_t size)
 	return dist;
 }
 
+// compare ai'th register at `a` and bi'th register at `b`
+size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai, int bi)
+{
+	assert(info[ai].size == info[bi].size);
+	uint8_t *a_start = a + info[ai].offset,
+			*b_start = b + info[bi].offset;
+	size_t size = info[ai].size;
+
+	size_t i;
+	size_t dist = 0;
+	for (i = 0; i < size; i++) {
+		dist += get_byte_dist((a_start)[i], (b_start)[i]);
+	}
+
+	return dist;
+}
+
+
 uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 { 
 	void *stack_bottom, *heap_top;
@@ -138,7 +164,6 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 		sem_wait(sem);
 		is_parent = 0;
 
-		//daemon(1, 0);
 		struct sockaddr_un addr;
 		int sockfd;
 
@@ -182,11 +207,21 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 				uint32_t (*rewrite)() = dlsym(lib, funcname); 
 				if (!rewrite) respond(cli_fd, make_error(CANT_LOAD_FUNC));
 
+				uint8_t *rewrite_reg_data = dlsym(lib, "_ug_reg_data");
+				if (!rewrite_reg_data) respond(cli_fd, make_error("can't load _ug_reg_data"));
+
+				struct reg_info *rewrite_reg_info = dlsym(lib, "_ug_reg_info");
+				if (!rewrite_reg_info) respond(cli_fd, make_error("can't load _ug_reg_info"));
+				
+				size_t *rewrite_num_regs = dlsym(lib, "_ug_num_regs");
+				if (!rewrite_num_regs) respond(cli_fd, make_error("can't load _ug_num_regs"));
 				int ret;
 				if ((ret=setjmp(jb)) == 0)  {
 					// run the function
 					_stub_rewrite_call(rewrite); 
 				}
+
+				printf("ESI = %d\n", *(int *)(rewrite_reg_data+rewrite_reg_info[0].offset));	
 
 				size_t stack_dist = get_mem_dist(stack_bottom, target_stack, stack_size),
 					   heap_dist = get_mem_dist(_server_heap_bottom, target_heap, heap_size);
@@ -239,5 +274,8 @@ void _server_init()
 
 	remove(OUT_FILENAME);
 	FILE *buf_out = fopen(JB_FILENAME, "w");
-	fprintf(buf_out, "%p\n", &jb);
+	fprintf(buf_out, "%ld\n", (long)&jb);
+	fclose(buf_out);
+
+	daemon(1, 0);
 }

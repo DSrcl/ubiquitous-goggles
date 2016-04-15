@@ -15,6 +15,8 @@ protected:
   llvm::TargetMachine *TM;
   const llvm::MCRegisterInfo *MRI;
   const llvm::MCInstrInfo *MII;
+  // temporary register whose value users don't care about (e.g. R15 in x86_64)
+  unsigned FreeReg;
 
 public:
   Instrumenter(llvm::TargetMachine *TheTM) : TM(TheTM) {
@@ -22,7 +24,7 @@ public:
     MRI = TM->getMCRegisterInfo();
   }
 
-  unsigned getOpcode(const std::string &Name) {
+  unsigned getOpcode(const std::string &Name) const {
     for (unsigned i = 0; i < MII->getNumOpcodes(); i++) { 
       if (std::string(MII->getName(i)) == Name) {
         return i;
@@ -31,7 +33,7 @@ public:
     llvm_unreachable("unable to find opcode");
   }
   
-  unsigned getRegister(const std::string &Name) {
+  unsigned getRegister(const std::string &Name) const {
     for (unsigned i = 0; i < MRI->getNumRegs(); i++) {
       if (Name == MRI->getName(i))  {
         return i;
@@ -42,7 +44,11 @@ public:
 
   virtual void instrumentToReturn(llvm::MachineFunction &MF, int64_t JmpbfuAddr) const = 0;
 
-  void dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MB, std::vector<unsigned> &Regs);
+  void dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MB, const std::vector<unsigned> &Regs);
+
+  virtual void instrumentToReturnNormally(llvm::MachineFunction &MF, llvm::MachineBasicBlock &MBB) const = 0;
+
+  virtual std::vector<unsigned> getReturnRegs(llvm::Function *) const = 0;
 
   static unsigned align(unsigned Addr, unsigned Alignment);
 };
@@ -51,14 +57,20 @@ class X86_64Instrumenter : public Instrumenter {
   // opcodes 
   unsigned Callq;
   unsigned Movabsq;
+  unsigned Retq;
 
   // registers
   unsigned RDI;
   unsigned ESI;
+  unsigned RAX;
+  unsigned EAX;
+  unsigned AL;
 
 public:
   X86_64Instrumenter(llvm::TargetMachine *TM);
   void instrumentToReturn(llvm::MachineFunction &MF, int64_t JmpbfuAddr) const override;
+  void instrumentToReturnNormally(llvm::MachineFunction &MF, llvm::MachineBasicBlock &MBB) const override;
+  std::vector<unsigned> getReturnRegs(llvm::Function *) const override;
 };
 
 Instrumenter *getInstrumenter(llvm::TargetMachine *TM);

@@ -1,9 +1,17 @@
+#include <stdio.h>
+
 unsigned char data[1000];
 
 void foo(int x);
 
 
-void add()
+char add()
 {
-	*(int *)0xdeadbeef = 10;
+	data[42] = 10;
+	return 4;
+}
+
+void foo()
+{
+	printf("%c\n", add());
 }

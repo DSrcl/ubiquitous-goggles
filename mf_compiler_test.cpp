@@ -99,6 +99,7 @@ int main()
   PM.add(createGVExtractionPass(ToKeep, false));
   PM.run(*M);
 
+  ////////////////
   Triple TheTriple = Triple(M->getTargetTriple());
 
   if (TheTriple.getTriple().empty())
@@ -111,12 +112,13 @@ int main()
   const Target *TheTarget = TargetRegistry::lookupTarget(TheTriple.str(), Error);
   assert(TheTarget);
   std::unique_ptr<TargetMachine> TM(
-      TheTarget->createTargetMachine(TheTriple.getTriple(), CPUStr, FeaturesStr,
-                                     Options, Reloc::PIC_));
+    TheTarget->createTargetMachine(TheTriple.getTriple(), CPUStr, FeaturesStr,
+                                   Options, Reloc::PIC_));
+  ////////////////////////
 
   MachineModuleInfo *MMI = new MachineModuleInfo(
     *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
-  
+
 
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
@@ -124,9 +126,10 @@ int main()
   auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
   //std::vector<unsigned> Regs{ 35, 36 };
-  std::vector<unsigned> Regs{ 19, 20 };
+  std::vector<unsigned> Regs{ Instrumenter->getRegister("ESI") };
   Instrumenter->dumpRegisters(*M, *MBB, Regs);
-  Instrumenter->instrumentToReturn(MF, 0x10e2841b0);
+  Instrumenter->instrumentToReturn(MF, 0x1073031a0);
 
   compileToObjectFile(*M, MF, "x.o", TM.get(), false);
+  emitDumpRegistersModule(TM.get(), Regs, "server_dump_regs.o");
 }

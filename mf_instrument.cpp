@@ -1,29 +1,29 @@
-#include <llvm/IR/Module.h>
-#include <llvm/IR/Mangler.h>
-#include <llvm/IR/Constants.h>
-#include <llvm/Support/raw_ostream.h>
-#include <llvm/CodeGen/MachineFunction.h>
-#include <llvm/CodeGen/MachineBasicBlock.h>
 #include <llvm/CodeGen/AsmPrinter.h>
-#include <llvm/CodeGen/MachineModuleInfo.h>
+#include <llvm/CodeGen/MachineBasicBlock.h>
+#include <llvm/CodeGen/MachineFunction.h>
 #include <llvm/CodeGen/MachineFunctionInitializer.h>
+#include <llvm/CodeGen/MachineInstrBuilder.h>
+#include <llvm/CodeGen/MachineMemOperand.h>
+#include <llvm/CodeGen/MachineModuleInfo.h>
+#include <llvm/CodeGen/MachineOperand.h>
+#include <llvm/IR/Constants.h>
+#include <llvm/IR/LegacyPassManager.h>
+#include <llvm/IR/Mangler.h>
+#include <llvm/IR/Module.h>
 #include <llvm/MC/MCAsmInfo.h>
 #include <llvm/MC/MCContext.h>
 #include <llvm/MC/MCInstrInfo.h>
 #include <llvm/MC/MCStreamer.h>
 #include <llvm/MC/MCSubtargetInfo.h>
-#include <llvm/Target/TargetMachine.h>
-#include <llvm/Target/TargetLoweringObjectFile.h>
-#include <llvm/Support/ToolOutputFile.h>
-#include <llvm/Support/SystemUtils.h>
 #include <llvm/Support/FileSystem.h>
-#include <llvm/IR/LegacyPassManager.h>
+#include <llvm/Support/SystemUtils.h>
+#include <llvm/Support/ToolOutputFile.h>
+#include <llvm/Support/raw_ostream.h>
+#include <llvm/Target/TargetInstrInfo.h>
+#include <llvm/Target/TargetLoweringObjectFile.h>
+#include <llvm/Target/TargetMachine.h>
 #include <llvm/Target/TargetMachine.h>
 #include <llvm/Target/TargetSubtargetInfo.h>
-#include <llvm/Target/TargetInstrInfo.h>
-#include <llvm/CodeGen/MachineInstrBuilder.h>
-#include <llvm/CodeGen/MachineOperand.h>
-#include <llvm/CodeGen/MachineMemOperand.h>
 
 #include "mf_instrument.h"
 
@@ -52,8 +52,9 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment)
 // * declare `reg_info(struct{ size_t offset, size}[])` in `M`
 // * declare `num_regs`
 // * emit code to dump `Regs` at the end of `MBB`
-void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, std::vector<unsigned> &Regs)
+void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, const std::vector<unsigned> &Regs)
 {
+  assert(FreeReg && "FreeReg uninitialized");
 
   auto &Ctx = M.getContext();
  
@@ -102,32 +103,39 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
                      GlobalVariable::ExternalLinkage,
                      ConstantInt::get(Int64Ty, Regs.size()),
                      "_ug_num_regs");
+
+
   
   auto *MF = MBB.getParent();
+
   auto &Subtarget = MF->getSubtarget();
   auto *TII = Subtarget.getInstrInfo();
   auto *TRI = Subtarget.getRegisterInfo();
-  // load address of `reg_data` into %RSP
-  unsigned RSP = getRegister("R15");
-  auto *LoadAddr = TII->getGlobalPICAddr(*MF, RSP, &MF->getTarget(), RegData);
+  // load address of `reg_data` into `FreeReg`
+  auto *LoadAddr = TII->getGlobalPICAddr(*MF, FreeReg, &MF->getTarget(), RegData);
   MBB.push_back(LoadAddr);
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
     unsigned Reg = Regs[i];
     unsigned Offset = RegInfo[i].first;
     auto *RC = TRI->getMinimalPhysRegClass(Reg);
-    auto *Store = TII->storeReg(*MF, Reg, RSP, Offset, RC);
+    auto *Store = TII->storeReg(*MF, Reg, FreeReg, Offset, RC);
     MBB.push_back(Store);
   }
 }
 
 X86_64Instrumenter::X86_64Instrumenter(TargetMachine *TM) : Instrumenter(TM)
 {
+  FreeReg = getRegister("R15");
   // find out opcodes
   Callq = getOpcode("CALL64pcrel32");
   Movabsq = getOpcode("MOV64ri");
+  Retq = getOpcode("RETQ");
   // find out registers 
   RDI = getRegister("RDI");
   ESI = getRegister("ESI");
+  EAX = getRegister("EAX");
+  RAX = getRegister("RAX");
+  AL = getRegister("AL");
 }
 
 // assume `MF` only has one basic block
@@ -148,4 +156,37 @@ void X86_64Instrumenter::instrumentToReturn(MachineFunction &MF, int64_t JmpbufA
   MBB.push_back(BuildMI(MF, DebugLoc(), MII->get(Callq))
                 .addExternalSymbol("longjmp"));
     
+}
+
+// assume `MF` only has one basic block
+void X86_64Instrumenter::instrumentToReturnNormally(MachineFunction &MF, MachineBasicBlock &MBB) const
+{
+  MBB.push_back(BuildMI(MF, DebugLoc(), MII->get(Retq)));
+}
+
+std::vector<unsigned> X86_64Instrumenter::getReturnRegs(llvm::Function *F) const 
+{
+  auto *RetType = F->getFunctionType()->getReturnType();
+
+  // everything below is hack 
+  IntegerType *IntTy;
+  if ((IntTy=dyn_cast<IntegerType>(RetType)) != nullptr) { 
+    if (IntTy->getBitWidth() == 64) {
+      return { RAX };
+    } else if (IntTy->getBitWidth() == 32) {
+      return { EAX };
+    } else {
+      return { AL };
+    }
+  }
+  
+  if (RetType->isPointerTy()) {
+    return { RAX };
+  }
+
+  if (RetType->isVoidTy()) {
+    return {};
+  }
+
+  llvm_unreachable("don't need this for an A");
 }

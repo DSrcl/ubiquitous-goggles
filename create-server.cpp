@@ -189,7 +189,7 @@ int main(int argc, char **argv)
   sys::PrintStackTraceOnErrorSignal();
   PrettyStackTraceProgram X(argc, argv);
 
-  cl::ParseCommandLineOptions(argc, argv, "instrument loop for profiling");
+  cl::ParseCommandLineOptions(argc, argv, "create server");
 
   LLVMContext &Context = getGlobalContext();
   SMDiagnostic Err; 
