@@ -65,15 +65,18 @@ void Transformation::doSwap(InstrIterator A, InstrIterator B)
 {
   if (A == B) return;
 
-  
+  // magic?
+  std::swap(A, B);
 }
 
-void Transformation::swap()
+void Transformation::Swap()
 {
   if (NumInstrs == 1) return;
 
   auto &MBB = *MF->begin();
-  auto A = select(MBB->end()),
+  auto A = select(MBB.instr_end()),
        B = select(A);
   doSwap(A, B);
+
+  PrevTransformation = SWAP;
 }

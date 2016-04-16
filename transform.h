@@ -42,6 +42,8 @@ class Transformation {
 
   void doSwap(InstrIterator A, InstrIterator B);
 
+  void doReplace(InstrIterator Orig, llvm::MachineInstr *Rep);
+
 public:
   Transformation(llvm::MachineFunction *TheMF) : MF(TheMF) {
     assert(MF->size() == 1 && "no jumps for now");
