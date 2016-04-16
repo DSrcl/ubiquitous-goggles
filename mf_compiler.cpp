@@ -76,10 +76,12 @@ struct CopyMFInitializer : MachineFunctionInitializer {
     //NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
     // move instructions from `TheMF` to `MF`
     if (MF.getFunction() == TheMF->getFunction()) {
-      while (!TheMF->empty()) {
-        auto MBB = &TheMF->front();
-        TheMF->remove(MBB);
-        MF.push_front(MBB);
+      for (auto &MBB : *TheMF) {
+        auto *MBB_ = MF.CreateMachineBasicBlock();
+        for (auto &MI : MBB) { 
+          MBB_->push_back(MF.CloneMachineInstr(&MI));
+        }
+        MF.push_front(MBB_);
       }
     }
     return false;
@@ -89,7 +91,7 @@ struct CopyMFInitializer : MachineFunctionInitializer {
 // return true if success
 bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM, bool PrintAssemly)
 {
-  auto Printer = getAsmPrinter(M, OutFilename, TM);
+  auto *Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer) return false;
 
   std::error_code EC;
