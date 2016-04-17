@@ -1,12 +1,17 @@
 #ifndef _TRANSFORM_H_
 #define _TRANSFORM_H_
 
+#include <llvm/ADT/EquivalenceClasses.h>
 #include <llvm/CodeGen/MachineFunction.h>
 #include <llvm/CodeGen/MachineBasicBlock.h>
 #include <llvm/CodeGen/MachineInstr.h>
+#include <llvm/Target/TargetMachine.h>
 
 class Transformation {
   llvm::MachineFunction *MF;
+  llvm::TargetMachine *TM;
+  // allows us to quickly select an opcode that's random but "syntactically equivalent" of a given opcode
+  llvm::EquivalenceClasses<unsigned> OpcodeClasses;
 
   unsigned NumInstrs;
 
@@ -44,10 +49,14 @@ class Transformation {
 
   void doReplace(InstrIterator Orig, llvm::MachineInstr *Rep);
 
+  // build equivalence classes for opcodes
+  void buildOpcodeClasses();
+
 public:
-  Transformation(llvm::MachineFunction *TheMF) : MF(TheMF) {
+  Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : MF(TheMF), TM(TheTM) {
     assert(MF->size() == 1 && "no jumps for now");
     NumInstrs = MF->begin()->size();
+    buildOpcodeClasses();  
   }
 
   void Undo();

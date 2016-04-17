@@ -1,7 +1,26 @@
 #include "transform.h"
 #include <cstdlib>
 
+#include <llvm/MC/MCInstrInfo.h>
+
 using namespace llvm;
+
+// return if two opcodes are exchangeable
+static bool isExchangeable(const MCInstrInfo *MII, unsigned A, unsigned B)
+{
+  const auto &DescA = MII->get(A), &DescB = MII->get(B);
+  if (DescA.NumOperands != DescB.NumOperands) return false;
+  
+  for (unsigned i = 0; i < DescA.NumOperands; i++) {
+    const auto &OpA = DescA.OpInfo[i], &OpB = DescB.OpInfo[i];
+    if (OpA.OperandType != OpB.OperandType) return false;
+
+    if (OpA.OperandType == MCOI::OPERAND_REGISTER &&
+        OpA.RegClass != OpB.RegClass) return false;
+  }
+
+  return true;
+}
 
 void Transformation::Undo()
 {
@@ -67,6 +86,25 @@ void Transformation::doSwap(InstrIterator A, InstrIterator B)
 
   // magic?
   std::swap(A, B);
+}
+
+void Transformation::buildOpcodeClasses()
+{ 
+  const auto *MII = TM->getMCInstrInfo();
+
+  for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
+    OpcodeClasses.insert(i);
+
+    for (auto Itr = OpcodeClasses.begin(), End = OpcodeClasses.end();
+         Itr != End;
+         Itr++) {
+      unsigned Opc = *OpcodeClasses.findLeader(Itr);
+      if (isExchangeable(MII, Opc, i)) { 
+        OpcodeClasses.unionSets(Opc, i);
+        break;
+      }
+    }
+  }
 }
 
 void Transformation::Swap()
