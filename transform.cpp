@@ -117,4 +117,6 @@ void Transformation::Swap()
   doSwap(A, B);
 
   PrevTransformation = SWAP;
+  Swapped1 = A;
+  Swapped2 = B;
 }
