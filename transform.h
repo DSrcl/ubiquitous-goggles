@@ -6,10 +6,13 @@
 #include <llvm/CodeGen/MachineBasicBlock.h>
 #include <llvm/CodeGen/MachineInstr.h>
 #include <llvm/Target/TargetMachine.h>
+#include <llvm/MC/MCRegisterInfo.h>
 
 class Transformation {
   llvm::MachineFunction *MF;
   llvm::TargetMachine *TM;
+  const llvm::MCInstrInfo *MII;
+  const llvm::MCRegisterInfo *MRI;
   // allows us to quickly select an opcode that's random but "syntactically equivalent" of a given opcode
   llvm::EquivalenceClasses<unsigned> OpcodeClasses;
 
@@ -52,11 +55,26 @@ class Transformation {
   // build equivalence classes for opcodes
   void buildOpcodeClasses();
 
+  std::vector<int64_t> Immediates;
+
 public:
   Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : MF(TheMF), TM(TheTM) {
     assert(MF->size() == 1 && "no jumps for now");
+
     NumInstrs = MF->begin()->size();
+
+    MII = TM->getMCInstrInfo();
+    MRI = TM->getMCRegisterInfo();
+
     buildOpcodeClasses();  
+
+    Immediates = {
+      0,
+      1, -1, 2, -2, 3, -3, 4, -4,
+      5, -5, 6, -6, 7, -7, 8, -8,
+      16, -16, 32, -32, 64, -64, 128, -128
+    };
+
   }
 
   void Undo();

@@ -1,4 +1,5 @@
 #include "transform.h"
+#include <iterator>
 #include <cstdlib>
 
 #include <llvm/MC/MCInstrInfo.h>
@@ -20,6 +21,11 @@ static bool isExchangeable(const MCInstrInfo *MII, unsigned A, unsigned B)
   }
 
   return true;
+}
+
+static unsigned choose(unsigned NumChoice)
+{
+  return (unsigned)(rand() % (int)(NumChoice + 1));
 }
 
 void Transformation::Undo()
@@ -73,7 +79,7 @@ Transformation::InstrIterator Transformation::select(Transformation::InstrIterat
   assert(NumInstrs > 1 || MBB.begin() != Except);
 
   do {
-    unsigned Idx = (unsigned)(rand() % (int)(NumInstrs + 1));
+    unsigned Idx = choose(NumInstrs);
     Selected = MBB.begin() + Idx;
   } while (Selected == Except);
 
@@ -90,8 +96,6 @@ void Transformation::doSwap(InstrIterator A, InstrIterator B)
 
 void Transformation::buildOpcodeClasses()
 { 
-  const auto *MII = TM->getMCInstrInfo();
-
   for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
     OpcodeClasses.insert(i);
 
@@ -119,4 +123,66 @@ void Transformation::Swap()
   PrevTransformation = SWAP;
   Swapped1 = A;
   Swapped2 = B;
+}
+
+void Transformation::MutateOpcode()
+{
+  auto &MBB = *MF->begin();
+  auto Instr = select(MBB.instr_end());
+  unsigned OldOpcode = Instr->getOpcode();
+
+  // select a random but "equivalent" opcode
+  auto Opc = OpcodeClasses.member_begin(
+    OpcodeClasses.findValue(OldOpcode)); 
+  unsigned ClassSize = std::distance(Opc, OpcodeClasses.member_end());
+  std::advance(Opc, choose(ClassSize)); 
+  unsigned NewOpcode = *Opc;
+
+  // construct new instruction with different opcode
+  Old = Instr;
+  New = MF->CloneMachineInstr(Instr);
+  New->setDesc(MII->get(NewOpcode));
+  PrevTransformation = MUT_OPCODE;
+
+  // insert new instruction into the function
+  MBB.insert(InstrIterator(Old), New);
+  Old->removeFromParent();
+}
+
+void Transformation::MutateOperand()
+{
+  auto &MBB = *MF->begin();
+  auto Instr = select(MBB.instr_end());
+
+  Old = Instr;
+  New = MF->CloneMachineInstr(Instr);
+  PrevTransformation = MUT_OPERAND;
+
+  const auto &Desc = Instr->getDesc(); 
+  // select which operand to mutate
+  unsigned OpIdx = choose(Desc.NumOperands);
+  const auto &OpInfo = Desc.OpInfo[OpIdx];
+  auto &Operand = New->getOperand(OpIdx);
+  switch (OpInfo.OperandType) {
+  case MCOI::OPERAND_UNKNOWN:
+    break; // give up
+
+  case MCOI::OPERAND_PCREL:
+  case MCOI::OPERAND_FIRST_TARGET:
+  case MCOI::OPERAND_IMMEDIATE: { 
+    unsigned NewImm = Immediates[choose(Immediates.size())];
+    assert(Operand.isImm());
+    Operand.setImm(NewImm);
+    break;
+  }
+
+  case MCOI::OPERAND_REGISTER: {
+    assert(Operand.isReg());
+    const auto &RC = MRI->getRegClass(OpInfo.RegClass);
+    assert(RC.contains(Operand.getReg()));
+    unsigned NewReg = RC.getRegister(choose(RC.getNumRegs()));
+    Operand.setReg(NewReg);
+    break;
+  }
+  }
 }
