@@ -175,7 +175,10 @@ bool Transformation::MutateOperand()
 void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &OpInfo)
 {
   if (Operand.isImm()) {
-    auto NewImm = Immediates[choose(Immediates.size())];
+    int64_t NewImm = Immediates[choose(Immediates.size())];
+    if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
+      NewImm = std::abs(NewImm);
+    }
     Operand.setImm(NewImm);
   } else {
     assert(Operand.isReg());
@@ -221,11 +224,11 @@ MachineInstr *Transformation::randInstr()
     }
 
     case MCOI::OPERAND_MEMORY: {
-      break;
       auto UseReg = (bool)choose(2);
-      auto CanUseReg = OpInfo.RegClass < MRI->getNumRegClasses();
+      auto CanUseReg = OpInfo.RegClass > 0;
+      CanUseReg = false;
       Op = UseReg && CanUseReg ?
-        MachineOperand::CreateReg(1, true) :
+        MachineOperand::CreateReg(1, false) :
         MachineOperand::CreateImm(0);
       break;
     }
