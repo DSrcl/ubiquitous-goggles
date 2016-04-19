@@ -174,6 +174,15 @@ bool Transformation::MutateOperand()
 
 void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &OpInfo)
 {
+  if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
+    auto UseReg = (bool)choose(2);
+    auto CanUseReg = OpInfo.RegClass > 0;
+    CanUseReg = false;
+    Operand = UseReg && CanUseReg ?
+      MachineOperand::CreateReg(1, false) :
+      MachineOperand::CreateImm(0);
+  }
+
   if (Operand.isImm()) {
     int64_t NewImm = Immediates[choose(Immediates.size())];
     if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
@@ -181,6 +190,7 @@ void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &O
     }
     Operand.setImm(NewImm);
   } else {
+    // FIXME use TRI's getPointerRegClass when OpInfo.isLookupPtrRegClass
     assert(Operand.isReg());
     const auto &RC = MRI->getRegClass(OpInfo.RegClass);
     unsigned NewReg = RC.getRegister(choose(RC.getNumRegs()));
@@ -218,18 +228,9 @@ MachineInstr *Transformation::randInstr()
       break;
     }
 
+    case MCOI::OPERAND_MEMORY:
     case MCOI::OPERAND_REGISTER: {
       Op = MachineOperand::CreateReg(1, true);
-      break;
-    }
-
-    case MCOI::OPERAND_MEMORY: {
-      auto UseReg = (bool)choose(2);
-      auto CanUseReg = OpInfo.RegClass > 0;
-      CanUseReg = false;
-      Op = UseReg && CanUseReg ?
-        MachineOperand::CreateReg(1, false) :
-        MachineOperand::CreateImm(0);
       break;
     }
 
