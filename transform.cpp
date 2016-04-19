@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include <llvm/MC/MCInstrInfo.h>
+#include <llvm/Support/raw_ostream.h>
 
 using namespace llvm;
 
@@ -25,14 +26,11 @@ static bool isExchangeable(const MCInstrInfo *MII, unsigned A, unsigned B)
 
 static unsigned choose(unsigned NumChoice)
 {
-  return (unsigned)(rand() % (int)(NumChoice + 1));
+  return (unsigned)(rand() % (int)NumChoice);
 }
 
 void Transformation::Undo()
 {
-  assert(!Undone);
-  
-
   switch (PrevTransformation) {
   case MUT_OPCODE:
   case MUT_OPERAND:
@@ -67,8 +65,6 @@ void Transformation::Undo()
     }
     break;
   }
-
-  Undone = true;
 }
 
 Transformation::InstrIterator Transformation::select(Transformation::InstrIterator Except)
@@ -76,11 +72,12 @@ Transformation::InstrIterator Transformation::select(Transformation::InstrIterat
   InstrIterator Selected;
   auto &MBB = *MF->begin();
 
-  assert(NumInstrs > 1 || MBB.begin() != Except);
+  assert(NumInstrs >= 1 || MBB.begin() != Except);
 
   do {
     unsigned Idx = choose(NumInstrs);
-    Selected = MBB.begin() + Idx;
+    Selected = MBB.instr_begin();
+    std::advance(Selected, Idx);
   } while (Selected == Except);
 
   return Selected;
@@ -103,6 +100,7 @@ void Transformation::buildOpcodeClasses()
          Itr != End;
          Itr++) {
       unsigned Opc = *OpcodeClasses.findLeader(Itr);
+      if (MII->get(Opc).isBranch()) continue;
       if (isExchangeable(MII, Opc, i)) { 
         OpcodeClasses.unionSets(Opc, i);
         break;
@@ -111,9 +109,9 @@ void Transformation::buildOpcodeClasses()
   }
 }
 
-void Transformation::Swap()
+bool Transformation::Swap()
 {
-  if (NumInstrs == 1) return;
+  if (NumInstrs < 2) return false;
 
   auto &MBB = *MF->begin();
   auto A = select(MBB.instr_end()),
@@ -123,10 +121,14 @@ void Transformation::Swap()
   PrevTransformation = SWAP;
   Swapped1 = A;
   Swapped2 = B;
+
+  return true;
 }
 
-void Transformation::MutateOpcode()
+bool Transformation::MutateOpcode()
 {
+  if (NumInstrs == 0) return false;
+
   auto &MBB = *MF->begin();
   auto Instr = select(MBB.instr_end());
   unsigned OldOpcode = Instr->getOpcode();
@@ -144,18 +146,20 @@ void Transformation::MutateOpcode()
   New->setDesc(MII->get(NewOpcode));
   PrevTransformation = MUT_OPCODE;
 
-  // insert new instruction into the function
-  MBB.insert(InstrIterator(Old), New);
-  Old->removeFromParent();
+  replaceInst(MBB, Old, New);
+  return true;
 }
 
-void Transformation::MutateOperand()
+bool Transformation::MutateOperand()
 {
+  if (NumInstrs == 0) return false;
+
   auto &MBB = *MF->begin();
   auto Instr = select(MBB.instr_end());
 
   Old = Instr;
   New = MF->CloneMachineInstr(Instr);
+  replaceInst(MBB, Old, New);
   PrevTransformation = MUT_OPERAND;
 
   const auto &Desc = Instr->getDesc(); 
@@ -163,26 +167,139 @@ void Transformation::MutateOperand()
   unsigned OpIdx = choose(Desc.NumOperands);
   const auto &OpInfo = Desc.OpInfo[OpIdx];
   auto &Operand = New->getOperand(OpIdx);
-  switch (OpInfo.OperandType) {
-  case MCOI::OPERAND_UNKNOWN:
-    break; // give up
+  randOperand(Operand, OpInfo);
 
-  case MCOI::OPERAND_PCREL:
-  case MCOI::OPERAND_FIRST_TARGET:
-  case MCOI::OPERAND_IMMEDIATE: { 
-    unsigned NewImm = Immediates[choose(Immediates.size())];
-    assert(Operand.isImm());
+  return true;
+}
+
+void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &OpInfo)
+{
+  if (Operand.isImm()) {
+    auto NewImm = Immediates[choose(Immediates.size())];
     Operand.setImm(NewImm);
-    break;
-  }
-
-  case MCOI::OPERAND_REGISTER: {
+  } else {
     assert(Operand.isReg());
     const auto &RC = MRI->getRegClass(OpInfo.RegClass);
-    assert(RC.contains(Operand.getReg()));
     unsigned NewReg = RC.getRegister(choose(RC.getNumRegs()));
     Operand.setReg(NewReg);
-    break;
   }
+}
+
+unsigned Transformation::chooseNonBranchOpcode()
+{
+  const MCInstrDesc *Desc;
+  unsigned NumOpcodes = MII->getNumOpcodes();
+
+  do {
+    Desc = &MII->get(choose(NumOpcodes));
+  } while (Desc->isBranch());
+
+  return Desc->getOpcode();
+}
+
+MachineInstr *Transformation::randInstr()
+{
+  unsigned Opc = chooseNonBranchOpcode();
+  const auto &Desc = MII->get(Opc);
+  MachineInstr *New = MF->CreateMachineInstr(Desc, DebugLoc());
+
+  // fill the instruction with operands
+  for (unsigned i = 0; i < Desc.NumOperands; i++) {
+    const auto &OpInfo = Desc.OpInfo[i];
+    MachineOperand Op = MachineOperand::CreateImm(42);
+    switch (OpInfo.OperandType) {
+    case MCOI::OPERAND_PCREL:
+    case MCOI::OPERAND_FIRST_TARGET:
+    case MCOI::OPERAND_IMMEDIATE: {
+      Op = MachineOperand::CreateImm(0);
+      break;
+    }
+
+    case MCOI::OPERAND_REGISTER: {
+      Op = MachineOperand::CreateReg(1, true);
+      break;
+    }
+
+    case MCOI::OPERAND_MEMORY: {
+      break;
+      auto UseReg = (bool)choose(2);
+      auto CanUseReg = OpInfo.RegClass < MRI->getNumRegClasses();
+      Op = UseReg && CanUseReg ?
+        MachineOperand::CreateReg(1, true) :
+        MachineOperand::CreateImm(0);
+      break;
+    }
+
+    default:
+      llvm_unreachable("unkown operand type");
+    }
+
+    randOperand(Op, OpInfo);
+    New->addOperand(*MF, Op);
   }
+
+  return New;
+}
+
+bool Transformation::Replace()
+{
+  if (NumInstrs == 0) return false;
+
+  New = randInstr();
+  auto &MBB = *MF->begin();
+  Old = select(MBB.instr_begin());
+  replaceInst(MBB, Old, New);
+  PrevTransformation = REPLACE;
+  return true;
+}
+
+bool Transformation::Move()
+{
+  if (NumInstrs == 1) return false;
+
+  auto &MBB = *MF->begin();
+
+  auto Instr = select(MBB.instr_begin());
+  NextLoc = std::next(Instr, 1);
+
+  // move
+  auto NewLoc = select(Instr);
+  Instr->removeFromParent();
+  MBB.insert(NewLoc, Instr);
+
+  New = Instr;
+  PrevTransformation = MOVE;
+
+  return true;
+}
+
+bool Transformation::Insert()
+{ 
+  New = randInstr();
+  auto &MBB = *MF->begin();
+
+  if (NumInstrs == 0) { 
+    MBB.push_back(New);
+  } else {
+    auto InsertPt = select(MBB.instr_end());
+    MBB.insert(InsertPt, New);
+  }
+
+  PrevTransformation = INSERT;
+
+  NumInstrs++;
+  return true;
+}
+
+bool Transformation::Delete()
+{
+  if (NumInstrs == 0) return false;
+
+  auto &MBB = *MF->begin();
+  New = select(MBB.instr_end());
+
+  PrevTransformation = DELETE;
+
+  NumInstrs--;
+  return true;
 }

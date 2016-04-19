@@ -28,9 +28,6 @@ class Transformation {
     DELETE
   } PrevTransformation;
 
-  // purely for debugging purpose because you can't undo more than once
-  bool Undone;
-
   typedef llvm::MachineBasicBlock::instr_iterator InstrIterator;
 
   // ------- states for undo ------------
@@ -57,6 +54,18 @@ class Transformation {
 
   std::vector<int64_t> Immediates;
 
+  void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo);
+
+  unsigned chooseNonBranchOpcode();
+
+  // replace `Old` with `New`
+  static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old, InstrIterator New) {
+    MBB.insert(Old, New);
+    Old->removeFromParent();
+  }
+
+  llvm::MachineInstr *randInstr();
+
 public:
   Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : MF(TheMF), TM(TheTM) {
     assert(MF->size() == 1 && "no jumps for now");
@@ -79,13 +88,13 @@ public:
 
   void Undo();
 
-  void MutateOpcode();
-  void MutateOperand();
-  void Swap();
-  void Replace();
-  void Move();
-  void Insert();
-  void Delete();
+  bool MutateOpcode();
+  bool MutateOperand();
+  bool Swap();
+  bool Replace();
+  bool Move();
+  bool Insert();
+  bool Delete();
 };
 
 #endif
