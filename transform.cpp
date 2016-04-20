@@ -6,6 +6,7 @@
 #include <llvm/Support/raw_ostream.h>
 
 using namespace llvm;
+using namespace MCID;
 
 // return if two opcodes are exchangeable
 static bool isExchangeable(const MCInstrInfo *MII, unsigned A, unsigned B)
@@ -91,9 +92,27 @@ void Transformation::doSwap(InstrIterator A, InstrIterator B)
   std::swap(A, B);
 }
 
+template <MCID::Flag Flag>
+static bool is(const MCInstrDesc &Desc)
+{
+  return Desc.getFlags() & (1 << Flag);
+}
+
+static bool hasUnknown(const MCInstrDesc &Desc)
+{
+  for (unsigned i = 0; i < Desc.NumOperands; i++) {
+    if (Desc.OpInfo[i].OperandType == MCOI::OPERAND_UNKNOWN) return true;
+  }
+
+  return false;
+}
+
 void Transformation::buildOpcodeClasses()
 { 
   for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
+    const auto &Opcode = MII->get(i);
+    if (hasUnknown(Opcode) || is<Pseudo>(Opcode)) continue;
+
     OpcodeClasses.insert(i);
 
     for (auto Itr = OpcodeClasses.begin(), End = OpcodeClasses.end();
@@ -205,7 +224,8 @@ unsigned Transformation::chooseNonBranchOpcode()
 
   do {
     Desc = &MII->get(choose(NumOpcodes));
-  } while (Desc->isBranch());
+  } while (Desc->isBranch() || hasUnknown(*Desc) ||
+           is<Pseudo>(*Desc));
 
   return Desc->getOpcode();
 }
@@ -242,6 +262,8 @@ MachineInstr *Transformation::randInstr()
     New->addOperand(*MF, Op);
   }
 
+  StringRef X = "";
+  assert(TII->verifyInstruction(New, X) && "invalid random instruction");
   return New;
 }
 
