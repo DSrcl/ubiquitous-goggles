@@ -30,6 +30,19 @@ static unsigned choose(unsigned NumChoice)
   return (unsigned)(rand() % (int)NumChoice);
 }
 
+const TargetRegisterClass *Transformation::getRegClass(const MCOperandInfo &Op)
+{
+  assert(Op.RegClass >= 0);
+  const TargetRegisterClass *RC;
+  if (Op.isLookupPtrRegClass()) {
+    RC = TRI->getPointerRegClass(*MF, Op.RegClass);
+  } else {
+    RC = TRI->getRegClass(Op.RegClass);
+  }
+  assert(RC && "unable to find regclass");
+  return RC;
+}
+
 void Transformation::Undo()
 {
   switch (PrevTransformation) {
@@ -193,15 +206,6 @@ bool Transformation::MutateOperand()
 
 void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &OpInfo)
 {
-  if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
-    auto UseReg = (bool)choose(2);
-    auto CanUseReg = OpInfo.RegClass > 0;
-    CanUseReg = false;
-    Operand = UseReg && CanUseReg ?
-      MachineOperand::CreateReg(1, false) :
-      MachineOperand::CreateImm(0);
-  }
-
   if (Operand.isImm()) {
     int64_t NewImm = Immediates[choose(Immediates.size())];
     if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
@@ -211,8 +215,8 @@ void Transformation::randOperand(MachineOperand &Operand, const MCOperandInfo &O
   } else {
     // FIXME use TRI's getPointerRegClass when OpInfo.isLookupPtrRegClass
     assert(Operand.isReg());
-    const auto &RC = MRI->getRegClass(OpInfo.RegClass);
-    unsigned NewReg = RC.getRegister(choose(RC.getNumRegs()));
+    const auto *RC = getRegClass(OpInfo);
+    unsigned NewReg = RC->getRegister(choose(RC->getNumRegs()));
     Operand.setReg(NewReg);
   }
 }
@@ -239,6 +243,7 @@ MachineInstr *Transformation::randInstr()
   // fill the instruction with operands
   for (unsigned i = 0; i < Desc.NumOperands; i++) {
     const auto &OpInfo = Desc.OpInfo[i];
+    auto IsDef = i < Desc.NumDefs;
     MachineOperand Op = MachineOperand::CreateImm(42);
     switch (OpInfo.OperandType) {
     case MCOI::OPERAND_PCREL:
@@ -248,9 +253,15 @@ MachineInstr *Transformation::randInstr()
       break;
     }
 
-    case MCOI::OPERAND_MEMORY:
     case MCOI::OPERAND_REGISTER: {
-      Op = MachineOperand::CreateReg(1, true);
+      Op = MachineOperand::CreateReg(1, IsDef);
+      break;
+    }
+
+    case MCOI::OPERAND_MEMORY: {
+      Op = OpInfo.RegClass < 0 ?
+        MachineOperand::CreateImm(0) :
+        MachineOperand::CreateReg(1, IsDef);
       break;
     }
 
@@ -263,7 +274,6 @@ MachineInstr *Transformation::randInstr()
   }
 
   StringRef X = "";
-  assert(TII->verifyInstruction(New, X) && "invalid random instruction");
   return New;
 }
 

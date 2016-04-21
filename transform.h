@@ -5,14 +5,19 @@
 #include <llvm/CodeGen/MachineFunction.h>
 #include <llvm/CodeGen/MachineBasicBlock.h>
 #include <llvm/CodeGen/MachineInstr.h>
+#include <llvm/Target/TargetInstrInfo.h>
 #include <llvm/Target/TargetMachine.h>
+#include <llvm/Target/TargetSubtargetInfo.h>
 #include <llvm/MC/MCRegisterInfo.h>
+#include <llvm/Support/raw_ostream.h>
 
 class Transformation {
   llvm::MachineFunction *MF;
   llvm::TargetMachine *TM;
   const llvm::MCInstrInfo *MII;
   const llvm::MCRegisterInfo *MRI;
+  const llvm::TargetRegisterInfo *TRI;
+  const llvm::TargetInstrInfo *TII;
   // allows us to quickly select an opcode that's random but "syntactically equivalent" of a given opcode
   llvm::EquivalenceClasses<unsigned> OpcodeClasses;
 
@@ -66,6 +71,8 @@ class Transformation {
 
   llvm::MachineInstr *randInstr();
 
+  const llvm::TargetRegisterClass *getRegClass(const llvm::MCOperandInfo &Op);
+
 public:
   Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : MF(TheMF), TM(TheTM) {
     assert(MF->size() == 1 && "no jumps for now");
@@ -74,6 +81,8 @@ public:
 
     MII = TM->getMCInstrInfo();
     MRI = TM->getMCRegisterInfo();
+    TII = MF->getSubtarget().getInstrInfo();
+    TRI = MF->getSubtarget().getRegisterInfo();
 
     buildOpcodeClasses();  
 
