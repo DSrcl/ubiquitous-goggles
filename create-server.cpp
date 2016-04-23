@@ -47,7 +47,7 @@ OutputFilename(
     cl::desc("Specify output file name"), 
     cl::value_desc("output file"));
 
-void replaceStubCall(CallInst *Stub, FunctionType *TargetTy, Function::arg_iterator FnArgs)
+static void replaceStubCall(CallInst *Stub, FunctionType *TargetTy, Function::arg_iterator FnArgs)
 {
   auto *Callee = new BitCastInst(Stub->getArgOperand(0), TargetTy->getPointerTo(), "", Stub);
 
@@ -105,8 +105,10 @@ void emitGetTopOfStack(Module &M)
 // based on the type of `FnToRun`
 //
 // return the a version of `SpawnFn`
-Function *fixSpawnFn(Function *SpawnFn, Function *FnToRun)
+Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun)
 {
+  auto *M = SpawnFn->getParent();
+
   FunctionType *OldTy = SpawnFn->getFunctionType(),
                *TargetTy = FnToRun->getFunctionType();
 
@@ -124,11 +126,68 @@ Function *fixSpawnFn(Function *SpawnFn, Function *FnToRun)
   // transfer over arguments of old function to new function 
   for (Function::arg_iterator I = NewSpawnFn->arg_begin(),
        I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end(); I2 != E; I++, I2++) {
+    I2->mutateType(I->getType());
     I2->replaceAllUsesWith(&*I);
     I->takeName(&*I2);
   }
 
-  // arguments used to call `FunctionToRun`
+  // fix the call to `spawn_impl`
+  // arguments used to call `spawn_impl`
+  std::vector<Value *> SpawnArgs(NewTy->getNumParams());
+  Function::arg_iterator FnArgs = NewSpawnFn->arg_begin();
+  for (auto &Arg : SpawnArgs) { 
+    Arg = FnArgs++;
+  }
+  auto *SpawnImpl = M->getFunction("spawn_impl");
+  auto *OrigCall = dyn_cast<CallInst>(SpawnImpl->uses().begin()->getUser());
+  assert(OrigCall);
+  auto *NewCall = CallInst::Create(SpawnImpl, SpawnArgs, "", OrigCall); 
+  auto IsVoid = TargetTy->getReturnType()->isVoidTy();
+  if (!IsVoid) {
+    OrigCall->replaceAllUsesWith(NewCall);
+  } else if (!OrigCall->use_empty()) {
+    // change `ret void xxx` to `ret`
+    auto Ret = dyn_cast<ReturnInst>(OrigCall->uses().begin()->getUser());
+    assert(Ret);
+    auto &Ctx = Ret->getParent()->getParent()->getContext();
+    ReturnInst::Create(Ctx, Ret->getParent()); 
+    Ret->eraseFromParent(); 
+  }
+  OrigCall->eraseFromParent();
+  return NewSpawnFn;
+}
+
+// replace `_stub_target_call` and `_stub_rewrite_call` with approciate instructions
+// based on the type of `FnToRun`
+//
+// return the a version of `SpawnFn`
+Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun)
+{
+  auto *M = SpawnFn->getParent();
+
+  FunctionType *OldTy = SpawnFn->getFunctionType(),
+               *TargetTy = FnToRun->getFunctionType();
+
+  // concatenate arguments ofr `SpawnFn` and `FnToRun`
+  std::vector<Type *> Params { TargetTy->getPointerTo() };
+  Params.insert(Params.end(), OldTy->param_begin()+1, OldTy->param_end());
+  Params.insert(Params.end(), TargetTy->param_begin(), TargetTy->param_end());
+
+  FunctionType *NewTy = FunctionType::get(TargetTy->getReturnType(), Params, false);
+  Function *NewSpawnFn = Function::Create(NewTy, SpawnFn->getLinkage(), "x", SpawnFn->getParent());
+  NewSpawnFn->copyAttributesFrom(SpawnFn);
+  NewSpawnFn->takeName(SpawnFn);
+  NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
+
+  // transfer over arguments of old function to new function 
+  for (Function::arg_iterator I = NewSpawnFn->arg_begin(),
+       I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end(); I2 != E; I++, I2++) {
+    I2->mutateType(I->getType());
+    I2->replaceAllUsesWith(&*I);
+    I->takeName(&*I2);
+  }
+
+  // arguments used to call `FnToRun`
   Function::arg_iterator FnArgs = NewSpawnFn->arg_begin();
   for (unsigned i = 0, e = OldTy->getNumParams(); i != e; i++) {
     ++FnArgs;
@@ -136,12 +195,10 @@ Function *fixSpawnFn(Function *SpawnFn, Function *FnToRun)
 
   auto *RewriteCall = dyn_cast<CallInst>(
     FnToRun->getParent()->getFunction("_stub_rewrite_call")->uses().begin()->getUser());
-  assert(RewriteCall && RewriteCall->getParent()->getParent() == NewSpawnFn);
   replaceStubCall(RewriteCall, TargetTy, FnArgs);
 
   auto *TargetCall = dyn_cast<CallInst>(
     FnToRun->getParent()->getFunction("_stub_target_call")->uses().begin()->getUser());
-  assert(TargetCall && TargetCall->getParent()->getParent() == NewSpawnFn);
   replaceStubCall(TargetCall, TargetTy, FnArgs);
 
   return NewSpawnFn;
@@ -153,8 +210,13 @@ Function *fixSpawnFn(Function *SpawnFn, Function *FnToRun)
 // replace call to `FunctionToRun` with a call to an appropriate version of `_server_spawn_worker`
 void createServer(Module &M)
 {
-  Function *Target = M.getFunction(FunctionToRun),
-           *SpawnFn = fixSpawnFn(M.getFunction("_server_spawn_worker"), Target);
+  Function *Target = M.getFunction(FunctionToRun);
+  auto *OrigSpawnImpl = M.getFunction("spawn_impl");
+  Function *SpawnImpl = fixSpawnImpl(OrigSpawnImpl, Target);
+  OrigSpawnImpl->mutateType(SpawnImpl->getType());
+  OrigSpawnImpl->replaceAllUsesWith(SpawnImpl);
+  OrigSpawnImpl->eraseFromParent();
+  Function *SpawnFn = fixSpawnWrapper(M.getFunction("_server_spawn_worker"), Target);
 
   auto &Ctx = M.getContext();
 
@@ -208,6 +270,6 @@ int main(int argc, char **argv)
   legacy::PassManager PM;
   PM.add(createBitcodeWriterPass(Out.os(), true));
   PM.run(*M.get());
-  
+
   Out.keep();
 }

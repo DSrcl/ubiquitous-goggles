@@ -124,9 +124,8 @@ size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai, int 
 	return dist;
 }
 
-
-uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
-{ 
+uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname)
+{
 	void *stack_bottom, *heap_top;
 	GET_STACKBOUND(stack_bottom);
 	heap_top = sbrk(0);
@@ -256,6 +255,16 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 		return ret;
 	}
 }
+
+uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
+{ 
+	// make sure the spawn function's frame uses different pages than the testcases'
+	char placeholder[getpagesize()];
+	placeholder[42] = 42;
+
+	return spawn_impl(orig_func, funcname);
+}
+
 
 void _server_init()
 {
