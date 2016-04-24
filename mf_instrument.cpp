@@ -62,10 +62,8 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
   std::vector<std::pair<unsigned, unsigned>> RegInfo(Regs.size());
   std::vector<Constant *> RegInfoInitializer(Regs.size());
 
-  auto *RegInfoTy = StructType::get(Ctx, "struct.RegInfo");
   auto *Int64Ty = Type::getInt64Ty(Ctx);
-  RegInfoTy->setBody(std::vector<Type *> {Int64Ty, Int64Ty});
-  
+  auto *RegInfoTy = StructType::get(Ctx, std::vector<Type *> {Int64Ty, Int64Ty});
 
   unsigned CurOffset = 0;
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
@@ -76,12 +74,11 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB, 
     RegInfo[i].first = CurOffset;
     RegInfo[i].second = RegSize;
     RegInfoInitializer[i] = ConstantStruct::get(RegInfoTy,
-                                                std::vector<Constant *> {ConstantInt::get(Int64Ty, CurOffset), ConstantInt::get(Int64Ty, RegSize)});
+                                                std::vector<Constant *> {
+                                                ConstantInt::get(Int64Ty, CurOffset),
+                                                ConstantInt::get(Int64Ty, RegSize) });
     CurOffset += RegSize;
-    errs() << "!!! size of register " << MRI->getName(Reg) << " : " << RegSize << "\n";
   }
-
-  errs() << "!!! size of reg data: " << CurOffset << "\n";
 
   // declare `reg_data`
   auto *Int8Ty = Type::getInt8Ty(Ctx);
@@ -190,3 +187,13 @@ std::vector<unsigned> X86_64Instrumenter::getReturnRegs(llvm::Function *F) const
 
   llvm_unreachable("don't need this for an A");
 }
+
+/*
+ * The first six integer or pointer arguments are passed in registers
+ * RDI, RSI, RDX, RCX (R10 in the Linux kernel interface[16]:124), R8, and R9,
+ * while XMM0, XMM1, XMM2, XMM3, XMM4, XMM5, XMM6 and XMM7 are used for certain floating point arguments
+ */
+void X86_64Instrumenter::mprotect() const
+{
+}
+
