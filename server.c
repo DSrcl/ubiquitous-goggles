@@ -14,6 +14,7 @@
 #include <semaphore.h>
 #include <setjmp.h>
 #include <assert.h>
+#include <signal.h>
 
 #include "regs.h"
 #include "common.h"
@@ -49,9 +50,14 @@ int max_client;
 
 int is_parent = 1;
 
+int crash_signal;
+
 static jmp_buf jb;
 
 void *_server_stack_top, *_server_heap_bottom;
+
+void *frame_begin;
+size_t frame_size;
 
 static inline struct response *make_error(char *msg)
 { 
@@ -67,6 +73,7 @@ static inline struct response *make_report(size_t stack_dist, size_t heap_dist)
 	resp->success = 1;
 	resp->stack_dist = stack_dist;
 	resp->heap_dist = heap_dist;
+	resp->signal = crash_signal;
 	return resp;
 }
 
@@ -84,10 +91,10 @@ static inline void *respond(int fd, struct response *resp)
 	exit(0);
 }
 
-static inline void dump_worker_data(const char *sock_path)
+static inline void dump_worker_data(const char *sock_path, void *frame_begin, size_t frame_size)
 { 
 	FILE *out_file = fopen(OUT_FILENAME, "a");
-	fprintf(out_file, "%s\n", sock_path);
+	fprintf(out_file, "%s,%zu,%zu\n", sock_path, (size_t)frame_begin, frame_size);
 	fclose(out_file);
 } 
 
@@ -124,10 +131,42 @@ size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai, int 
 	return dist;
 }
 
+void handle_segfault(int signo, siginfo_t* si, void* data)
+{
+	crash_signal = signo;
+	mprotect(frame_begin, frame_size, PROT_READ | PROT_WRITE);
+	siglongjmp(jb, 42);
+} 
+
+
+static char handler_stack[SIGSTKSZ];
+void register_segfault_handler()
+{ 
+	stack_t ss;
+	ss.ss_size = SIGSTKSZ;
+	ss.ss_sp = handler_stack;
+	struct sigaction sa;
+	sa.sa_handler = handle_segfault;
+	sa.sa_flags = SA_ONSTACK;
+	sigaltstack(&ss, 0);
+	sigfillset(&sa.sa_mask);
+	sigaction(SIGSEGV, &sa, 0);
+	sigaction(SIGILL, &sa, 0);
+	sigaction(SIGFPE, &sa, 0);
+}
+
 uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname)
 {
+	void *fp = __builtin_frame_address(0);
+
+	// assuming compiler can't constprop getpagesize
+	int page_size = getpagesize();
+	char *stack_boundary = alloca(page_size);
+	frame_begin = (char *)(((size_t) stack_boundary + page_size-1) & ~(page_size-1));
+	frame_size = fp - frame_begin;
+
 	void *stack_bottom, *heap_top;
-	GET_STACKBOUND(stack_bottom);
+	stack_bottom = fp;
 	heap_top = sbrk(0);
 
 	size_t stack_size = _server_stack_top - stack_bottom,
@@ -160,6 +199,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname)
 	}
 
 	if (can_spawn && fork()) { // body of worker process
+		register_segfault_handler();
 		sem_wait(sem);
 		is_parent = 0;
 
@@ -215,12 +255,10 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname)
 				size_t *rewrite_num_regs = dlsym(lib, "_ug_num_regs");
 				if (!rewrite_num_regs) respond(cli_fd, make_error("can't load _ug_num_regs"));
 				int ret;
-				if ((ret=setjmp(jb)) == 0)  {
+				if ((ret=sigsetjmp(jb, 1)) == 0)  {
 					// run the function
 					_stub_rewrite_call(rewrite); 
 				}
-
-				printf("ESI = %d\n", *(int *)(rewrite_reg_data+rewrite_reg_info[0].offset));	
 
 				size_t stack_dist = get_mem_dist(stack_bottom, target_stack, stack_size),
 					   heap_dist = get_mem_dist(_server_heap_bottom, target_heap, heap_size);
@@ -235,7 +273,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname)
 		exit(0);
 	} else { // body of parent process 
 		if (can_spawn) {
-			dump_worker_data(sock_path);
+			dump_worker_data(sock_path, frame_begin, frame_size);
 		}
 
 		// this will finally be transformed into `int ret = orig_func(...)`
@@ -260,11 +298,11 @@ uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname)
 { 
 	// make sure the spawn function's frame uses different pages than the testcases'
 	char placeholder[getpagesize()];
+	// make sure the compiler doesn't remove placeholder's allocation
 	placeholder[42] = 42;
 
 	return spawn_impl(orig_func, funcname);
 }
-
 
 void _server_init()
 {
@@ -286,5 +324,5 @@ void _server_init()
 	fprintf(buf_out, "%ld\n", (long)&jb);
 	fclose(buf_out);
 
-	daemon(1, 0);
+	//daemon(1, 0);
 }

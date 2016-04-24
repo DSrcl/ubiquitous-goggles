@@ -78,12 +78,13 @@ struct CopyMFInitializer : MachineFunctionInitializer {
     if (MF.getFunction() == TheMF->getFunction()) {
       for (auto &MBB : *TheMF) {
         auto *MBB_ = MF.CreateMachineBasicBlock();
+        MF.push_back(MBB_);
         for (auto &MI : MBB) { 
           MBB_->push_back(MF.CloneMachineInstr(&MI));
         }
-        MF.push_front(MBB_);
       }
     }
+
     return false;
   }
 };

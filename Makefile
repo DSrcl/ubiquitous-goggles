@@ -1,11 +1,13 @@
 #LIBS = support irreader ipo bitwriter bitreader codegen mc
-LDFLAGS = $(shell llvm-config --ldflags --system-libs --libs $(LIBS) | sed 's/-DNDEBUG//g')
-CXXFLAGS = $(shell llvm-config --cxxflags | sed 's/-DNDEBUG//g') -g
+#CONFIG = ~/workspace/llvm-3.7.1.obj/bin/llvm-config
+CONFIG = ~/workspace/llvm-fast/bin/llvm-config
+LDFLAGS = $(shell $(CONFIG) --ldflags --system-libs --libs $(LIBS) | sed 's/-DNDEBUG//g')
+CXXFLAGS = $(shell $(CONFIG) --cxxflags | sed 's/-DNDEBUG//g') -g
 CXX = clang++
 
 .PHONY: all clean
 
-OBJS = mf_compiler.o mf_instrument.o
+OBJS = mf_compiler.o mf_instrument.o transform.o
 BC = server.bc
 TESTS = mf_compiler_test 
 TOOLS = create-server replay-cli ug
@@ -17,7 +19,7 @@ ug: $(OBJS)
 server.bc: server.c common.h
 	clang -c -O3 -emit-llvm -o $@ $<
 
-mf_compiler_test: mf_compiler.o mf_instrument.o mf_compiler_test.o
+mf_compiler_test: mf_compiler.o mf_instrument.o mf_compiler_test.o transform.o
 	$(CXX) $^ $(LDFLAGS) -o $@ -g
 
 malloc.o: malloc.c

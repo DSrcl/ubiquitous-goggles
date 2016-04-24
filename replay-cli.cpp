@@ -5,6 +5,7 @@
 #include <sys/un.h>
 #include <unistd.h>
 #include <vector>
+#include <sstream>
 
 #include "replay.h"
 
@@ -63,10 +64,13 @@ std::vector<std::string> getTests(const std::string& workerFile)
   std::vector<std::string> sockets;
   std::string line;
   std::ifstream socketsFile(workerFile.c_str());
+  std::string sockpath;
 
   if (socketsFile.is_open()) {
     while (std::getline(socketsFile, line)) {
-      sockets.push_back(line);
+      std::stringstream fields(line);
+      std::getline(fields, sockpath, ',');
+      sockets.push_back(sockpath);
     }
   }
 
@@ -90,6 +94,7 @@ int main(int argc, char **argv)
     std::cout << "error: " << resp.msg << std::endl;
     std::cout << "stack dist: " << resp.stack_dist << std::endl;
     std::cout << "heap dist: " << resp.heap_dist << std::endl;
+    std::cout << "signal: " << resp.signal << std::endl;
     std::cout << "success: " << resp.success << std::endl;
   }
 }

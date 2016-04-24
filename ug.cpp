@@ -111,8 +111,8 @@ int main(int argc, char **argv)
   // 3. create `dump_regs.o`
   emitDumpRegistersModule(TM.get(), RetRegs, DumpRegsObj);
 
-  // 4. do `cc dump_regs.o server.o -o server`
-  run("cc "+DumpRegsObj+" "+ServerObj+" -o "+ServerExe);
+  // 4. do `cc malloc.o dump_regs.o server.o -o server`
+  run("cc "+DumpRegsObj+" malloc.o "+ServerObj+" -o "+ServerExe);
 
   // 5. run the server
   run("./"+ServerExe);

@@ -273,7 +273,6 @@ MachineInstr *Transformation::randInstr()
     New->addOperand(*MF, Op);
   }
 
-  StringRef X = "";
   return New;
 }
 

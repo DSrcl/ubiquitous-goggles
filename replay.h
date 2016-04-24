@@ -8,6 +8,7 @@ struct response {
 	size_t stack_dist;
   size_t heap_dist;
 	int success;
+  int signal;
 };
 
 #endif

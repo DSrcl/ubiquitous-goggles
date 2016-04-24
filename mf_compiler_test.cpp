@@ -74,6 +74,7 @@
 
 #include <string>
 
+#include "transform.h"
 #include "mf_compiler.h"
 #include "mf_instrument.h"
 
@@ -125,11 +126,19 @@ int main()
   auto MBB = MF.CreateMachineBasicBlock();
   auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
-  //std::vector<unsigned> Regs{ 35, 36 };
-  std::vector<unsigned> Regs{ Instrumenter->getRegister("ESI") };
-  Instrumenter->dumpRegisters(*M, *MBB, Regs);
-  Instrumenter->instrumentToReturn(MF, 0x1073031a0);
 
-  compileToObjectFile(*M, MF, "x.o", TM.get(), false);
-  emitDumpRegistersModule(TM.get(), Regs, "server_dump_regs.o");
+  //srand(time(NULL));
+  Transformation Transform(TM.get(), &MF);
+  for (unsigned i = 0; i < 10; i++) {
+    //Transform.Insert();
+  }
+  
+  Instrumenter->protectRTFrame(*MBB, 140734736265216, 2160);
+  Instrumenter->unprotectRTFrame(*MBB, 140734736265216, 2160);
+  Instrumenter->dumpRegisters(*M, *MBB, {});
+  Instrumenter->instrumentToReturn(MF, 4358559136);
+  
+  assert(compileToObjectFile(*M, MF, "x.o", TM.get(), false));
+  assert(compileToObjectFile(*M, MF, "x.s", TM.get(), true));
+
 }
