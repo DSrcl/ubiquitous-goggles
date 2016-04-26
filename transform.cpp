@@ -105,12 +105,6 @@ void Transformation::doSwap(InstrIterator A, InstrIterator B)
   std::swap(A, B);
 }
 
-template <MCID::Flag Flag>
-static bool is(const MCInstrDesc &Desc)
-{
-  return Desc.getFlags() & (1 << Flag);
-}
-
 static bool hasUnknown(const MCInstrDesc &Desc)
 {
   for (unsigned i = 0; i < Desc.NumOperands; i++) {
@@ -124,7 +118,10 @@ void Transformation::buildOpcodeClasses()
 { 
   for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
     const auto &Opcode = MII->get(i);
-    if (hasUnknown(Opcode) || is<Pseudo>(Opcode)) continue;
+    if (hasUnknown(Opcode) ||
+        Opcode.isPseudo() ||
+        Opcode.isBranch() ||
+        Opcode.isReturn()) continue;
 
     OpcodeClasses.insert(i);
 
@@ -132,7 +129,6 @@ void Transformation::buildOpcodeClasses()
          Itr != End;
          Itr++) {
       unsigned Opc = *OpcodeClasses.findLeader(Itr);
-      if (MII->get(Opc).isBranch()) continue;
       if (isExchangeable(MII, Opc, i)) { 
         OpcodeClasses.unionSets(Opc, i);
         break;
@@ -228,8 +224,10 @@ unsigned Transformation::chooseNonBranchOpcode()
 
   do {
     Desc = &MII->get(choose(NumOpcodes));
-  } while (Desc->isBranch() || hasUnknown(*Desc) ||
-           is<Pseudo>(*Desc));
+  } while (Desc->isBranch() ||
+           hasUnknown(*Desc) ||
+           Desc->isPseudo() ||
+           Desc->isReturn());
 
   return Desc->getOpcode();
 }
