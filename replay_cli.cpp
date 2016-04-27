@@ -53,9 +53,9 @@ struct ReplayClient::ClientImpl {
     return sock;
   }
 
-  // send `libpath` to worker waiting on `sockpath` and get response
-  response runOneTest(std::string sockpath, std::string libpath) {
-    response result;
+  // send `libpath` to worker waiting on `sockpath`
+  // return the socket used
+  int runTest(std::string sockpath, std::string libpath) {
     sockaddr_un addr; 
     auto sock = connectToAddr(sockpath, addr);
 
@@ -65,9 +65,17 @@ struct ReplayClient::ClientImpl {
       exit(1);
     }
 
+    return sock;
+  }
+
+  // get result back from a test
+  response waitTest(int sock) {
+    response result;
+
     if (recv(sock, &result, sizeof(result), 0) < 0) {
       close(sock);
       errs() << "Cannot receive response from the server\n";
+      exit(1);
     }
 
     close(sock);
@@ -77,9 +85,14 @@ struct ReplayClient::ClientImpl {
 
   std::vector<response> runAllTests(std::string libpath) {
     std::vector<response> TestResults;
-    // TODO this is embarssinly parallel
+    std::vector<int> Sockets; 
+
     for (const auto &W : Workers) {
-      TestResults.push_back(runOneTest(W.Address, libpath));
+      Sockets.push_back(runTest(W.Address, libpath));
+    }
+
+    for (int Sock : Sockets) {
+      TestResults.push_back(waitTest(Sock));
     }
 
     return TestResults;
@@ -173,9 +186,7 @@ std::vector<response> ReplayClient::testRewrite(Module *M, FunctionType *FnTy, M
 { 
   // path to the implementation
   Impl->instrument(M, FnTy, Rewrite);
-  errs() << "Instrumented Rewrite\n";
   std::string Libpath = Impl->compile(M, Rewrite);
-  errs() << "Compiled rewrite to " << Libpath << "\n";
   /////////
   for (int i = 0; i < 1e4; i++) {
     errs() << "!!! " << i << "\n";
