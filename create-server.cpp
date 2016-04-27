@@ -7,7 +7,7 @@
 #include <llvm/IR/BasicBlock.h>
 #include <llvm/IR/Instructions.h>
 #include <llvm/IR/LLVMContext.h>
-#include <llvm/IR/Constants.h> 
+#include <llvm/IR/Constants.h>
 #include <llvm/IR/DerivedTypes.h>
 #include <llvm/IR/InlineAsm.h>
 #include <llvm/IR/Type.h>
@@ -28,30 +28,22 @@
 
 using namespace llvm;
 
-cl::opt<std::string>
-FunctionToRun(
-    "f",
-    cl::desc("functions to run"),
-    cl::value_desc("function"),
-    cl::Required, cl::Prefix);
+cl::opt<std::string> FunctionToRun("f", cl::desc("functions to run"),
+                                   cl::value_desc("function"), cl::Required,
+                                   cl::Prefix);
 
-cl::opt<std::string>
-InputFilename(
-    cl::Positional,
-    cl::desc("<input file>"),
-    cl::Required);
+cl::opt<std::string> InputFilename(cl::Positional, cl::desc("<input file>"),
+                                   cl::Required);
 
-cl::opt<std::string>
-OutputFilename( 
-    "o", 
-    cl::desc("Specify output file name"), 
-    cl::value_desc("output file"));
+cl::opt<std::string> OutputFilename("o", cl::desc("Specify output file name"),
+                                    cl::value_desc("output file"));
 
-static void replaceStubCall(CallInst *Stub, FunctionType *TargetTy, Function::arg_iterator FnArgs)
-{
-  auto *Callee = new BitCastInst(Stub->getArgOperand(0), TargetTy->getPointerTo(), "", Stub);
+static void replaceStubCall(CallInst *Stub, FunctionType *TargetTy,
+                            Function::arg_iterator FnArgs) {
+  auto *Callee = new BitCastInst(Stub->getArgOperand(0),
+                                 TargetTy->getPointerTo(), "", Stub);
 
-  // call with proper arguments 
+  // call with proper arguments
   std::vector<Value *> Args;
   Args.resize(TargetTy->getNumParams());
   for (auto &Arg : Args) {
@@ -67,28 +59,27 @@ static void replaceStubCall(CallInst *Stub, FunctionType *TargetTy, Function::ar
     auto Ret = dyn_cast<ReturnInst>(Stub->uses().begin()->getUser());
     assert(Ret);
     auto &Ctx = Ret->getParent()->getParent()->getContext();
-    ReturnInst::Create(Ctx, Ret->getParent()); 
-    Ret->eraseFromParent(); 
+    ReturnInst::Create(Ctx, Ret->getParent());
+    Ret->eraseFromParent();
   }
 
   Stub->eraseFromParent();
 }
 
-void emitX86_64GetTopOfStack(Function *Main)
-{
+void emitX86_64GetTopOfStack(Function *Main) {
   auto M = Main->getParent();
   auto &Ctx = M->getContext();
 
   auto FnTy = FunctionType::get(Type::getInt8PtrTy(Ctx), false);
-  auto Asm = InlineAsm::get(FnTy, "movq %rbp, $0", "=r,~{dirflag},~{fpsr},~{flags}", false);
+  auto Asm = InlineAsm::get(FnTy, "movq %rbp, $0",
+                            "=r,~{dirflag},~{fpsr},~{flags}", false);
   auto Head = &*Main->begin()->begin();
   auto RBP = CallInst::Create(Asm, std::vector<Value *>{}, "x86_64.rbp", Head);
   auto TopOfStack = M->getGlobalVariable("_server_stack_top");
   new StoreInst(RBP, TopOfStack, Head);
 }
 
-void emitGetTopOfStack(Module &M)
-{
+void emitGetTopOfStack(Module &M) {
   Triple TargetTriple(M.getTargetTriple());
   auto Main = M.getFunction("main");
   auto Arch = TargetTriple.getArch();
@@ -97,35 +88,39 @@ void emitGetTopOfStack(Module &M)
     emitX86_64GetTopOfStack(Main);
     break;
   default:
-    llvm_unreachable("target not supported"); 
+    llvm_unreachable("target not supported");
   };
 }
 
-// replace `_stub_target_call` and `_stub_rewrite_call` with approciate instructions
+// replace `_stub_target_call` and `_stub_rewrite_call` with approciate
+// instructions
 // based on the type of `FnToRun`
 //
 // return the a version of `SpawnFn`
-Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun)
-{
+Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun) {
   auto *M = SpawnFn->getParent();
 
   FunctionType *OldTy = SpawnFn->getFunctionType(),
                *TargetTy = FnToRun->getFunctionType();
 
   // concatenate arguments ofr `SpawnFn` and `FnToRun`
-  std::vector<Type *> Params { TargetTy->getPointerTo() };
-  Params.insert(Params.end(), OldTy->param_begin()+1, OldTy->param_end());
+  std::vector<Type *> Params{TargetTy->getPointerTo()};
+  Params.insert(Params.end(), OldTy->param_begin() + 1, OldTy->param_end());
   Params.insert(Params.end(), TargetTy->param_begin(), TargetTy->param_end());
 
-  FunctionType *NewTy = FunctionType::get(TargetTy->getReturnType(), Params, false);
-  Function *NewSpawnFn = Function::Create(NewTy, SpawnFn->getLinkage(), "x", SpawnFn->getParent());
+  FunctionType *NewTy =
+      FunctionType::get(TargetTy->getReturnType(), Params, false);
+  Function *NewSpawnFn =
+      Function::Create(NewTy, SpawnFn->getLinkage(), "x", SpawnFn->getParent());
   NewSpawnFn->copyAttributesFrom(SpawnFn);
   NewSpawnFn->takeName(SpawnFn);
-  NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
+  NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(),
+                                         SpawnFn->getBasicBlockList());
 
-  // transfer over arguments of old function to new function 
+  // transfer over arguments of old function to new function
   for (Function::arg_iterator I = NewSpawnFn->arg_begin(),
-       I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end(); I2 != E; I++, I2++) {
+                              I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end();
+       I2 != E; I++, I2++) {
     I2->mutateType(I->getType());
     I2->replaceAllUsesWith(&*I);
     I->takeName(&*I2);
@@ -135,13 +130,13 @@ Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun)
   // arguments used to call `spawn_impl`
   std::vector<Value *> SpawnArgs(NewTy->getNumParams());
   Function::arg_iterator FnArgs = NewSpawnFn->arg_begin();
-  for (auto &Arg : SpawnArgs) { 
+  for (auto &Arg : SpawnArgs) {
     Arg = FnArgs++;
   }
   auto *SpawnImpl = M->getFunction("spawn_impl");
   auto *OrigCall = dyn_cast<CallInst>(SpawnImpl->uses().begin()->getUser());
   assert(OrigCall);
-  auto *NewCall = CallInst::Create(SpawnImpl, SpawnArgs, "", OrigCall); 
+  auto *NewCall = CallInst::Create(SpawnImpl, SpawnArgs, "", OrigCall);
   auto IsVoid = TargetTy->getReturnType()->isVoidTy();
   if (!IsVoid) {
     OrigCall->replaceAllUsesWith(NewCall);
@@ -150,38 +145,42 @@ Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun)
     auto Ret = dyn_cast<ReturnInst>(OrigCall->uses().begin()->getUser());
     assert(Ret);
     auto &Ctx = Ret->getParent()->getParent()->getContext();
-    ReturnInst::Create(Ctx, Ret->getParent()); 
-    Ret->eraseFromParent(); 
+    ReturnInst::Create(Ctx, Ret->getParent());
+    Ret->eraseFromParent();
   }
   OrigCall->eraseFromParent();
   return NewSpawnFn;
 }
 
-// replace `_stub_target_call` and `_stub_rewrite_call` with approciate instructions
+// replace `_stub_target_call` and `_stub_rewrite_call` with approciate
+// instructions
 // based on the type of `FnToRun`
 //
 // return the a version of `SpawnFn`
-Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun)
-{
+Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun) {
   auto *M = SpawnFn->getParent();
 
   FunctionType *OldTy = SpawnFn->getFunctionType(),
                *TargetTy = FnToRun->getFunctionType();
 
   // concatenate arguments ofr `SpawnFn` and `FnToRun`
-  std::vector<Type *> Params { TargetTy->getPointerTo() };
-  Params.insert(Params.end(), OldTy->param_begin()+1, OldTy->param_end());
+  std::vector<Type *> Params{TargetTy->getPointerTo()};
+  Params.insert(Params.end(), OldTy->param_begin() + 1, OldTy->param_end());
   Params.insert(Params.end(), TargetTy->param_begin(), TargetTy->param_end());
 
-  FunctionType *NewTy = FunctionType::get(TargetTy->getReturnType(), Params, false);
-  Function *NewSpawnFn = Function::Create(NewTy, SpawnFn->getLinkage(), "x", SpawnFn->getParent());
+  FunctionType *NewTy =
+      FunctionType::get(TargetTy->getReturnType(), Params, false);
+  Function *NewSpawnFn =
+      Function::Create(NewTy, SpawnFn->getLinkage(), "x", SpawnFn->getParent());
   NewSpawnFn->copyAttributesFrom(SpawnFn);
   NewSpawnFn->takeName(SpawnFn);
-  NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
+  NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(),
+                                         SpawnFn->getBasicBlockList());
 
-  // transfer over arguments of old function to new function 
+  // transfer over arguments of old function to new function
   for (Function::arg_iterator I = NewSpawnFn->arg_begin(),
-       I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end(); I2 != E; I++, I2++) {
+                              I2 = SpawnFn->arg_begin(), E = SpawnFn->arg_end();
+       I2 != E; I++, I2++) {
     I2->mutateType(I->getType());
     I2->replaceAllUsesWith(&*I);
     I->takeName(&*I2);
@@ -193,12 +192,18 @@ Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun)
     ++FnArgs;
   }
 
-  auto *RewriteCall = dyn_cast<CallInst>(
-    FnToRun->getParent()->getFunction("_stub_rewrite_call")->uses().begin()->getUser());
+  auto *RewriteCall = dyn_cast<CallInst>(FnToRun->getParent()
+                                             ->getFunction("_stub_rewrite_call")
+                                             ->uses()
+                                             .begin()
+                                             ->getUser());
   replaceStubCall(RewriteCall, TargetTy, FnArgs);
 
-  auto *TargetCall = dyn_cast<CallInst>(
-    FnToRun->getParent()->getFunction("_stub_target_call")->uses().begin()->getUser());
+  auto *TargetCall = dyn_cast<CallInst>(FnToRun->getParent()
+                                            ->getFunction("_stub_target_call")
+                                            ->uses()
+                                            .begin()
+                                            ->getUser());
   replaceStubCall(TargetCall, TargetTy, FnArgs);
 
   return NewSpawnFn;
@@ -207,36 +212,38 @@ Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun)
 // pre-condition: `M` has been linked with "server.bc", which contains
 // the template implementation of the `_server_spawn_worker` function
 //
-// replace call to `FunctionToRun` with a call to an appropriate version of `_server_spawn_worker`
-void createServer(Module &M)
-{
+// replace call to `FunctionToRun` with a call to an appropriate version of
+// `_server_spawn_worker`
+void createServer(Module &M) {
   Function *Target = M.getFunction(FunctionToRun);
   auto *OrigSpawnImpl = M.getFunction("spawn_impl");
   Function *SpawnImpl = fixSpawnImpl(OrigSpawnImpl, Target);
   OrigSpawnImpl->mutateType(SpawnImpl->getType());
   OrigSpawnImpl->replaceAllUsesWith(SpawnImpl);
   OrigSpawnImpl->eraseFromParent();
-  Function *SpawnFn = fixSpawnWrapper(M.getFunction("_server_spawn_worker"), Target);
+  Function *SpawnFn =
+      fixSpawnWrapper(M.getFunction("_server_spawn_worker"), Target);
 
   auto &Ctx = M.getContext();
 
   // declare global variable that refers to target function's name
   Constant *Str = ConstantDataArray::getString(Ctx, FunctionToRun);
-  GlobalVariable *GV = new GlobalVariable(M, Str->getType(),
-      true, GlobalValue::PrivateLinkage,
-      Str, "server.fn-name", nullptr,
-      GlobalVariable::NotThreadLocal,
-      0);
+  GlobalVariable *GV = new GlobalVariable(
+      M, Str->getType(), true, GlobalValue::PrivateLinkage, Str,
+      "server.fn-name", nullptr, GlobalVariable::NotThreadLocal, 0);
   Constant *Zero = ConstantInt::get(Type::getInt32Ty(Ctx), 0);
   std::vector<Constant *> Idxs = {Zero, Zero};
-  Constant *TargetName = ConstantExpr::getInBoundsGetElementPtr(Str->getType(), GV, Idxs); 
+  Constant *TargetName =
+      ConstantExpr::getInBoundsGetElementPtr(Str->getType(), GV, Idxs);
 
   for (auto &U : Target->uses()) {
     auto *Call = dyn_cast<CallInst>(U.getUser());
-    if (!Call) continue;
-    
-    std::vector<Value *>Args { Target, TargetName };
-    Args.insert(Args.end(), Call->arg_operands().begin(), Call->arg_operands().end());
+    if (!Call)
+      continue;
+
+    std::vector<Value *> Args{Target, TargetName};
+    Args.insert(Args.end(), Call->arg_operands().begin(),
+                Call->arg_operands().end());
 
     // replace a call to `Target` with a corresponding call to `SpawnFn`
     auto *Replaced = CallInst::Create(SpawnFn, Args, "", Call);
@@ -245,8 +252,7 @@ void createServer(Module &M)
   }
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   // Print a stack trace if we signal out.
   sys::PrintStackTraceOnErrorSignal();
   PrettyStackTraceProgram X(argc, argv);
@@ -254,7 +260,7 @@ int main(int argc, char **argv)
   cl::ParseCommandLineOptions(argc, argv, "create server");
 
   LLVMContext &Context = getGlobalContext();
-  SMDiagnostic Err; 
+  SMDiagnostic Err;
   std::unique_ptr<Module> M = parseIRFile(InputFilename, Err, Context);
 
   std::error_code EC;
@@ -262,7 +268,7 @@ int main(int argc, char **argv)
   if (EC) {
     errs() << EC.message() << '\n';
     return 1;
-  } 
+  }
 
   emitGetTopOfStack(*M.get());
   createServer(*M.get());

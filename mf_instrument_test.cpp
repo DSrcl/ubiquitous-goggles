@@ -8,7 +8,7 @@
 #include <llvm/IR/BasicBlock.h>
 #include <llvm/IR/Instructions.h>
 #include <llvm/IR/LLVMContext.h>
-#include <llvm/IR/Constants.h> 
+#include <llvm/IR/Constants.h>
 #include <llvm/IR/DerivedTypes.h>
 #include <llvm/IR/InlineAsm.h>
 #include <llvm/IR/Type.h>
@@ -72,8 +72,7 @@
 
 #include "mf_instrument.h"
 
-int main()
-{
+int main() {
   InitializeAllTargets();
   InitializeAllTargets();
   InitializeAllTargetMCs();
@@ -84,7 +83,7 @@ int main()
 
   // create a template module from user's testcase
   LLVMContext &Context = getGlobalContext();
-  SMDiagnostic Err; 
+  SMDiagnostic Err;
   std::unique_ptr<Module> M = parseIRFile(TestFile, Err, Context);
 
   Triple TheTriple = Triple(M->getTargetTriple());
@@ -96,11 +95,11 @@ int main()
   TargetOptions Options = InitTargetOptionsFromCodeGenFlags();
   std::string CPUStr = getCPUStr(), FeaturesStr = getFeaturesStr();
   std::string Error;
-  const Target *TheTarget = TargetRegistry::lookupTarget(TheTriple.str(), Error);
+  const Target *TheTarget =
+      TargetRegistry::lookupTarget(TheTriple.str(), Error);
   assert(TheTarget);
-  std::unique_ptr<TargetMachine> TM(
-      TheTarget->createTargetMachine(TheTriple.getTriple(), CPUStr, FeaturesStr,
-                                     Options, Reloc::PIC_));
+  std::unique_ptr<TargetMachine> TM(TheTarget->createTargetMachine(
+      TheTriple.getTriple(), CPUStr, FeaturesStr, Options, Reloc::PIC_));
 
   getInstrumenter(TM.get());
 }

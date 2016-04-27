@@ -2,8 +2,9 @@
 #define _MF_DUMP_REGS_H_
 
 #include <llvm/MC/MCRegisterInfo.h>
-#include <llvm/CodeGen/MachineBasicBlock.h>
-
+#include <llvm/CodeGen/MachineBasicBlock.h> 
+#include <llvm/MC/MCInstrInfo.h>
+#include <llvm/MC/MCRegisterInfo.h>
 
 class Instrumenter {
   std::map<std::string, unsigned> Registers;
@@ -50,7 +51,7 @@ public:
   instrumentToReturnNormally(llvm::MachineFunction &MF,
                              llvm::MachineBasicBlock &MBB) const = 0;
 
-  virtual std::vector<unsigned> getReturnRegs(llvm::Function *) const = 0;
+  virtual std::vector<unsigned> getReturnRegs(llvm::FunctionType *) const = 0;
 
   // make the runtime's frame unaccessible
   virtual void protectRTFrame(llvm::MachineBasicBlock &MBB, int64_t FrameBegin,
@@ -89,7 +90,7 @@ public:
                           int64_t JmpbfuAddr) const override;
   void instrumentToReturnNormally(llvm::MachineFunction &MF,
                                   llvm::MachineBasicBlock &MBB) const override;
-  std::vector<unsigned> getReturnRegs(llvm::Function *) const override;
+  std::vector<unsigned> getReturnRegs(llvm::FunctionType *) const override;
   void protectRTFrame(llvm::MachineBasicBlock &MBB, int64_t FrameBegin,
                       int64_t FrameSize) const override;
   void unprotectRTFrame(llvm::MachineBasicBlock &MBB, int64_t FrameBegin,

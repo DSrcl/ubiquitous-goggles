@@ -8,7 +8,7 @@
 #include <llvm/IR/BasicBlock.h>
 #include <llvm/IR/Instructions.h>
 #include <llvm/IR/LLVMContext.h>
-#include <llvm/IR/Constants.h> 
+#include <llvm/IR/Constants.h>
 #include <llvm/IR/DerivedTypes.h>
 #include <llvm/IR/InlineAsm.h>
 #include <llvm/IR/Type.h>
@@ -80,8 +80,7 @@
 
 using namespace llvm;
 
-int main()
-{
+int main() {
   InitializeAllTargets();
   InitializeAllTargets();
   InitializeAllTargetMCs();
@@ -92,11 +91,11 @@ int main()
 
   // create a template module from user's testcase
   LLVMContext &Context = getGlobalContext();
-  SMDiagnostic Err; 
+  SMDiagnostic Err;
   std::unique_ptr<Module> M = parseIRFile(TestFile, Err, Context);
 
   legacy::PassManager PM;
-  std::vector<GlobalValue *> ToKeep { M->getFunction(FnName) };
+  std::vector<GlobalValue *> ToKeep{M->getFunction(FnName)};
   PM.add(createGVExtractionPass(ToKeep, false));
   PM.run(*M);
 
@@ -110,16 +109,15 @@ int main()
   TargetOptions Options = InitTargetOptionsFromCodeGenFlags();
   std::string CPUStr = getCPUStr(), FeaturesStr = getFeaturesStr();
   std::string Error;
-  const Target *TheTarget = TargetRegistry::lookupTarget(TheTriple.str(), Error);
+  const Target *TheTarget =
+      TargetRegistry::lookupTarget(TheTriple.str(), Error);
   assert(TheTarget);
-  std::unique_ptr<TargetMachine> TM(
-    TheTarget->createTargetMachine(TheTriple.getTriple(), CPUStr, FeaturesStr,
-                                   Options, Reloc::PIC_));
+  std::unique_ptr<TargetMachine> TM(TheTarget->createTargetMachine(
+      TheTriple.getTriple(), CPUStr, FeaturesStr, Options, Reloc::PIC_));
   ////////////////////////
 
   MachineModuleInfo *MMI = new MachineModuleInfo(
-    *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
-
+      *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
 
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
@@ -127,18 +125,17 @@ int main()
   auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
 
-  //srand(time(NULL));
+  // srand(time(NULL));
   Transformation Transform(TM.get(), &MF);
   for (unsigned i = 0; i < 10; i++) {
-    //Transform.Insert();
+    Transform.Insert();
   }
-  
+
   Instrumenter->protectRTFrame(*MBB, 140734736265216, 2160);
   Instrumenter->unprotectRTFrame(*MBB, 140734736265216, 2160);
   Instrumenter->dumpRegisters(*M, *MBB, {});
   Instrumenter->instrumentToReturn(MF, 4358559136);
-  
+
   assert(compileToObjectFile(*M, MF, "x.o", TM.get(), false));
   assert(compileToObjectFile(*M, MF, "x.s", TM.get(), true));
-
 }

@@ -28,22 +28,25 @@ using namespace llvm;
 
 // TODO hire someone to clean this up
 // magic
-AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename, TargetMachine *TM)
-{
+AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename,
+                          TargetMachine *TM) {
   const auto MII = TM->getMCInstrInfo();
   const auto MRI = TM->getMCRegisterInfo();
   MachineModuleInfo *MMI = new MachineModuleInfo(
-    *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
+      *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
   auto Context = &MMI->getContext();
   const auto &STI = *TM->getMCSubtargetInfo();
   const auto &Options = TM->Options;
   std::error_code EC;
   tool_output_file Out(OutFilename, EC, sys::fs::F_None);
-  if (EC) return nullptr;
+  if (EC)
+    return nullptr;
   auto &OS = Out.os();
 
-  MCCodeEmitter *MCE = TM->getTarget().createMCCodeEmitter(*MII, *MRI, *Context);
-  MCAsmBackend *MAB = TM->getTarget().createMCAsmBackend(*MRI, TM->getTargetTriple().str(), TM->getTargetCPU());
+  MCCodeEmitter *MCE =
+      TM->getTarget().createMCCodeEmitter(*MII, *MRI, *Context);
+  MCAsmBackend *MAB = TM->getTarget().createMCAsmBackend(
+      *MRI, TM->getTargetTriple().str(), TM->getTargetCPU());
   if (!MCE || !MAB)
     return nullptr;
 
@@ -68,18 +71,17 @@ AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename, TargetMachi
 
 struct CopyMFInitializer : MachineFunctionInitializer {
   MachineFunction *TheMF;
-  CopyMFInitializer(MachineFunction &MF) {
-    TheMF = &MF;
-  }
+  CopyMFInitializer(MachineFunction &MF) { TheMF = &MF; }
 
   bool initializeMachineFunction(MachineFunction &MF) {
-    //NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(), SpawnFn->getBasicBlockList());
+    // NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(),
+    // SpawnFn->getBasicBlockList());
     // move instructions from `TheMF` to `MF`
     if (MF.getFunction() == TheMF->getFunction()) {
       for (auto &MBB : *TheMF) {
         auto *MBB_ = MF.CreateMachineBasicBlock();
         MF.push_back(MBB_);
-        for (auto &MI : MBB) { 
+        for (auto &MI : MBB) {
           MBB_->push_back(MF.CloneMachineInstr(&MI));
         }
       }
@@ -90,24 +92,29 @@ struct CopyMFInitializer : MachineFunctionInitializer {
 };
 
 // return true if success
-bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutFilename, TargetMachine *TM, bool PrintAssemly)
-{
+bool compileToObjectFile(Module &M, MachineFunction &MF,
+                         const std::string &OutFilename, TargetMachine *TM,
+                         bool PrintAssemly) {
   auto *Printer = getAsmPrinter(M, OutFilename, TM);
-  if (!Printer) return false;
+  if (!Printer)
+    return false;
 
   std::error_code EC;
   tool_output_file Out(OutFilename, EC, sys::fs::F_None);
-  if (EC) return false;
+  if (EC)
+    return false;
   auto &OS = Out.os();
-  
+
   auto AsmPrinterId = Printer->getPassID();
-  
+
   CopyMFInitializer MFInit(MF);
 
-  auto FileType = PrintAssemly ? LLVMTargetMachine::CGFT_AssemblyFile : LLVMTargetMachine::CGFT_ObjectFile;
-  
+  auto FileType = PrintAssemly ? LLVMTargetMachine::CGFT_AssemblyFile
+                               : LLVMTargetMachine::CGFT_ObjectFile;
+
   legacy::PassManager PM;
-  TM->addPassesToEmitFile(PM, OS, FileType, true, AsmPrinterId, nullptr, nullptr, &MFInit);
+  TM->addPassesToEmitFile(PM, OS, FileType, true, AsmPrinterId, nullptr,
+                          nullptr, &MFInit);
   PM.run(M);
 
   Out.keep();
@@ -115,12 +122,13 @@ bool compileToObjectFile(Module &M, MachineFunction &MF, const std::string &OutF
   return true;
 }
 
-bool emitDumpRegistersModule(TargetMachine *TM, const std::vector<unsigned> &Regs, const std::string &OutFilename)
-{ 
+bool emitDumpRegistersModule(TargetMachine *TM,
+                             const std::vector<unsigned> &Regs,
+                             const std::string &OutFilename) {
   auto &Ctx = getGlobalContext();
   auto *VoidTy = Type::getVoidTy(Ctx);
 
-  auto *M = new Module("dump_regs", Ctx); 
+  auto *M = new Module("dump_regs", Ctx);
   M->setDataLayout(*TM->getDataLayout());
 
   auto *FnTy = FunctionType::get(VoidTy, std::vector<Type *>{}, false);
@@ -130,7 +138,7 @@ bool emitDumpRegistersModule(TargetMachine *TM, const std::vector<unsigned> &Reg
   BasicBlock::Create(Ctx, "", F);
 
   MachineModuleInfo *MMI = new MachineModuleInfo(
-    *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
+      *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
   MachineFunction MF(F, *TM, 0, *MMI);
   auto *MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);

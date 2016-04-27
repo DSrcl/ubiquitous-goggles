@@ -7,10 +7,10 @@ CXX = clang++
 
 .PHONY: all clean
 
-OBJS = mf_compiler.o mf_instrument.o transform.o
+OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o
 BC = server.bc
 TESTS = mf_compiler_test 
-TOOLS = create-server replay-cli ug
+TOOLS = create-server ug
 
 all: $(TOOLS) $(OBJS) $(TESTS) $(BC)
 
@@ -31,9 +31,6 @@ replay-server.o: $(TESTCASE) server.bc create-server
 
 replay-server: replay-server.o malloc.o
 	cc $^ -o $@
-
-replay-cli: replay-cli.cpp
-	$(CXX) $^ -o $@ -std=c++11
 
 clean:
 	rm -f $(TOOLS) $(OBJS) $(TESTS)

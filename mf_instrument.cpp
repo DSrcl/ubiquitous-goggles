@@ -160,8 +160,8 @@ void X86_64Instrumenter::instrumentToReturnNormally(
 }
 
 std::vector<unsigned>
-X86_64Instrumenter::getReturnRegs(llvm::Function *F) const {
-  auto *RetType = F->getFunctionType()->getReturnType();
+X86_64Instrumenter::getReturnRegs(llvm::FunctionType *FnTy) const {
+  auto *RetType = FnTy->getReturnType();
 
   // everything below is hack
   IntegerType *IntTy;
@@ -214,11 +214,13 @@ void X86_64Instrumenter::protectRTFrame(llvm::MachineBasicBlock &MBB,
 void X86_64Instrumenter::unprotectRTFrame(llvm::MachineBasicBlock &MBB,
                                           int64_t FrameBegin,
                                           int64_t FrameSize) const {
-  callMprotect(MBB, FrameBegin, FrameSize, PROT_READ | PROT_WRITE, MBB.instr_end());
+  callMprotect(MBB, FrameBegin, FrameSize, PROT_READ | PROT_WRITE,
+               MBB.instr_end());
 }
 
-void X86_64Instrumenter::push(MachineBasicBlock &MBB, unsigned Reg,
-                              MachineBasicBlock::instr_iterator InsertPt) const {
+void X86_64Instrumenter::push(
+    MachineBasicBlock &MBB, unsigned Reg,
+    MachineBasicBlock::instr_iterator InsertPt) const {
   BuildMI(MBB, InsertPt, DebugLoc(), MII->get(PUSH64r), Reg);
 }
 
@@ -231,14 +233,11 @@ void X86_64Instrumenter::callMprotect(
     llvm::MachineBasicBlock &MBB, int64_t FrameBegin, int64_t FrameSize,
     int ProtLevel, MachineBasicBlock::instr_iterator InsertPt) const {
   // mov `FrameBegin`, RSI
-  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RSI)
-      .addImm(FrameBegin);
+  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RSI).addImm(FrameBegin);
   // mov `FrameSize`, RDI
-  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDI)
-      .addImm(FrameSize);
+  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDI).addImm(FrameSize);
   // mov `PROT_READ`, RDX
-  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDX)
-      .addImm(ProtLevel);
+  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDX).addImm(ProtLevel);
   // callq mprotect
   BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Callq))
       .addExternalSymbol("mprotect");
