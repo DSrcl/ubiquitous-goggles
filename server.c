@@ -28,7 +28,7 @@
 #define OUT_FILENAME "worker-data.txt"
 #define JB_FILENAME "jmp_buf.txt"
 #define MAXFD 256
-#define MAX_CLIENT 4
+#define MAX_CLIENT 10
 #define MAX_WORKER 32
 
 #define X86_64
@@ -230,19 +230,14 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
       exit(-1);
     }
 
+    int cli_fd;
+    if ((cli_fd = accept(sockfd, NULL, NULL)) == -1) {
+      exit(-1);
+    }
+
     for (;;) {
-      int cli_fd;
-      if ((cli_fd = accept(sockfd, NULL, NULL)) == -1) {
-        continue;
-      }
-
-      if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 0) {
-        continue;
-      }
-
-      // read control byte and see if needs to kill current worker
-      if (!msg[0]) {
-        close(cli_fd);
+      bzero(msg, sizeof msg);
+      if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 1) { 
         break;
       }
 
@@ -267,6 +262,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         size_t *rewrite_num_regs = dlsym(lib, "_ug_num_regs");
         if (!rewrite_num_regs)
           respond(cli_fd, make_error("can't load _ug_num_regs"));
+
         int ret;
         if ((ret = sigsetjmp(jb, 1)) == 0) {
           // run the function
@@ -281,9 +277,8 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         respond(cli_fd, make_report(stack_dist, heap_dist));
       }
 
-      memset(msg, 0, sizeof msg);
-      close(cli_fd);
     }
+
     unlink(sock_path);
     exit(0);
   } else { // body of parent process
@@ -312,7 +307,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
 uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname) {
   // make sure the spawn function's frame uses different pages than the
   // testcases'
-  char placeholder[getpagesize()];
+  volatile char placeholder[getpagesize()];
   // make sure the compiler doesn't remove placeholder's allocation
   placeholder[42] = 42;
 

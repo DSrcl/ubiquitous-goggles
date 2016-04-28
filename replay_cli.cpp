@@ -24,7 +24,7 @@ using namespace llvm;
 struct ReplayClient::ClientImpl {
   struct Worker {
     size_t FrameBegin, FrameSize;
-    std::string Address;
+    int Socket;
   };
 
   std::vector<Worker> Workers;
@@ -33,12 +33,13 @@ struct ReplayClient::ClientImpl {
 
   Instrumenter *Instrumenter_;
 
-  int connectToAddr(const std::string sockpath, sockaddr_un &addr) {
+  int connectToAddr(const std::string sockpath) {
     auto sock = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sock < 0) {
       errs() << "Cannot create socket\n";
       exit(1);
     }
+    sockaddr_un addr;
 
     addr.sun_family = AF_UNIX;
     sockpath.copy(addr.sun_path, sockpath.size());
@@ -55,17 +56,11 @@ struct ReplayClient::ClientImpl {
 
   // send `libpath` to worker waiting on `sockpath`
   // return the socket used
-  int runTest(std::string sockpath, std::string libpath) {
-    sockaddr_un addr; 
-    auto sock = connectToAddr(sockpath, addr);
-
-    if (send(sock, libpath.c_str(), libpath.size(), 0) < 0) {
-      close(sock);
-      errs() << "Cannot send a lib path to a server\n";
+  void runTest(int sock, const std::string &libpath) {
+    if (send(sock, libpath.c_str(), libpath.size()+1, 0) < 0) {
+      std::perror("send lib path to socket");
       exit(1);
     }
-
-    return sock;
   }
 
   // get result back from a test
@@ -78,23 +73,19 @@ struct ReplayClient::ClientImpl {
       exit(1);
     }
 
-    close(sock);
-
     return result;
   }
 
   std::vector<response> runAllTests(std::string libpath) {
     std::vector<response> TestResults;
-    std::vector<int> Sockets; 
 
     for (const auto &W : Workers) {
-      Sockets.push_back(runTest(W.Address, libpath));
+      runTest(W.Socket, libpath);
     }
 
-    for (int Sock : Sockets) {
-      TestResults.push_back(waitTest(Sock));
+    for (const auto &W : Workers) {
+      TestResults.push_back(waitTest(W.Socket));
     }
-
     return TestResults;
   }
 
@@ -110,11 +101,16 @@ struct ReplayClient::ClientImpl {
     if (WorkerFile.is_open()) {
       while (std::getline(WorkerFile, line)) {
         std::stringstream fields(line);
-        std::getline(fields, W.Address, ',');
+        std::string Sockpath;
+        std::getline(fields, Sockpath, ',');
+
         std::getline(fields, Str, ',');
         W.FrameBegin = std::stol(Str);
+
         std::getline(fields, Str, ',');
         W.FrameSize = std::stol(Str);
+
+        W.Socket = connectToAddr(Sockpath);
         Workers.push_back(W);
       }
     }
@@ -159,8 +155,7 @@ struct ReplayClient::ClientImpl {
     sockaddr_un Addr;
 
     for (const auto &W : Workers) {
-      auto sock = connectToAddr(W.Address, Addr); 
-      if (send(sock, "", 1, 0) < 0) {
+      if (send(W.Socket, "", 1, 0) < 0) {
         std::perror("send");
         errs() << "cannot send kill msg\n";
         exit(1);
