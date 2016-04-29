@@ -44,8 +44,12 @@ Transformation::getRegClass(const MCOperandInfo &Op) {
   return RC;
 }
 
+// TODO
+// cleanup the memory even if no undo
 void Transformation::Undo() {
   switch (PrevTransformation) {
+  case NOP:
+    break;
   case MUT_OPCODE:
   case MUT_OPERAND:
   case REPLACE: {
@@ -68,14 +72,13 @@ void Transformation::Undo() {
   case MOVE:
     New->removeFromParent();
 
-  // undo MOVE and DELET by inserting the instruction back
+  // undo MOVE and DELETE by inserting `New` back
   // to its previous position
   case DELETE:
-    auto *MBB = New->getParent();
-    if (NextLoc == MBB->end()) {
-      MBB->push_back(New);
+    if (NextLoc == Parent->instr_end()) {
+      Parent->push_back(New);
     } else {
-      MBB->insert(NextLoc, New);
+      Parent->insert(NextLoc, New);
     }
     break;
   }
@@ -135,8 +138,10 @@ void Transformation::buildOpcodeClasses() {
 }
 
 bool Transformation::Swap() {
-  if (NumInstrs < 2)
+  if (NumInstrs < 2) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   auto &MBB = *MF->begin();
   auto A = select(MBB.instr_end()), B = select(A);
@@ -150,15 +155,19 @@ bool Transformation::Swap() {
 }
 
 bool Transformation::MutateOpcode() {
-  if (NumInstrs == 0)
+  if (NumInstrs == 0) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   auto &MBB = *MF->begin();
   auto Instr = select(MBB.instr_end());
   unsigned OldOpcode = Instr->getOpcode();
 
   // select a random but "equivalent" opcode
-  auto Opc = OpcodeClasses.member_begin(OpcodeClasses.findValue(OldOpcode));
+  auto Opc = OpcodeClasses.member_begin(OpcodeClasses.findValue(
+      OpcodeClasses.getLeaderValue(OldOpcode)));
+  assert(Opc != OpcodeClasses.member_end());
   unsigned ClassSize = std::distance(Opc, OpcodeClasses.member_end());
   std::advance(Opc, choose(ClassSize));
   unsigned NewOpcode = *Opc;
@@ -174,8 +183,10 @@ bool Transformation::MutateOpcode() {
 }
 
 bool Transformation::MutateOperand() {
-  if (NumInstrs == 0)
+  if (NumInstrs == 0) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   auto &MBB = *MF->begin();
   auto Instr = select(MBB.instr_end());
@@ -265,25 +276,30 @@ MachineInstr *Transformation::randInstr() {
 }
 
 bool Transformation::Replace() {
-  if (NumInstrs == 0)
+  if (NumInstrs == 0) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   New = randInstr();
   auto &MBB = *MF->begin();
-  Old = select(MBB.instr_begin());
+  Old = select(MBB.instr_end());
   replaceInst(MBB, Old, New);
   PrevTransformation = REPLACE;
   return true;
 }
 
-bool Transformation::Move() {
-  if (NumInstrs == 1)
+bool Transformation::Move() { 
+  if (NumInstrs == 1) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   auto &MBB = *MF->begin();
 
   auto Instr = select(MBB.instr_begin());
-  NextLoc = std::next(Instr, 1);
+  NextLoc = Instr;
+  ++NextLoc;
 
   // move
   auto NewLoc = select(Instr);
@@ -291,6 +307,7 @@ bool Transformation::Move() {
   MBB.insert(NewLoc, Instr);
 
   New = Instr;
+  Parent = New->getParent();
   PrevTransformation = MOVE;
 
   return true;
@@ -314,12 +331,19 @@ bool Transformation::Insert() {
 }
 
 bool Transformation::Delete() {
-  if (NumInstrs == 0)
+  if (NumInstrs == 0) {
+    PrevTransformation = NOP;
     return false;
+  }
 
   auto &MBB = *MF->begin();
   New = select(MBB.instr_end());
 
+  errs() << "!!! deleted: " << *New;
+  NextLoc = New;
+  ++NextLoc;
+  Parent = New->getParent();
+  New->removeFromParent();
   PrevTransformation = DELETE;
 
   NumInstrs--;

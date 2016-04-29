@@ -24,6 +24,7 @@ class Transformation {
   unsigned NumInstrs;
 
   enum Kind {
+    NOP,
     MUT_OPCODE,
     MUT_OPERAND,
     SWAP, 
@@ -48,6 +49,9 @@ class Transformation {
 
   // select a random instruction
   InstrIterator select(InstrIterator Except);
+
+  // for delete
+  llvm::MachineBasicBlock *Parent;
   // -----------------------
 
   void doSwap(InstrIterator A, InstrIterator B);
@@ -57,7 +61,12 @@ class Transformation {
   // build equivalence classes for opcodes
   void buildOpcodeClasses();
 
-  std::vector<int64_t> Immediates;
+  const std::vector<int64_t> Immediates {
+    0,
+      1, -1, 2, -2, 3, -3, 4, -4,
+      5, -5, 6, -6, 7, -7, 8, -8,
+      16, -16, 32, -32, 64, -64, 128, -128
+  };
 
   void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo);
 
@@ -85,14 +94,6 @@ public:
     TRI = MF->getSubtarget().getRegisterInfo();
 
     buildOpcodeClasses();  
-
-    Immediates = {
-      0,
-      1, -1, 2, -2, 3, -3, 4, -4,
-      5, -5, 6, -6, 7, -7, 8, -8,
-      16, -16, 32, -32, 64, -64, 128, -128
-    };
-
   }
 
   void Undo();

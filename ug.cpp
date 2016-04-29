@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 
   // 1. do `llvm-link `testcase` server.bc | llc -filetype=obj -o server.o`
   run("llvm-link server.bc " + TestcaseFilename + " -o - " + "| " +
-      CreateServer + " - -o - -f" + TargetName + "| llc -filetype=obj -o " +
+      CreateServer + " - -o - -f" + TargetName + "| opt -O3 -o - | llc -filetype=obj -o " +
       ServerObj);
 
   LLVMContext &Context = getGlobalContext();

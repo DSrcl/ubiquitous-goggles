@@ -125,11 +125,71 @@ int main() {
   auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
 
+  auto dump = [MBB]() { 
+    errs() << "----------------\n";
+    for (auto &I : *MBB) {
+      errs() << I;
+    }
+    
+  };
+
   // srand(time(NULL));
   Transformation Transform(TM.get(), &MF);
-  for (unsigned i = 0; i < 10; i++) {
+  unsigned n = 1;
+  for (unsigned i = 0; i < n; i++) {
     Transform.Insert();
   }
+  dump();
+
+  errs() << "-- swap \n";
+  Transform.Swap();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+  
+
+  errs() << "-- mutate opcode \n";
+  Transform.MutateOpcode();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+
+  errs() << "-- mutate operand\n";
+  Transform.MutateOperand();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+  
+  errs() << "-- replace instruction\n";
+  Transform.Replace();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+
+  errs() << "-- move instruction\n";
+  Transform.Move();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+
+  errs() << "-- insert instruction\n";
+  Transform.Insert();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
+
+  errs() << "-- delete instruction\n";
+  Transform.Delete();
+  dump();
+  errs() << "--undo\n";
+  Transform.Undo();
+  dump();
 
   Instrumenter->protectRTFrame(*MBB, 140734736265216, 2160);
   Instrumenter->unprotectRTFrame(*MBB, 140734736265216, 2160);
