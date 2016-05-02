@@ -1,3 +1,6 @@
+#ifndef _REPLAY_CLI_H_
+#define _REPLAY_CLI_H_
+
 #include <llvm/Target/TargetMachine.h>
 #include <llvm/CodeGen/MachineFunction.h>
 
@@ -18,3 +21,5 @@ public:
                                     llvm::MachineFunction *Rewrite);
   ~ReplayClient();
 };
+
+#endif

@@ -71,12 +71,32 @@ AsmPrinter *getAsmPrinter(Module &M, const std::string &OutFilename,
 
 struct CopyMFInitializer : MachineFunctionInitializer {
   MachineFunction *TheMF;
-  CopyMFInitializer(MachineFunction &MF) { TheMF = &MF; }
+  bool Reuse;
 
-  bool initializeMachineFunction(MachineFunction &MF) {
-    // NewSpawnFn->getBasicBlockList().splice(NewSpawnFn->begin(),
-    // SpawnFn->getBasicBlockList());
-    // move instructions from `TheMF` to `MF`
+  CopyMFInitializer(MachineFunction &MF, bool ReuseFunction)
+    : TheMF(&MF), Reuse(ReuseFunction) {}
+
+  bool initializeMachineFunction(MachineFunction &MF) { 
+    if (Reuse) {
+      copyFunction(MF);
+    } else { 
+      moveFunction(MF);
+    }
+
+    return false;
+  }
+
+  void moveFunction(MachineFunction &MF) {
+    if (MF.getFunction() == TheMF->getFunction()) {
+      while (!TheMF->empty()) {
+        auto MBB = &TheMF->front();
+        TheMF->remove(MBB);
+        MF.push_front(MBB);
+      }
+    }
+  }
+
+  void copyFunction(MachineFunction &MF) {
     if (MF.getFunction() == TheMF->getFunction()) {
       for (auto &MBB : *TheMF) {
         auto *MBB_ = MF.CreateMachineBasicBlock();
@@ -86,15 +106,14 @@ struct CopyMFInitializer : MachineFunctionInitializer {
         }
       }
     }
-
-    return false;
   }
 };
 
 // return true if success
 bool compileToObjectFile(Module &M, MachineFunction &MF,
                          const std::string &OutFilename, TargetMachine *TM,
-                         bool PrintAssemly) {
+                         bool PrintAssemly,
+                         bool ReuseFunction) {
   auto *Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer)
     return false;
@@ -107,7 +126,7 @@ bool compileToObjectFile(Module &M, MachineFunction &MF,
 
   auto AsmPrinterId = Printer->getPassID();
 
-  CopyMFInitializer MFInit(MF);
+  CopyMFInitializer MFInit(MF, ReuseFunction);
 
   auto FileType = PrintAssemly ? LLVMTargetMachine::CGFT_AssemblyFile
                                : LLVMTargetMachine::CGFT_ObjectFile;

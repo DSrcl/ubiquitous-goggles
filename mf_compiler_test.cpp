@@ -121,12 +121,13 @@ int main() {
 
   // create a machine function
   MachineFunction MF(M->getFunction(FnName), *TM, 0, *MMI);
+  assert(compileToObjectFile(*M, MF, "x.o", TM.get(), false));
   auto MBB = MF.CreateMachineBasicBlock();
   auto Instrumenter = getInstrumenter(TM.get());
   MF.push_back(MBB);
 
   auto dump = [MBB]() { 
-    errs() << "----------------\n";
+    errs() << "-------instructions---------\n";
     for (auto &I : *MBB) {
       errs() << I;
     }
@@ -135,18 +136,19 @@ int main() {
 
   // srand(time(NULL));
   Transformation Transform(TM.get(), &MF);
-  unsigned n = 1;
+  unsigned n = 5;
   for (unsigned i = 0; i < n; i++) {
     Transform.Insert();
   }
   dump();
 
   errs() << "-- swap \n";
-  Transform.Swap();
+  Transform.Move();
   dump();
   errs() << "--undo\n";
   Transform.Undo();
   dump();
+  return 0;
   
 
   errs() << "-- mutate opcode \n";

@@ -48,18 +48,10 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment) {
   return Aligned;
 }
 
-// * declare `reg_data(uint8[])` in `M`
-// * declare `reg_info(struct{ size_t offset, size}[])` in `M`
-// * declare `num_regs`
-// * emit code to dump `Regs` at the end of `MBB`
-void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
-                                 const std::vector<unsigned> &Regs) {
-  assert(FreeReg && "FreeReg uninitialized");
-
+void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &Regs) {
   auto &Ctx = M.getContext();
 
-  // list of (offset, size)
-  std::vector<std::pair<unsigned, unsigned>> RegInfo(Regs.size());
+  RegInfo.resize(Regs.size());
   std::vector<Constant *> RegInfoInitializer(Regs.size());
 
   auto *Int64Ty = Type::getInt64Ty(Ctx);
@@ -82,7 +74,7 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
   // declare `reg_data`
   auto *Int8Ty = Type::getInt8Ty(Ctx);
   auto *RegDataTy = ArrayType::get(Int8Ty, CurOffset);
-  auto *RegData =
+  RegData[&M] =
       new GlobalVariable(M, RegDataTy, false, GlobalVariable::ExternalLinkage,
                          ConstantAggregateZero::get(RegDataTy), "_ug_reg_data");
 
@@ -95,6 +87,19 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
   // declare `num_regs`
   new GlobalVariable(M, Int64Ty, true, GlobalVariable::ExternalLinkage,
                      ConstantInt::get(Int64Ty, Regs.size()), "_ug_num_regs");
+}
+
+// * declare `reg_data(uint8[])` in `M`
+// * declare `reg_info(struct{ size_t offset, size}[])` in `M`
+// * declare `num_regs`
+// * emit code to dump `Regs` at the end of `MBB`
+void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
+                                 const std::vector<unsigned> &Regs) {
+  assert(FreeReg && "FreeReg uninitialized");
+  
+  if (RegData.find(&M) == RegData.end()) {
+    calculateRegBufferLayout(M, Regs);
+  }
 
   auto *MF = MBB.getParent();
 
@@ -103,7 +108,7 @@ void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
   auto *TRI = Subtarget.getRegisterInfo();
   // load address of `reg_data` into `FreeReg`
   auto *LoadAddr =
-      TII->getGlobalPICAddr(*MF, FreeReg, &MF->getTarget(), RegData);
+      TII->getGlobalPICAddr(*MF, FreeReg, &MF->getTarget(), RegData[&M]);
   MBB.push_back(LoadAddr);
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
     unsigned Reg = Regs[i];
@@ -232,10 +237,10 @@ void X86_64Instrumenter::pop(MachineBasicBlock &MBB, unsigned Reg,
 void X86_64Instrumenter::callMprotect(
     llvm::MachineBasicBlock &MBB, int64_t FrameBegin, int64_t FrameSize,
     int ProtLevel, MachineBasicBlock::instr_iterator InsertPt) const {
-  // mov `FrameBegin`, RSI
-  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RSI).addImm(FrameBegin);
-  // mov `FrameSize`, RDI
-  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDI).addImm(FrameSize);
+  // mov `FrameBegin`, RDI
+  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDI).addImm(FrameBegin);
+  // mov `FrameSize`, RSI
+  BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RSI).addImm(FrameSize);
   // mov `PROT_READ`, RDX
   BuildMI(MBB, InsertPt, DebugLoc(), MII->get(Movabsq), RDX).addImm(ProtLevel);
   // callq mprotect

@@ -41,8 +41,9 @@
 extern uint8_t _ug_reg_data[];
 // target reg_info
 extern struct reg_info _ug_reg_info[];
+extern size_t _ug_num_regs;
 // dump target registers
-extern void dump_registers();
+extern void dump_registers(void);
 
 void _server_init() __attribute__((constructor));
 
@@ -52,7 +53,7 @@ int is_parent = 1;
 
 int crash_signal;
 
-static jmp_buf jb;
+static sigjmp_buf jb;
 
 void *_server_stack_top, *_server_heap_bottom;
 
@@ -66,12 +67,13 @@ static inline struct response *make_error(char *msg) {
   return resp;
 }
 
-static inline struct response *make_report(size_t stack_dist,
-                                           size_t heap_dist) {
+static inline struct response *make_report(size_t reg_dist, size_t stack_dist,
+                                           size_t heap_dist, int crash_signal) {
   struct response *resp = malloc(sizeof(struct response));
   resp->success = 1;
   resp->stack_dist = stack_dist;
   resp->heap_dist = heap_dist;
+  resp->reg_dist = reg_dist;
   resp->signal = crash_signal;
   return resp;
 }
@@ -84,10 +86,9 @@ uint32_t _stub_target_call(uint32_t (*)());
 uint32_t _stub_rewrite_call(uint32_t (*)());
 
 // send response to the client and kill current process
-static inline void *respond(int fd, struct response *resp) {
+static inline void respond(int fd, struct response *resp) {
   write(fd, resp, sizeof(struct response));
-  free(resp);
-  exit(0);
+  _Exit(0);
 }
 
 static inline void dump_worker_data(const char *sock_path, void *frame_begin,
@@ -121,36 +122,36 @@ size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
   size_t i;
   size_t dist = 0;
   for (i = 0; i < size; i++) {
-    dist += get_byte_dist((a_start)[i], (b_start)[i]);
+    dist += get_byte_dist(a_start[i], b_start[i]);
   }
 
   return dist;
 }
 
-void handle_segfault(int signo) {
-  crash_signal = signo;
+int cli_fd;
+
+void handle_signal(int signo, siginfo_t *siginfo, void *context) {
   mprotect(frame_begin, frame_size, PROT_READ | PROT_WRITE);
   siglongjmp(jb, 42);
 }
 
-void handle_sigchld(int sig) {
-  while (waitpid((pid_t)(-1), 0, WNOHANG) > 0) {
-  }
-}
-
-static char handler_stack[SIGSTKSZ];
-void register_segfault_handler() {
+void register_signal_handler() {
   stack_t ss;
   ss.ss_size = SIGSTKSZ;
-  ss.ss_sp = handler_stack;
+  ss.ss_sp = malloc(SIGSTKSZ);
   struct sigaction sa;
-  sa.sa_handler = handle_segfault;
-  sa.sa_flags = SA_ONSTACK;
-  sigaltstack(&ss, 0);
+  sa.sa_sigaction = handle_signal;
+  sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
+  sigaltstack(&ss, NULL);
   sigfillset(&sa.sa_mask);
-  sigaction(SIGSEGV, &sa, 0);
-  sigaction(SIGILL, &sa, 0);
-  sigaction(SIGFPE, &sa, 0);
+  if (sigaction(SIGSEGV, &sa, NULL))
+    exit(1);
+  if (sigaction(SIGBUS, &sa, NULL))
+    exit(1);
+  if (sigaction(SIGILL, &sa, NULL))
+    exit(1);
+  if (sigaction(SIGFPE, &sa, NULL))
+    exit(1);
 }
 
 uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
@@ -168,16 +169,23 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
   heap_top = sbrk(0);
 
   size_t stack_size = _server_stack_top - stack_bottom,
-         heap_size = heap_top - _server_heap_bottom;
+         heap_size = heap_top - _server_heap_bottom, reg_buf_size = 0;
+  if (_ug_num_regs > 0) {
+    struct reg_info *last_reg = &_ug_reg_info[_ug_num_regs - 1];
+    reg_buf_size = last_reg->offset + last_reg->size;
+  }
 
-  // layout of `shared_mem` = |sem| stack | heap |
-  void *shared_mem = mmap(NULL, heap_size + stack_size + sizeof(sem_t),
-                          PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
+  // layout of `shared_mem` = |sem| stack | heap | reg buf|
+  void *shared_mem =
+      mmap(NULL, heap_size + stack_size + sizeof(sem_t) + reg_buf_size,
+           PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANON, -1, 0);
 
   assert(shared_mem && "failed to mmap");
   sem_t *sem = shared_mem;
   void *target_stack = shared_mem + sizeof(sem_t),
        *target_heap = target_stack + stack_size;
+
+  uint8_t *target_reg_data = target_heap + heap_size;
 
   sem_init(sem, 1, 0);
 
@@ -197,16 +205,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
   }
 
   if (can_spawn && fork() == 0) { // body of worker process
-    register_segfault_handler();
-
-    struct sigaction sa;
-    sa.sa_handler = &handle_sigchld;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART | SA_NOCLDSTOP;
-    if (sigaction(SIGCHLD, &sa, 0) == -1) {
-      perror(0);
-      exit(1);
-    }
+    register_signal_handler();
 
     sem_wait(sem);
     is_parent = 0;
@@ -230,18 +229,20 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
       exit(-1);
     }
 
-    int cli_fd;
     if ((cli_fd = accept(sockfd, NULL, NULL)) == -1) {
       exit(-1);
     }
 
     for (;;) {
       bzero(msg, sizeof msg);
-      if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 1) { 
+      if (read(cli_fd, msg, LIBPATH_MAX_LEN) <= 1) {
         break;
       }
 
-      if (fork() == 0) {
+      pid_t pid = fork();
+        static int itr;
+        itr++;
+      if (pid == 0) {
         // lookup the function from shared library
         void *lib = dlopen(msg, RTLD_NOW);
         if (!lib)
@@ -255,14 +256,6 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         if (!rewrite_reg_data)
           respond(cli_fd, make_error("can't load _ug_reg_data"));
 
-        struct reg_info *rewrite_reg_info = dlsym(lib, "_ug_reg_info");
-        if (!rewrite_reg_info)
-          respond(cli_fd, make_error("can't load _ug_reg_info"));
-
-        size_t *rewrite_num_regs = dlsym(lib, "_ug_num_regs");
-        if (!rewrite_num_regs)
-          respond(cli_fd, make_error("can't load _ug_num_regs"));
-
         int ret;
         if ((ret = sigsetjmp(jb, 1)) == 0) {
           // run the function
@@ -272,11 +265,28 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         size_t stack_dist =
                    get_mem_dist(stack_bottom, target_stack, stack_size),
                heap_dist =
-                   get_mem_dist(_server_heap_bottom, target_heap, heap_size);
+                   get_mem_dist(_server_heap_bottom, target_heap, heap_size),
+               reg_dist = 0;
 
-        respond(cli_fd, make_report(stack_dist, heap_dist));
+        int i;
+        for (i = 0; i < _ug_num_regs; i++) {
+          reg_dist += get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i);
+        }
+        // FIXME
+        FILE *debug = fopen("/dev/null", "a");
+        fprintf(debug, "%zu", reg_dist);
+        fclose(debug);
+
+        respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
       }
 
+      int retval;
+      waitpid(pid, &retval, 0);
+      if (WIFSIGNALED(retval)) {
+        struct response *resp = make_report(0, 0, 0, WTERMSIG(retval));
+        write(cli_fd, resp, sizeof(struct response));
+        free(resp);
+      }
     }
 
     unlink(sock_path);
@@ -288,6 +298,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
 
     // this will finally be transformed into `int ret = orig_func(...)`
     int ret = _stub_target_call(orig_func);
+    dump_registers();
 
     // copy stack[bottom:top] to the shared memory
     memcpy(target_stack, stack_bottom, stack_size);
@@ -295,6 +306,11 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
     if (heap_size) {
       // copy heap[bottom:top] to shared memory
       memcpy(target_heap, _server_heap_bottom, heap_size);
+    }
+
+    // copy reg buffer  to shared memory
+    if (_ug_num_regs > 0) {
+      memcpy(target_reg_data, _ug_reg_data, reg_buf_size);
     }
 
     // let go of the child process

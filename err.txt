@@ -1,0 +1,7660 @@
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+need this to work(?)
+shitshitshitshitshitshitshitshitshitshitreg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 2
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 7
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 6
+reg dist: 3
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 2
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 8
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 6
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 1
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 3
+reg dist: 2
+reg dist: 8
+reg dist: 0
+reg dist: 5
+reg dist: 1
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 3
+reg dist: 4
+reg dist: 8
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 8
+reg dist: 3
+reg dist: 2
+reg dist: 9
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 2
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 4
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 2
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 2
+reg dist: 4
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 4
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 8
+reg dist: 3
+reg dist: 9
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 1
+reg dist: 4
+reg dist: 7
+reg dist: 2
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 4
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 2
+reg dist: 5
+reg dist: 9
+reg dist: 0
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 9
+reg dist: 2
+reg dist: 8
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 4
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 8
+reg dist: 5
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 6
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 1
+reg dist: 9
+reg dist: 2
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 2
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 2
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 2
+reg dist: 7
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 8
+reg dist: 1
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 6
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 2
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 2
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 5
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 7
+reg dist: 8
+reg dist: 3
+reg dist: 5
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 1
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 8
+reg dist: 5
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 7
+reg dist: 3
+reg dist: 8
+reg dist: 1
+reg dist: 9
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 6
+reg dist: 0
+reg dist: 5
+reg dist: 2
+reg dist: 7
+reg dist: 4
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 5
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 3
+reg dist: 7
+reg dist: 0
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 8
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 0
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 9
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 5
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 4
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 7
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 9
+reg dist: 2
+reg dist: 7
+reg dist: 1
+reg dist: 8
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 5
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 7
+reg dist: 8
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 9
+reg dist: 6
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 1
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 7
+reg dist: 0
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 3
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 7
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 7
+reg dist: 0
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 7
+reg dist: 8
+reg dist: 5
+reg dist: 9
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 7
+reg dist: 1
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 5
+reg dist: 7
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 1
+reg dist: 8
+reg dist: 3
+reg dist: 7
+reg dist: 2
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 1
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 7
+reg dist: 3
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 2
+reg dist: 7
+reg dist: 5
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 8
+reg dist: 0
+reg dist: 5
+reg dist: 1
+reg dist: 9
+reg dist: 7
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 0
+reg dist: 2
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 2
+reg dist: 8
+reg dist: 5
+reg dist: 9
+reg dist: 1
+reg dist: 7
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 4
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 8
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 0
+reg dist: 2
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 5
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 1
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 1
+reg dist: 2
+reg dist: 7
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 2
+reg dist: 8
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 8
+reg dist: 6
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 0
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 7
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 3
+reg dist: 9
+reg dist: 8
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 8
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 8
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 1
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 5
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 8
+reg dist: 2
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 7
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 6
+reg dist: 0
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 8
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 5
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 2
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 0
+reg dist: 4
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 3
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 8
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 5
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 6
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 5
+reg dist: 3
+reg dist: 7
+reg dist: 4
+reg dist: 6
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 1
+reg dist: 6
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 3
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 2
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 7
+reg dist: 5
+reg dist: 0
+reg dist: 6
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 4
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 4
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 1
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 1
+reg dist: 3
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 1
+reg dist: 0
+reg dist: 7
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 4
+reg dist: 7
+reg dist: 2
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 1
+reg dist: 0
+reg dist: 4
+reg dist: 6
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 4
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 7
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 2
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 7
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 4
+reg dist: 2
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 0
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 5
+reg dist: 1
+reg dist: 6
+reg dist: 4
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 6
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 5
+reg dist: 4
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 1
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 5
+reg dist: 4
+reg dist: 6
+reg dist: 3
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 5
+reg dist: 1
+reg dist: 3
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 6
+reg dist: 2
+reg dist: 3
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 5
+reg dist: 1
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 6
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 0
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 7
+reg dist: 5
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 3
+reg dist: 1
+reg dist: 8
+reg dist: 7
+reg dist: 0
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 2
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 7
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 1
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 7
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 2
+reg dist: 1
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 1
+reg dist: 0
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 1
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 0
+reg dist: 3
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 1
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 9
+reg dist: 7
+reg dist: 8
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 6
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 2
+reg dist: 0
+reg dist: 4
+reg dist: 1
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 6
+reg dist: 4
+reg dist: 3
+reg dist: 5
+reg dist: 0
+reg dist: 1
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 4
+reg dist: 0
+reg dist: 5
+reg dist: 2
+reg dist: 3
+reg dist: 1
+reg dist: 6
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 6
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 4
+reg dist: 0
+reg dist: 1
+reg dist: 3
+reg dist: 5
+reg dist: 8
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 2
+reg dist: 3
+reg dist: 4
+reg dist: 5
+reg dist: 6
+reg dist: 0
+reg dist: 1
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 6
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 8
+reg dist: 9
+reg dist: 0
+reg dist: 3
+reg dist: 1
+reg dist: 2
+reg dist: 4
+reg dist: 5
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 0
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 3
+reg dist: 6
+reg dist: 1
+reg dist: 9
+reg dist: 8
+reg dist: 7
+reg dist: 2
+reg dist: 0
+reg dist: 1
+reg dist: 5
+reg dist: 3
+reg dist: 4
+reg dist: 7
+reg dist: 6
+reg dist: 9
+reg dist: 8
+reg dist: 1
+reg dist: 2
+reg dist: 5
+reg dist: 4
+reg dist: 0
+reg dist: 3
+reg dist: 7
+reg dist: 6
+reg dist: 8
+reg dist: 9
+reg dist: 3
+reg dist: 6
+reg dist: 5
+reg dist: 4
+reg dist: 7
+reg dist: 1
+reg dist: 0
+reg dist: 2
+reg dist: 8
+reg dist: 9
+reg dist: 2
+reg dist: 0
+reg dist: 3
+reg dist: 5
+reg dist: 1
+reg dist: 4
+reg dist: 6
+reg dist: 7
+reg dist: 9
+reg dist: 8
+reg dist: 2
+reg dist: 1
+reg dist: 3
+reg dist: 4
+reg dist: 0
+reg dist: 6
+reg dist: 5
+reg dist: 8
+reg dist: 7
+reg dist: 9
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 1, itr: 0
+reg dist: 7, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 6, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 7, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 6, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 7, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 1, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 0, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 7, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 6, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 1, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 5, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 6, itr: 0
+reg dist: 4, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 5, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 5, itr: 0
+reg dist: 2, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 6, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 1, itr: 0
+reg dist: 7, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 4, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 7, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 1, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 4, itr: 0
+reg dist: 2, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 1, itr: 0
+reg dist: 8, itr: 0
+reg dist: 7, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 5, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 7, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 2, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 1, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 0, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 6, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 4, itr: 0
+reg dist: 6, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 4, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 8, itr: 0
+reg dist: 6, itr: 0
+reg dist: 0, itr: 0
+reg dist: 7, itr: 0
+reg dist: 1, itr: 0
+reg dist: 9, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 5, itr: 0
+reg dist: 4, itr: 0
+reg dist: 1, itr: 0
+reg dist: 6, itr: 0
+reg dist: 0, itr: 0
+reg dist: 8, itr: 0
+reg dist: 9, itr: 0
+reg dist: 7, itr: 0
+reg dist: 1, itr: 0
+reg dist: 2, itr: 0
+reg dist: 3, itr: 0
+reg dist: 0, itr: 0
+reg dist: 6, itr: 0
+reg dist: 4, itr: 0
+reg dist: 5, itr: 0
+reg dist: 7, itr: 0
+reg dist: 9, itr: 0
+reg dist: 8, itr: 0
+reg dist: 0, itr: 1
+reg dist: 2, itr: 1
+reg dist: 1, itr: 1
+reg dist: 4, itr: 1
+reg dist: 3, itr: 1
+reg dist: 5, itr: 1
+reg dist: 7, itr: 1
+reg dist: 6, itr: 1
+reg dist: 8, itr: 1
+reg dist: 9, itr: 1
+reg dist: 1, itr: 2
+reg dist: 0, itr: 2
+reg dist: 2, itr: 2
+reg dist: 4, itr: 2
+reg dist: 3, itr: 2
+reg dist: 6, itr: 2
+reg dist: 5, itr: 2
+reg dist: 9, itr: 2
+reg dist: 8, itr: 2
+reg dist: 7, itr: 2
+reg dist: 1, itr: 3
+reg dist: 0, itr: 3
+reg dist: 2, itr: 3
+reg dist: 3, itr: 3
+reg dist: 4, itr: 3
+reg dist: 5, itr: 3
+reg dist: 6, itr: 3
+reg dist: 7, itr: 3
+reg dist: 8, itr: 3
+reg dist: 9, itr: 3
+reg dist: 5, itr: 4
+reg dist: 2, itr: 4
+reg dist: 4, itr: 4
+reg dist: 0, itr: 4
+reg dist: 1, itr: 4
+reg dist: 3, itr: 4
+reg dist: 6, itr: 4
+reg dist: 8, itr: 4
+reg dist: 7, itr: 4
+reg dist: 9, itr: 4
+reg dist: 4, itr: 5
+reg dist: 1, itr: 5
+reg dist: 3, itr: 5
+reg dist: 7, itr: 5
+reg dist: 8, itr: 5
+reg dist: 0, itr: 5
+reg dist: 5, itr: 5
+reg dist: 2, itr: 5
+reg dist: 6, itr: 5
+reg dist: 9, itr: 5
+reg dist: 0, itr: 6
+reg dist: 1, itr: 6
+reg dist: 2, itr: 6
+reg dist: 4, itr: 6
+reg dist: 6, itr: 6
+reg dist: 7, itr: 6
+reg dist: 8, itr: 6
+reg dist: 5, itr: 6
+reg dist: 3, itr: 6
+reg dist: 9, itr: 6
+reg dist: 1, itr: 7
+reg dist: 0, itr: 7
+reg dist: 2, itr: 7
+reg dist: 3, itr: 7
+reg dist: 4, itr: 7
+reg dist: 5, itr: 7
+reg dist: 8, itr: 7
+reg dist: 7, itr: 7
+reg dist: 6, itr: 7
+reg dist: 9, itr: 7
+reg dist: 0, itr: 8
+reg dist: 1, itr: 8
+reg dist: 3, itr: 8
+reg dist: 2, itr: 8
+reg dist: 5, itr: 8
+reg dist: 4, itr: 8
+reg dist: 6, itr: 8
+reg dist: 7, itr: 8
+reg dist: 8, itr: 8
+reg dist: 9, itr: 8
+reg dist: 2, itr: 9
+reg dist: 1, itr: 9
+reg dist: 0, itr: 9
+reg dist: 5, itr: 9
+reg dist: 3, itr: 9
+reg dist: 4, itr: 9
+reg dist: 6, itr: 9
+reg dist: 7, itr: 9
+reg dist: 9, itr: 9
+reg dist: 8, itr: 9
+reg dist: 2, itr: 10
+reg dist: 3, itr: 10
+reg dist: 5, itr: 10
+reg dist: 4, itr: 10
+reg dist: 7, itr: 10
+reg dist: 8, itr: 10
+reg dist: 6, itr: 10
+reg dist: 1, itr: 10
+reg dist: 0, itr: 10
+reg dist: 9, itr: 10
+reg dist: 1, itr: 11
+reg dist: 2, itr: 11
+reg dist: 3, itr: 11
+reg dist: 4, itr: 11
+reg dist: 0, itr: 11
+reg dist: 7, itr: 11
+reg dist: 5, itr: 11
+reg dist: 6, itr: 11
+reg dist: 8, itr: 11
+reg dist: 9, itr: 11
+reg dist: 0, itr: 12
+reg dist: 1, itr: 12
+reg dist: 3, itr: 12
+reg dist: 4, itr: 12
+reg dist: 2, itr: 12
+reg dist: 5, itr: 12
+reg dist: 6, itr: 12
+reg dist: 7, itr: 12
+reg dist: 9, itr: 12
+reg dist: 8, itr: 12
+reg dist: 4, itr: 13
+reg dist: 3, itr: 13
+reg dist: 5, itr: 13
+reg dist: 0, itr: 13
+reg dist: 1, itr: 13
+reg dist: 7, itr: 13
+reg dist: 2, itr: 13
+reg dist: 6, itr: 13
+reg dist: 9, itr: 13
+reg dist: 8, itr: 13
+reg dist: 3, itr: 14
+reg dist: 0, itr: 14
+reg dist: 4, itr: 14
+reg dist: 1, itr: 14
+reg dist: 2, itr: 14
+reg dist: 7, itr: 14
+reg dist: 5, itr: 14
+reg dist: 6, itr: 14
+reg dist: 8, itr: 14
+reg dist: 9, itr: 14
+reg dist: 0, itr: 15
+reg dist: 3, itr: 15
+reg dist: 4, itr: 15
+reg dist: 5, itr: 15
+reg dist: 1, itr: 15
+reg dist: 2, itr: 15
+reg dist: 6, itr: 15
+reg dist: 7, itr: 15
+reg dist: 8, itr: 15
+reg dist: 9, itr: 15
+reg dist: 0, itr: 16
+reg dist: 1, itr: 16
+reg dist: 4, itr: 16
+reg dist: 2, itr: 16
+reg dist: 3, itr: 16
+reg dist: 6, itr: 16
+reg dist: 5, itr: 16
+reg dist: 7, itr: 16
+reg dist: 9, itr: 16
+reg dist: 8, itr: 16
+reg dist: 0, itr: 17
+reg dist: 1, itr: 17
+reg dist: 2, itr: 17
+reg dist: 3, itr: 17
+reg dist: 4, itr: 17
+reg dist: 5, itr: 17
+reg dist: 6, itr: 17
+reg dist: 7, itr: 17
+reg dist: 8, itr: 17
+reg dist: 9, itr: 17
+reg dist: 2, itr: 18
+reg dist: 1, itr: 18
+reg dist: 0, itr: 18
+reg dist: 4, itr: 18
+reg dist: 3, itr: 18
+reg dist: 6, itr: 18
+reg dist: 5, itr: 18
+reg dist: 7, itr: 18
+reg dist: 8, itr: 18
+reg dist: 9, itr: 18
+reg dist: 3, itr: 19
+reg dist: 4, itr: 19
+reg dist: 6, itr: 19
+reg dist: 0, itr: 19
+reg dist: 5, itr: 19
+reg dist: 2, itr: 19
+reg dist: 1, itr: 19
+reg dist: 7, itr: 19
+reg dist: 8, itr: 19
+reg dist: 9, itr: 19
+reg dist: 1, itr: 20
+reg dist: 3, itr: 20
+reg dist: 4, itr: 20
+reg dist: 0, itr: 20
+reg dist: 5, itr: 20
+reg dist: 2, itr: 20
+reg dist: 6, itr: 20
+reg dist: 7, itr: 20
+reg dist: 8, itr: 20
+reg dist: 9, itr: 20
+reg dist: 3, itr: 21
+reg dist: 5, itr: 21
+reg dist: 2, itr: 21
+reg dist: 1, itr: 21
+reg dist: 0, itr: 21
+reg dist: 4, itr: 21
+reg dist: 6, itr: 21
+reg dist: 7, itr: 21
+reg dist: 9, itr: 21
+reg dist: 8, itr: 21
+reg dist: 1, itr: 22
+reg dist: 0, itr: 22
+reg dist: 4, itr: 22
+reg dist: 5, itr: 22
+reg dist: 2, itr: 22
+reg dist: 6, itr: 22
+reg dist: 3, itr: 22
+reg dist: 7, itr: 22
+reg dist: 8, itr: 22
+reg dist: 9, itr: 22
+reg dist: 0, itr: 23
+reg dist: 5, itr: 23
+reg dist: 6, itr: 23
+reg dist: 7, itr: 23
+reg dist: 4, itr: 23
+reg dist: 2, itr: 23
+reg dist: 1, itr: 23
+reg dist: 3, itr: 23
+reg dist: 8, itr: 23
+reg dist: 9, itr: 23
+reg dist: 3, itr: 24
+reg dist: 5, itr: 24
+reg dist: 4, itr: 24
+reg dist: 1, itr: 24
+reg dist: 0, itr: 24
+reg dist: 2, itr: 24
+reg dist: 6, itr: 24
+reg dist: 7, itr: 24
+reg dist: 9, itr: 24
+reg dist: 8, itr: 24
+reg dist: 3, itr: 25
+reg dist: 4, itr: 25
+reg dist: 6, itr: 25
+reg dist: 5, itr: 25
+reg dist: 2, itr: 25
+reg dist: 0, itr: 25
+reg dist: 1, itr: 25
+reg dist: 8, itr: 25
+reg dist: 9, itr: 25
+reg dist: 7, itr: 25
+reg dist: 5, itr: 26
+reg dist: 3, itr: 26
+reg dist: 4, itr: 26
+reg dist: 1, itr: 26
+reg dist: 2, itr: 26
+reg dist: 0, itr: 26
+reg dist: 6, itr: 26
+reg dist: 7, itr: 26
+reg dist: 8, itr: 26
+reg dist: 9, itr: 26
+reg dist: 0, itr: 27
+reg dist: 1, itr: 27
+reg dist: 2, itr: 27
+reg dist: 4, itr: 27
+reg dist: 3, itr: 27
+reg dist: 6, itr: 27
+reg dist: 5, itr: 27
+reg dist: 7, itr: 27
+reg dist: 8, itr: 27
+reg dist: 9, itr: 27
+reg dist: 2, itr: 28
+reg dist: 0, itr: 28
+reg dist: 1, itr: 28
+reg dist: 3, itr: 28
+reg dist: 4, itr: 28
+reg dist: 5, itr: 28
+reg dist: 6, itr: 28
+reg dist: 7, itr: 28
+reg dist: 8, itr: 28
+reg dist: 9, itr: 28
+reg dist: 0, itr: 29
+reg dist: 1, itr: 29
+reg dist: 4, itr: 29
+reg dist: 3, itr: 29
+reg dist: 2, itr: 29
+reg dist: 5, itr: 29
+reg dist: 7, itr: 29
+reg dist: 8, itr: 29
+reg dist: 9, itr: 29
+reg dist: 6, itr: 29
+reg dist: 0, itr: 30
+reg dist: 3, itr: 30
+reg dist: 5, itr: 30
+reg dist: 2, itr: 30
+reg dist: 1, itr: 30
+reg dist: 4, itr: 30
+reg dist: 7, itr: 30
+reg dist: 6, itr: 30
+reg dist: 9, itr: 30
+reg dist: 8, itr: 30
+reg dist: 7, itr: 31
+reg dist: 4, itr: 31
+reg dist: 5, itr: 31
+reg dist: 1, itr: 31
+reg dist: 6, itr: 31
+reg dist: 3, itr: 31
+reg dist: 0, itr: 31
+reg dist: 2, itr: 31
+reg dist: 8, itr: 31
+reg dist: 9, itr: 31
+reg dist: 1, itr: 32
+reg dist: 4, itr: 32
+reg dist: 2, itr: 32
+reg dist: 0, itr: 32
+reg dist: 3, itr: 32
+reg dist: 5, itr: 32
+reg dist: 7, itr: 32
+reg dist: 6, itr: 32
+reg dist: 8, itr: 32
+reg dist: 9, itr: 32
+reg dist: 7, itr: 33
+reg dist: 5, itr: 33
+reg dist: 6, itr: 33
+reg dist: 2, itr: 33
+reg dist: 4, itr: 33
+reg dist: 0, itr: 33
+reg dist: 1, itr: 33
+reg dist: 3, itr: 33
+reg dist: 9, itr: 33
+reg dist: 8, itr: 33
+reg dist: 1, itr: 34
+reg dist: 0, itr: 34
+reg dist: 2, itr: 34
+reg dist: 3, itr: 34
+reg dist: 5, itr: 34
+reg dist: 6, itr: 34
+reg dist: 4, itr: 34
+reg dist: 7, itr: 34
+reg dist: 9, itr: 34
+reg dist: 8, itr: 34
+reg dist: 3, itr: 35
+reg dist: 2, itr: 35
+reg dist: 0, itr: 35
+reg dist: 4, itr: 35
+reg dist: 1, itr: 35
+reg dist: 5, itr: 35
+reg dist: 7, itr: 35
+reg dist: 6, itr: 35
+reg dist: 8, itr: 35
+reg dist: 9, itr: 35
+reg dist: 1, itr: 36
+reg dist: 0, itr: 36
+reg dist: 4, itr: 36
+reg dist: 2, itr: 36
+reg dist: 3, itr: 36
+reg dist: 7, itr: 36
+reg dist: 5, itr: 36
+reg dist: 6, itr: 36
+reg dist: 8, itr: 36
+reg dist: 9, itr: 36
+reg dist: 3, itr: 37
+reg dist: 4, itr: 37
+reg dist: 1, itr: 37
+reg dist: 5, itr: 37
+reg dist: 0, itr: 37
+reg dist: 6, itr: 37
+reg dist: 2, itr: 37
+reg dist: 7, itr: 37
+reg dist: 8, itr: 37
+reg dist: 9, itr: 37
+reg dist: 0, itr: 38
+reg dist: 2, itr: 38
+reg dist: 1, itr: 38
+reg dist: 3, itr: 38
+reg dist: 4, itr: 38
+reg dist: 6, itr: 38
+reg dist: 5, itr: 38
+reg dist: 7, itr: 38
+reg dist: 8, itr: 38
+reg dist: 9, itr: 38
+reg dist: 2, itr: 39
+reg dist: 0, itr: 39
+reg dist: 3, itr: 39
+reg dist: 1, itr: 39
+reg dist: 4, itr: 39
+reg dist: 6, itr: 39
+reg dist: 7, itr: 39
+reg dist: 5, itr: 39
+reg dist: 8, itr: 39
+reg dist: 9, itr: 39
+reg dist: 2, itr: 40
+reg dist: 1, itr: 40
+reg dist: 0, itr: 40
+reg dist: 3, itr: 40
+reg dist: 4, itr: 40
+reg dist: 6, itr: 40
+reg dist: 5, itr: 40
+reg dist: 7, itr: 40
+reg dist: 8, itr: 40
+reg dist: 9, itr: 40
+reg dist: 1, itr: 41
+reg dist: 2, itr: 41
+reg dist: 3, itr: 41
+reg dist: 0, itr: 41
+reg dist: 4, itr: 41
+reg dist: 5, itr: 41
+reg dist: 6, itr: 41
+reg dist: 7, itr: 41
+reg dist: 8, itr: 41
+reg dist: 9, itr: 41
+reg dist: 1, itr: 42
+reg dist: 3, itr: 42
+reg dist: 2, itr: 42
+reg dist: 0, itr: 42
+reg dist: 4, itr: 42
+reg dist: 5, itr: 42
+reg dist: 7, itr: 42
+reg dist: 6, itr: 42
+reg dist: 8, itr: 42
+reg dist: 9, itr: 42
+reg dist: 0, itr: 43
+reg dist: 1, itr: 43
+reg dist: 3, itr: 43
+reg dist: 4, itr: 43
+reg dist: 5, itr: 43
+reg dist: 6, itr: 43
+reg dist: 2, itr: 43
+reg dist: 7, itr: 43
+reg dist: 9, itr: 43
+reg dist: 8, itr: 43
+reg dist: 4, itr: 44
+reg dist: 6, itr: 44
+reg dist: 5, itr: 44
+reg dist: 7, itr: 44
+reg dist: 0, itr: 44
+reg dist: 1, itr: 44
+reg dist: 3, itr: 44
+reg dist: 2, itr: 44
+reg dist: 9, itr: 44
+reg dist: 8, itr: 44
+reg dist: 4, itr: 45
+reg dist: 5, itr: 45
+reg dist: 2, itr: 45
+reg dist: 3, itr: 45
+reg dist: 0, itr: 45
+reg dist: 1, itr: 45
+reg dist: 8, itr: 45
+reg dist: 7, itr: 45
+reg dist: 6, itr: 45
+reg dist: 9, itr: 45

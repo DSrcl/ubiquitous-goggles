@@ -5,7 +5,8 @@ bool compileToObjectFile(llvm::Module &M,
                          llvm::MachineFunction &MF,
                          const std::string &OutFilename,
                          llvm::TargetMachine *TM,
-                         bool PrintAsm=false);
+                         bool PrintAsm=false,
+                         bool ReuseFunction=true);
 
 bool emitDumpRegistersModule(llvm::TargetMachine *TM, const std::vector<unsigned> &Regs, const std::string &OutFilename);
 

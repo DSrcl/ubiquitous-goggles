@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-void add(int *dst, int src)
+int add(int a, int b)
 {
-	*dst += src;
+  return a + b;
 }
 
 int main()
 {
 	int sum = 0;
 	for (int i = 0; i < 10; i++) {
-		add(&sum, i);
+		sum += add(sum, i);
 	}
 	printf("sum = %d\n", sum);
 }

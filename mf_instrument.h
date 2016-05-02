@@ -5,6 +5,7 @@
 #include <llvm/CodeGen/MachineBasicBlock.h> 
 #include <llvm/MC/MCInstrInfo.h>
 #include <llvm/MC/MCRegisterInfo.h>
+#include <set>
 
 class Instrumenter {
   std::map<std::string, unsigned> Registers;
@@ -21,12 +22,18 @@ protected:
   // temporary register whose value users don't care about (e.g. R15 in x86_64)
   unsigned FreeReg;
 
+  std::map<llvm::Module *, llvm::GlobalVariable *> RegData;
+  // list of (offset, size)
+  std::vector<std::pair<unsigned, unsigned>> RegInfo;
+
 public:
   Instrumenter(llvm::TargetMachine *TheTM) : TM(TheTM) {
     MII = TM->getMCInstrInfo();
     MRI = TM->getMCRegisterInfo();
     initRegisters();
   }
+
+  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs);
 
   unsigned getOpcode(const std::string &Name) const {
     for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {

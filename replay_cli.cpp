@@ -86,6 +86,7 @@ struct ReplayClient::ClientImpl {
     for (const auto &W : Workers) {
       TestResults.push_back(waitTest(W.Socket));
     }
+
     return TestResults;
   }
 
@@ -143,7 +144,7 @@ struct ReplayClient::ClientImpl {
   std::string compile(Module *M, MachineFunction *Rewrite) {
     const std::string RewriteObj = std::tmpnam(nullptr);
     errs() << "compiling rewrite\n";
-    compileToObjectFile(*M, *Rewrite, RewriteObj, TM);
+    compileToObjectFile(*M, *Rewrite, RewriteObj, TM, false);
     const std::string RewriteLib = std::tmpnam(nullptr);
     errs() << "linking rewrite\n";
     std::system(("cc -shared "+RewriteObj+" -o "+RewriteLib).c_str());
@@ -179,15 +180,18 @@ ReplayClient::~ReplayClient()
 
 std::vector<response> ReplayClient::testRewrite(Module *M, FunctionType *FnTy, MachineFunction *Rewrite)
 { 
-  // path to the implementation
-  Impl->instrument(M, FnTy, Rewrite);
-  std::string Libpath = Impl->compile(M, Rewrite);
-  /////////
-  for (int i = 0; i < 1e4; i++) {
-    errs() << "!!! " << i << "\n";
-    Impl->runAllTests(Libpath); 
+  // make a copy of rewrite
+  MachineFunction MF(Rewrite->getFunction(), Rewrite->getTarget(), 0, Rewrite->getMMI());
+  for (auto &MBB : *Rewrite) {
+    auto *MBB_ = MF.CreateMachineBasicBlock();
+    MF.push_back(MBB_);
+    for (auto &MI : MBB) {
+      MBB_->push_back(MF.CloneMachineInstr(&MI));
+    }
   }
-  //////////
+
+  Impl->instrument(M, FnTy, &MF);
+  std::string Libpath = Impl->compile(M, &MF);
   auto Result = Impl->runAllTests(Libpath);
   std::remove(Libpath.c_str());
   return Result;

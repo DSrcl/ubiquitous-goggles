@@ -37,6 +37,7 @@
 #include "mf_instrument.h"
 #include "replay_cli.h"
 #include "transform.h"
+#include "search.h"
 #include <cstdlib>
 #include <chrono>
 #include <fstream>
@@ -119,7 +120,7 @@ int main(int argc, char **argv) {
 
   // FIXME synchronize with the server
   sleep(1);
-  ReplayClient Client(TM.get(), "worker-data.txt", "jmpbuf.txt");
+  ReplayClient Client(TM.get(), "worker-data.txt", "jmp_buf.txt");
 
   MachineModuleInfo *MMI = new MachineModuleInfo(
       *TM->getMCAsmInfo(), *TM->getMCRegisterInfo(), TM->getObjFileLowering());
@@ -127,17 +128,25 @@ int main(int argc, char **argv) {
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
 
+  std::srand(std::time(NULL));
+  Searcher Synthesizer(TM.get(),
+           M.get(),
+           &MF,
+           TargetTy,
+           &Client);
+  Synthesizer.synthesize();
+
+
+  /*
   Transformation Transform(TM.get(), &MF);
   for (unsigned i = 0; i < 10; i++) {
     Transform.Insert();
   }
-
   auto now = std::chrono::system_clock::now();
   errs() << "Testing rewrite\n";
   Client.testRewrite(M.get(), TargetTy, &MF); 
   auto elapsed = std::chrono::system_clock::now() - now;
   errs() << "Elapsed: " << elapsed.count() << "\n";
- /*
   for (auto R : Results) {
     errs() << "signal: " << R.signal << "\n";
     errs() << "stack: " << R.stack_dist << "\n";
@@ -146,5 +155,4 @@ int main(int argc, char **argv) {
     errs() << "msg: " << R.msg << "\n";
   }
   */
-  errs() << "Testing done\n";
 }

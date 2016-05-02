@@ -12,6 +12,7 @@
 #include <llvm/Support/raw_ostream.h>
 
 class Transformation {
+
   llvm::MachineFunction *MF;
   llvm::TargetMachine *TM;
   const llvm::MCInstrInfo *MII;
@@ -48,13 +49,13 @@ class Transformation {
   InstrIterator Swapped1, Swapped2;
 
   // select a random instruction
-  InstrIterator select(InstrIterator Except);
+  InstrIterator select(InstrIterator Except, bool IncludeEnd=true);
 
   // for delete
   llvm::MachineBasicBlock *Parent;
   // -----------------------
 
-  void doSwap(InstrIterator A, InstrIterator B);
+  void doSwap(InstrIterator &A, InstrIterator &B);
 
   void doReplace(InstrIterator Orig, llvm::MachineInstr *Rep);
 
@@ -62,8 +63,7 @@ class Transformation {
   void buildOpcodeClasses();
 
   const std::vector<int64_t> Immediates {
-    0,
-      1, -1, 2, -2, 3, -3, 4, -4,
+    0, 1, -1, 2, -2, 3, -3, 4, -4,
       5, -5, 6, -6, 7, -7, 8, -8,
       16, -16, 32, -32, 64, -64, 128, -128
   };
@@ -73,9 +73,13 @@ class Transformation {
   unsigned chooseNonBranchOpcode();
 
   // replace `Old` with `New`
-  static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old, InstrIterator New) {
+  static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old, InstrIterator New, bool Erase=false) {
     MBB.insert(Old, New);
-    Old->removeFromParent();
+    if (Erase) {
+      Old->eraseFromParent();
+    } else {
+      Old->removeFromParent();
+    }
   }
 
   llvm::MachineInstr *randInstr();
@@ -95,6 +99,9 @@ public:
 
     buildOpcodeClasses();  
   }
+
+  unsigned getNumInstrs() { return NumInstrs; }
+  llvm::MachineFunction *getFunction() { return MF; }
 
   void Undo();
 

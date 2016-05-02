@@ -28,6 +28,7 @@ static bool isExchangeable(const MCInstrInfo *MII, unsigned A, unsigned B) {
 }
 
 static unsigned choose(unsigned NumChoice) {
+  assert(NumChoice > 0);
   return (unsigned)(rand() % (int)NumChoice);
 }
 
@@ -82,30 +83,48 @@ void Transformation::Undo() {
     }
     break;
   }
+
+  if (PrevTransformation == INSERT) {
+    NumInstrs--;
+  } else if (PrevTransformation == DELETE) { 
+    NumInstrs++;
+  }
 }
 
 Transformation::InstrIterator
-Transformation::select(Transformation::InstrIterator Except) {
+Transformation::select(Transformation::InstrIterator Except, bool IncludeEnd) {
   InstrIterator Selected;
   auto &MBB = *MF->begin();
 
-  assert(NumInstrs >= 1 || MBB.begin() != Except);
+  assert(NumInstrs >= 1 || MBB.instr_begin() != Except);
+  auto Begin = MBB.instr_begin(),
+       End = MBB.instr_end();
 
   do {
-    unsigned Idx = choose(NumInstrs);
-    Selected = MBB.instr_begin();
+    unsigned Idx = IncludeEnd ?
+      choose(NumInstrs+1)
+      : choose(NumInstrs);
+
+    Selected = Begin;
     std::advance(Selected, Idx);
   } while (Selected == Except);
 
   return Selected;
 }
 
-void Transformation::doSwap(InstrIterator A, InstrIterator B) {
+void Transformation::doSwap(InstrIterator &A, InstrIterator &B) {
   if (A == B)
     return;
 
-  // magic?
-  std::swap(A, B);
+  auto &MBB = *A->getParent();
+  assert(A != MBB.instr_end() && B != MBB.instr_end()
+         && "can't swap with `MBB.instr_end()`");
+  InstrIterator AA = MF->CloneMachineInstr(A),
+                BB = MF->CloneMachineInstr(B);
+  replaceInst(MBB, A, BB, true);
+  replaceInst(MBB, B, AA, true);
+  A = AA;
+  B = BB;
 }
 
 static bool hasUnknown(const MCInstrDesc &Desc) {
@@ -118,10 +137,10 @@ static bool hasUnknown(const MCInstrDesc &Desc) {
 }
 
 void Transformation::buildOpcodeClasses() {
-  for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
-    const auto &Opcode = MII->get(i);
+  for (unsigned i = 0; i < TII->getNumOpcodes(); i++) {
+    const auto &Opcode = TII->get(i);
     if (hasUnknown(Opcode) || Opcode.isPseudo() || Opcode.isBranch() ||
-        Opcode.isReturn())
+        Opcode.isReturn() || Opcode.isCall() || Opcode.isVariadic())
       continue;
 
     OpcodeClasses.insert(i);
@@ -129,7 +148,7 @@ void Transformation::buildOpcodeClasses() {
     for (auto Itr = OpcodeClasses.begin(), End = OpcodeClasses.end();
          Itr != End; Itr++) {
       unsigned Opc = *OpcodeClasses.findLeader(Itr);
-      if (isExchangeable(MII, Opc, i)) {
+      if (isExchangeable(TII, Opc, i)) {
         OpcodeClasses.unionSets(Opc, i);
         break;
       }
@@ -144,7 +163,7 @@ bool Transformation::Swap() {
   }
 
   auto &MBB = *MF->begin();
-  auto A = select(MBB.instr_end()), B = select(A);
+  auto A = select(MBB.instr_end()), B = select(A, false);
   doSwap(A, B);
 
   PrevTransformation = SWAP;
@@ -165,6 +184,7 @@ bool Transformation::MutateOpcode() {
   unsigned OldOpcode = Instr->getOpcode();
 
   // select a random but "equivalent" opcode
+  errs() << "++++++++ Trying to swap opcode for " << *Instr << "\n";
   auto Opc = OpcodeClasses.member_begin(OpcodeClasses.findValue(
       OpcodeClasses.getLeaderValue(OldOpcode)));
   assert(Opc != OpcodeClasses.member_end());
@@ -175,7 +195,7 @@ bool Transformation::MutateOpcode() {
   // construct new instruction with different opcode
   Old = Instr;
   New = MF->CloneMachineInstr(Instr);
-  New->setDesc(MII->get(NewOpcode));
+  New->setDesc(TII->get(NewOpcode));
   PrevTransformation = MUT_OPCODE;
 
   replaceInst(MBB, Old, New);
@@ -198,6 +218,10 @@ bool Transformation::MutateOperand() {
 
   const auto &Desc = Instr->getDesc();
   // select which operand to mutate
+  if (Desc.NumOperands == 0) {
+    PrevTransformation = NOP;
+    return false;
+  }
   unsigned OpIdx = choose(Desc.NumOperands);
   const auto &OpInfo = Desc.OpInfo[OpIdx];
   auto &Operand = New->getOperand(OpIdx);
@@ -229,8 +253,9 @@ unsigned Transformation::chooseNonBranchOpcode() {
 
   do {
     Desc = &MII->get(choose(NumOpcodes));
+
   } while (Desc->isBranch() || hasUnknown(*Desc) || Desc->isPseudo() ||
-           Desc->isReturn());
+           Desc->isReturn() || Desc->isCall() || Desc->isVariadic());
 
   return Desc->getOpcode();
 }
@@ -297,14 +322,21 @@ bool Transformation::Move() {
 
   auto &MBB = *MF->begin();
 
-  auto Instr = select(MBB.instr_begin());
-  NextLoc = Instr;
-  ++NextLoc;
-
+  auto Instr = select(MBB.instr_end());
+  NextLoc = Instr->getNextNode();
+  
   // move
-  auto NewLoc = select(Instr);
+  InstrIterator NewLoc;
+  do {
+    NewLoc = select(Instr->getNextNode());
+  } while (NewLoc == Instr);
+
   Instr->removeFromParent();
-  MBB.insert(NewLoc, Instr);
+  if (NewLoc != MBB.instr_end()) {
+    MBB.insert(NewLoc, Instr);
+  } else {
+    MBB.push_back(Instr);
+  }
 
   New = Instr;
   Parent = New->getParent();
@@ -339,7 +371,6 @@ bool Transformation::Delete() {
   auto &MBB = *MF->begin();
   New = select(MBB.instr_end());
 
-  errs() << "!!! deleted: " << *New;
   NextLoc = New;
   ++NextLoc;
   Parent = New->getParent();
