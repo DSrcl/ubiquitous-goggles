@@ -104,8 +104,8 @@ Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun) {
                *TargetTy = FnToRun->getFunctionType();
 
   // concatenate arguments ofr `SpawnFn` and `FnToRun`
-  std::vector<Type *> Params{TargetTy->getPointerTo()};
-  Params.insert(Params.end(), OldTy->param_begin() + 1, OldTy->param_end());
+  std::vector<Type *> Params{};
+  Params.insert(Params.end(), OldTy->param_begin(), OldTy->param_end());
   Params.insert(Params.end(), TargetTy->param_begin(), TargetTy->param_end());
 
   FunctionType *NewTy =
@@ -158,14 +158,12 @@ Function *fixSpawnWrapper(Function *SpawnFn, Function *FnToRun) {
 //
 // return the a version of `SpawnFn`
 Function *fixSpawnImpl(Function *SpawnFn, Function *FnToRun) {
-  auto *M = SpawnFn->getParent();
-
   FunctionType *OldTy = SpawnFn->getFunctionType(),
                *TargetTy = FnToRun->getFunctionType();
 
   // concatenate arguments ofr `SpawnFn` and `FnToRun`
-  std::vector<Type *> Params{TargetTy->getPointerTo()};
-  Params.insert(Params.end(), OldTy->param_begin() + 1, OldTy->param_end());
+  std::vector<Type *> Params{};
+  Params.insert(Params.end(), OldTy->param_begin(), OldTy->param_end());
   Params.insert(Params.end(), TargetTy->param_begin(), TargetTy->param_end());
 
   FunctionType *NewTy =
@@ -236,12 +234,17 @@ void createServer(Module &M) {
   Constant *TargetName =
       ConstantExpr::getInBoundsGetElementPtr(Str->getType(), GV, Idxs);
 
+  Type *GenericFnTy = SpawnFn->getFunctionType()->params()[0];
+
+  // FIXME this doesn't work if target is alled indirectly
   for (auto &U : Target->uses()) {
     auto *Call = dyn_cast<CallInst>(U.getUser());
     if (!Call)
       continue;
 
-    std::vector<Value *> Args{Target, TargetName};
+    // cast type of target to `uint32_t (*)(void)`
+    auto TargetCasted = new BitCastInst(Target, GenericFnTy, "", Call);
+    std::vector<Value *> Args{TargetCasted, TargetName};
     Args.insert(Args.end(), Call->arg_operands().begin(),
                 Call->arg_operands().end());
 

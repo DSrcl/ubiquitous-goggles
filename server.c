@@ -110,11 +110,16 @@ size_t get_mem_dist(void *a, void *b, size_t size) {
   }
 
   return dist;
+
 }
 
+/*
+size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
+                    int bi) __attribute__((noinline));
+                    */
 // compare ai'th register at `a` and bi'th register at `b`
 size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
-                    int bi) {
+                    int bi){
   assert(info[ai].size == info[bi].size);
   uint8_t *a_start = a + info[ai].offset, *b_start = b + info[bi].offset;
   size_t size = info[ai].size;
@@ -154,7 +159,7 @@ void register_signal_handler() {
     exit(1);
 }
 
-uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
+uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
   void *fp = __builtin_frame_address(0);
 
   // assuming compiler can't constprop getpagesize
@@ -248,7 +253,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         if (!lib)
           respond(cli_fd, make_error(CANT_LOAD_LIB));
 
-        uint32_t (*rewrite)() = dlsym(lib, funcname);
+        uint32_t (*rewrite)(void) = dlsym(lib, funcname);
         if (!rewrite)
           respond(cli_fd, make_error(CANT_LOAD_FUNC));
 
@@ -272,10 +277,6 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
         for (i = 0; i < _ug_num_regs; i++) {
           reg_dist += get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i);
         }
-        // FIXME
-        FILE *debug = fopen("/dev/null", "a");
-        fprintf(debug, "%zu", reg_dist);
-        fclose(debug);
 
         respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
       }
@@ -320,7 +321,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(), char *funcname) {
   }
 }
 
-uint32_t _server_spawn_worker(uint32_t (*orig_func)(), char *funcname) {
+uint32_t _server_spawn_worker(uint32_t (*orig_func)(void), char *funcname) {
   // make sure the spawn function's frame uses different pages than the
   // testcases'
   volatile char placeholder[getpagesize()];
