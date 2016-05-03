@@ -102,6 +102,7 @@ size_t get_byte_dist(uint8_t a, uint8_t b) {
   return __builtin_popcount((unsigned int)(a ^ b));
 }
 
+size_t get_mem_dist(void *a, void *b, size_t size) __attribute__((noinline));
 size_t get_mem_dist(void *a, void *b, size_t size) {
   size_t i;
   size_t dist = 0;
@@ -113,10 +114,8 @@ size_t get_mem_dist(void *a, void *b, size_t size) {
 
 }
 
-/*
 size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
                     int bi) __attribute__((noinline));
-                    */
 // compare ai'th register at `a` and bi'th register at `b`
 size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
                     int bi){

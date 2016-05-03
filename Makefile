@@ -7,7 +7,7 @@ CXX = clang++
 
 .PHONY: all clean
 
-OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o search.o
+OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o search.o malloc.o
 BC = server.bc
 TESTS = mf_compiler_test 
 TOOLS = create-server ug
