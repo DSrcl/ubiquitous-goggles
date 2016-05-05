@@ -60,7 +60,7 @@ double Searcher::rand()
 MachineFunction *Searcher::synthesize()
 { 
   unsigned cost = 100;
-  const unsigned MaxInstrs = 5;
+  const unsigned MaxInstrs = 10;
   do {
     double r = rand();
 
@@ -122,6 +122,7 @@ MachineFunction *Searcher::synthesize()
     if (!Accept) {
       Transform.Undo();
     } else {
+      Transform.Accept();
       cost = newCost;
     }
 

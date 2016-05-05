@@ -1,18 +1,18 @@
 LIBS = support irreader ipo bitwriter bitreader codegen mc all-targets
-#CONFIG = ~/workspace/llvm-3.7.1.obj/bin/llvm-config
-CONFIG = ~/workspace/llvm-fast/bin/llvm-config
+CONFIG = ~/workspace/llvm-3.7.1.obj/bin/llvm-config
+#CONFIG = ~/workspace/llvm-fast/bin/llvm-config
 LDFLAGS = $(shell $(CONFIG) --ldflags --system-libs --libs $(LIBS) | sed 's/-DNDEBUG//g')
 CXXFLAGS = $(shell $(CONFIG) --cxxflags | sed 's/-DNDEBUG//g') -g
 CXX = clang++
 
 .PHONY: all clean
 
-OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o search.o malloc.o
+OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o search.o
 BC = server.bc
 TESTS = mf_compiler_test 
 TOOLS = create-server ug
 
-all: $(TOOLS) $(OBJS) $(TESTS) $(BC)
+all: $(TOOLS) $(OBJS) $(TESTS) $(BC) malloc.o
 
 ug: $(OBJS)
 

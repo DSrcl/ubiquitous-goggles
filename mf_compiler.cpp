@@ -77,11 +77,7 @@ struct CopyMFInitializer : MachineFunctionInitializer {
     : TheMF(&MF), Reuse(ReuseFunction) {}
 
   bool initializeMachineFunction(MachineFunction &MF) { 
-    if (Reuse) {
-      copyFunction(MF);
-    } else { 
-      moveFunction(MF);
-    }
+    copyFunction(MF);
 
     return false;
   }
@@ -162,7 +158,7 @@ bool emitDumpRegistersModule(TargetMachine *TM,
   auto *MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
   auto *Instrumenter = getInstrumenter(TM);
-  Instrumenter->dumpRegisters(*M, *MBB, Regs);
+  Instrumenter->dumpRegisters(*M, *MBB, Regs, "_ug_target_reg_data");
   Instrumenter->instrumentToReturnNormally(MF, *MBB);
   return compileToObjectFile(*M, MF, OutFilename, TM);
 }

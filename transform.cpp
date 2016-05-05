@@ -32,6 +32,27 @@ static unsigned choose(unsigned NumChoice) {
   return (unsigned)(rand() % (int)NumChoice);
 }
 
+
+/////// cheat
+// check if an opcode is supported
+static bool isSupported(const MCInstrInfo *MII, unsigned Opc) {
+  std::string Name = MII->getName(Opc);
+  return Name.find("ADD32") == 0 ||
+    Name.find("ADD64") == 0 ||
+    Name.find("SUB32") == 0 ||
+    Name.find("SUB64") == 0 ||
+    Name.find("DIV32") == 0 ||
+    Name.find("DIV64") == 0 ||
+    Name.find("MUL32") == 0 ||
+    Name.find("MUL64") == 0 ||
+    Name == "MOV64mr" ||
+    Name == "MOV64rr" ||
+    Name == "MOV64rm" ||
+    Name == "MOV32mr" ||
+    Name == "MOV32rr" ||
+    Name == "MOV32rm";
+}
+
 const TargetRegisterClass *
 Transformation::getRegClass(const MCOperandInfo &Op) {
   assert(Op.RegClass >= 0);
@@ -45,8 +66,26 @@ Transformation::getRegClass(const MCOperandInfo &Op) {
   return RC;
 }
 
-// TODO
-// cleanup the memory even if no undo
+// cleans up memory
+void Transformation::Accept() {
+  switch(PrevTransformation) {
+  case NOP:
+  case INSERT:
+  case SWAP:
+  case MOVE:
+    break;
+  case MUT_OPCODE:
+  case MUT_OPERAND:
+  case REPLACE: {
+    MF->DeleteMachineInstr(Old);
+    break;
+  }
+  case DELETE: { 
+    MF->DeleteMachineInstr(New);
+  }
+  } 
+}
+
 void Transformation::Undo() {
   switch (PrevTransformation) {
   case NOP:
@@ -54,14 +93,14 @@ void Transformation::Undo() {
   case MUT_OPCODE:
   case MUT_OPERAND:
   case REPLACE: {
-    auto *MBB = New->getParent();
-    MBB->insert(InstrIterator(New), Old);
-    New->eraseFromParent();
+    auto &MBB = *New->getParent();
+    replaceInst(MBB, New, Old, true);
     break;
   }
 
   case INSERT: {
-    New->eraseFromParent();
+    New->removeFromParent();
+    MF->DeleteMachineInstr(New);
     break;
   }
 
@@ -97,8 +136,7 @@ Transformation::select(Transformation::InstrIterator Except, bool IncludeEnd) {
   auto &MBB = *MF->begin();
 
   assert(NumInstrs >= 1 || MBB.instr_begin() != Except);
-  auto Begin = MBB.instr_begin(),
-       End = MBB.instr_end();
+  auto Begin = MBB.instr_begin();
 
   do {
     unsigned Idx = IncludeEnd ?
@@ -129,7 +167,8 @@ void Transformation::doSwap(InstrIterator &A, InstrIterator &B) {
 
 static bool hasUnknown(const MCInstrDesc &Desc) {
   for (unsigned i = 0; i < Desc.NumOperands; i++) {
-    if (Desc.OpInfo[i].OperandType == MCOI::OPERAND_UNKNOWN)
+    if (Desc.OpInfo[i].OperandType == MCOI::OPERAND_UNKNOWN ||
+        Desc.OpInfo[i].OperandType == MCOI::OPERAND_MEMORY)
       return true;
   }
 
@@ -140,7 +179,8 @@ void Transformation::buildOpcodeClasses() {
   for (unsigned i = 0; i < TII->getNumOpcodes(); i++) {
     const auto &Opcode = TII->get(i);
     if (hasUnknown(Opcode) || Opcode.isPseudo() || Opcode.isBranch() ||
-        Opcode.isReturn() || Opcode.isCall() || Opcode.isVariadic())
+        Opcode.isReturn() || Opcode.isCall() || Opcode.isVariadic() ||
+        !isSupported(TII, i))
       continue;
 
     OpcodeClasses.insert(i);
@@ -222,10 +262,22 @@ bool Transformation::MutateOperand() {
     PrevTransformation = NOP;
     return false;
   }
+
   unsigned OpIdx = choose(Desc.NumOperands);
   const auto &OpInfo = Desc.OpInfo[OpIdx];
   auto &Operand = New->getOperand(OpIdx);
   randOperand(Operand, OpInfo);
+
+  // two address code
+  if (Desc.getOperandConstraint(0, MCOI::TIED_TO) &&
+      New->getOperand(0).isReg() &&
+      New->getOperand(1).isReg()) {
+    if (OpIdx == 0) {
+      New->getOperand(1).setReg(New->getOperand(0).getReg());
+    } else if (OpIdx == 1) {
+      New->getOperand(0).setReg(New->getOperand(1).getReg());
+    }
+  }
 
   return true;
 }
@@ -239,7 +291,6 @@ void Transformation::randOperand(MachineOperand &Operand,
     }
     Operand.setImm(NewImm);
   } else {
-    // FIXME use TRI's getPointerRegClass when OpInfo.isLookupPtrRegClass
     assert(Operand.isReg());
     const auto *RC = getRegClass(OpInfo);
     unsigned NewReg = RC->getRegister(choose(RC->getNumRegs()));
@@ -255,7 +306,8 @@ unsigned Transformation::chooseNonBranchOpcode() {
     Desc = &MII->get(choose(NumOpcodes));
 
   } while (Desc->isBranch() || hasUnknown(*Desc) || Desc->isPseudo() ||
-           Desc->isReturn() || Desc->isCall() || Desc->isVariadic());
+           Desc->isReturn() || Desc->isCall() || Desc->isVariadic() ||
+           !isSupported(MII, Desc->Opcode));
 
   return Desc->getOpcode();
 }
@@ -265,6 +317,7 @@ MachineInstr *Transformation::randInstr() {
   const auto &Desc = MII->get(Opc);
   MachineInstr *New = MF->CreateMachineInstr(Desc, DebugLoc());
 
+  errs() << "Creating random instruction: `" << MII->getName(Opc) << " ";
   // fill the instruction with operands
   for (unsigned i = 0; i < Desc.NumOperands; i++) {
     const auto &OpInfo = Desc.OpInfo[i];
@@ -274,16 +327,25 @@ MachineInstr *Transformation::randInstr() {
     case MCOI::OPERAND_PCREL:
     case MCOI::OPERAND_FIRST_TARGET:
     case MCOI::OPERAND_IMMEDIATE: {
+      errs() << "imm, ";
       Op = MachineOperand::CreateImm(0);
       break;
     }
 
     case MCOI::OPERAND_REGISTER: {
+      errs() << "register, ";
       Op = MachineOperand::CreateReg(1, IsDef);
       break;
     }
 
     case MCOI::OPERAND_MEMORY: {
+      errs() << "memory";
+      errs() << "(";
+      if (OpInfo.RegClass < 0) {
+        errs() << "imm), ";
+      } else {
+        errs() << "reg), ";
+      }
       Op = OpInfo.RegClass < 0 ? MachineOperand::CreateImm(0)
                                : MachineOperand::CreateReg(1, IsDef);
       break;
@@ -296,6 +358,16 @@ MachineInstr *Transformation::randInstr() {
     randOperand(Op, OpInfo);
     New->addOperand(*MF, Op);
   }
+
+  // two address code
+  if (Desc.getOperandConstraint(0, MCOI::TIED_TO)) {
+    auto &Dest = New->getOperand(0), 
+         &Src = New->getOperand(1);
+    if (Dest.isReg() && Src.isReg())
+      Src.setReg(Dest.getReg());
+  }
+
+  errs() << "`\n";
 
   return New;
 }

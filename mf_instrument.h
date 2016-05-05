@@ -33,7 +33,7 @@ public:
     initRegisters();
   }
 
-  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs);
+  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName); 
 
   unsigned getOpcode(const std::string &Name) const {
     for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
@@ -52,7 +52,8 @@ public:
                                   int64_t JmpbfuAddr) const = 0;
 
   void dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
-                     const std::vector<unsigned> &Regs);
+                     const std::vector<unsigned> &Regs,
+                     const std::string &BufferName);
 
   virtual void
   instrumentToReturnNormally(llvm::MachineFunction &MF,

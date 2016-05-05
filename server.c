@@ -38,7 +38,7 @@
 #endif
 
 // target reg_data
-extern uint8_t _ug_reg_data[];
+extern uint8_t _ug_target_reg_data[];
 // target reg_info
 extern struct reg_info _ug_reg_info[];
 extern size_t _ug_num_regs;
@@ -256,9 +256,9 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
         if (!rewrite)
           respond(cli_fd, make_error(CANT_LOAD_FUNC));
 
-        uint8_t *rewrite_reg_data = dlsym(lib, "_ug_reg_data");
+        uint8_t *rewrite_reg_data = dlsym(lib, "_ug_rewrite_reg_data");
         if (!rewrite_reg_data)
-          respond(cli_fd, make_error("can't load _ug_reg_data"));
+          respond(cli_fd, make_error("can't load _ug_rewrite_reg_data"));
 
         int ret;
         if ((ret = sigsetjmp(jb, 1)) == 0) {
@@ -272,10 +272,16 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
                    get_mem_dist(_server_heap_bottom, target_heap, heap_size),
                reg_dist = 0;
 
+        FILE *debug = fopen("err.txt", "a"); 
+
         int i;
         for (i = 0; i < _ug_num_regs; i++) {
-          reg_dist += get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i);
+          fprintf(debug, "%d, %d\n", rewrite_reg_data[0], target_reg_data[0]);
+          reg_dist += get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i); 
         }
+
+        fclose(debug);
+
 
         respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
       }
@@ -310,7 +316,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
 
     // copy reg buffer  to shared memory
     if (_ug_num_regs > 0) {
-      memcpy(target_reg_data, _ug_reg_data, reg_buf_size);
+      memcpy(target_reg_data, _ug_target_reg_data, reg_buf_size);
     }
 
     // let go of the child process

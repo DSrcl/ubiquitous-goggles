@@ -22,7 +22,7 @@ class Searcher {
   const float pi {0.16};
   // probability of deletion
   const float pu {0.16};
-  const float beta {1.0};
+  const float beta {10.0};
 
   unsigned calculateCost(std::vector<response> &);
   double rand();

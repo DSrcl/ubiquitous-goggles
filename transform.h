@@ -75,11 +75,8 @@ class Transformation {
   // replace `Old` with `New`
   static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old, InstrIterator New, bool Erase=false) {
     MBB.insert(Old, New);
-    if (Erase) {
-      Old->eraseFromParent();
-    } else {
-      Old->removeFromParent();
-    }
+    Old->removeFromParent();
+    if (Erase) MBB.getParent()->DeleteMachineInstr(Old);
   }
 
   llvm::MachineInstr *randInstr();
@@ -104,6 +101,7 @@ public:
   llvm::MachineFunction *getFunction() { return MF; }
 
   void Undo();
+  void Accept(); // the opposite of Undo
 
   bool MutateOpcode();
   bool MutateOperand();

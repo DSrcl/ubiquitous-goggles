@@ -109,6 +109,7 @@ int main(int argc, char **argv) {
   auto *TargetTy = TargetFunction->getFunctionType();
   const auto RetRegs = Instrumenter->getReturnRegs(TargetTy);
 
+  errs() << "!!! " << TM->getTargetTriple().normalize() << "\n";
   // 3. create `dump_regs.o`
   emitDumpRegistersModule(TM.get(), RetRegs, DumpRegsObj);
 
@@ -128,7 +129,12 @@ int main(int argc, char **argv) {
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
 
-  std::srand(std::time(NULL));
+  std::ofstream debug("seed.txt");
+  auto seed = 1462398274;//std::time(NULL);
+  debug << seed << "\n";
+  debug.close();
+
+  std::srand(seed);
   Searcher Synthesizer(TM.get(),
            M.get(),
            &MF,

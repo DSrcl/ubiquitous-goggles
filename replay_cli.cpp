@@ -136,15 +136,15 @@ struct ReplayClient::ClientImpl {
     const auto &W = Workers[0];
     auto RetRegs = Instrumenter_->getReturnRegs(FnTy);
     Instrumenter_->protectRTFrame(MBB, W.FrameBegin, W.FrameSize);
+    Instrumenter_->dumpRegisters(*M, MBB, RetRegs, "_ug_rewrite_reg_data");
     Instrumenter_->unprotectRTFrame(MBB, W.FrameBegin, W.FrameSize);
-    Instrumenter_->dumpRegisters(*M, MBB, RetRegs);
     Instrumenter_->instrumentToReturn(*Rewrite, JmpbufAddr);
   }
 
   std::string compile(Module *M, MachineFunction *Rewrite) {
     const std::string RewriteObj = std::tmpnam(nullptr);
     errs() << "compiling rewrite\n";
-    compileToObjectFile(*M, *Rewrite, RewriteObj, TM, false);
+    compileToObjectFile(*M, *Rewrite, RewriteObj, TM, false, false);
     const std::string RewriteLib = std::tmpnam(nullptr);
     errs() << "linking rewrite\n";
     std::system(("cc -shared "+RewriteObj+" -o "+RewriteLib).c_str());

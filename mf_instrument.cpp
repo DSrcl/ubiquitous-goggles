@@ -48,7 +48,7 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment) {
   return Aligned;
 }
 
-void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &Regs) {
+void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName) {
   auto &Ctx = M.getContext();
 
   RegInfo.resize(Regs.size());
@@ -76,7 +76,7 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
   auto *RegDataTy = ArrayType::get(Int8Ty, CurOffset);
   RegData[&M] =
       new GlobalVariable(M, RegDataTy, false, GlobalVariable::ExternalLinkage,
-                         ConstantAggregateZero::get(RegDataTy), "_ug_reg_data");
+                         ConstantAggregateZero::get(RegDataTy), BufferName);
 
   auto *RegInfoArrTy = ArrayType::get(RegInfoTy, Regs.size());
   // declare `reg_info`
@@ -93,12 +93,14 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
 // * declare `reg_info(struct{ size_t offset, size}[])` in `M`
 // * declare `num_regs`
 // * emit code to dump `Regs` at the end of `MBB`
-void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
-                                 const std::vector<unsigned> &Regs) {
+void Instrumenter::dumpRegisters(llvm::Module &M,
+                                 llvm::MachineBasicBlock &MBB,
+                                 const std::vector<unsigned> &Regs,
+                                 const std::string &BufferName) {
   assert(FreeReg && "FreeReg uninitialized");
   
   if (RegData.find(&M) == RegData.end()) {
-    calculateRegBufferLayout(M, Regs);
+    calculateRegBufferLayout(M, Regs, BufferName);
   }
 
   auto *MF = MBB.getParent();
