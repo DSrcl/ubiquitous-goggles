@@ -43,14 +43,15 @@ static bool isSupported(const MCInstrInfo *MII, unsigned Opc) {
     Name.find("SUB64") == 0 ||
     Name.find("DIV32") == 0 ||
     Name.find("DIV64") == 0 ||
-    Name.find("MUL32") == 0 ||
-    Name.find("MUL64") == 0 ||
-    Name == "MOV64mr" ||
-    Name == "MOV64rr" ||
-    Name == "MOV64rm" ||
-    Name == "MOV32mr" ||
-    Name == "MOV32rr" ||
-    Name == "MOV32rm";
+    Name.find("IMUL32") == 0 ||
+    Name.find("IMUL64") == 0 ||
+    Name.find("XOR") == 0 ||
+    Name.find("AND") == 0 ||
+    Name.find("OR") == 0 ||
+    Name.find("CMOV") == 0 ||
+    Name.find("MOV64") == 0 ||
+    Name.find("MOV32") == 0
+    ;
 }
 
 const TargetRegisterClass *
