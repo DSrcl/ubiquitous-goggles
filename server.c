@@ -135,6 +135,7 @@ size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
 int cli_fd;
 
 void handle_signal(int signo, siginfo_t *siginfo, void *context) {
+  crash_signal = signo;
   mprotect(frame_begin, frame_size, PROT_READ | PROT_WRITE);
   siglongjmp(jb, 42);
 }
