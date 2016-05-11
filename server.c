@@ -30,6 +30,7 @@
 #define MAXFD 256
 #define MAX_CLIENT 10
 #define MAX_WORKER 32
+#define MISMATCH_PENALTY 1
 
 #define X86_64
 
@@ -42,6 +43,7 @@ extern uint8_t _ug_target_reg_data[];
 // target reg_info
 extern struct reg_info _ug_reg_info[];
 extern size_t _ug_num_regs;
+extern size_t _ug_num_output_regs;
 // dump target registers
 extern void dump_registers(void);
 
@@ -141,9 +143,10 @@ void handle_signal(int signo, siginfo_t *siginfo, void *context) {
 }
 
 void register_signal_handler() {
+  static char handler_stack[SIGSTKSZ];
   stack_t ss;
   ss.ss_size = SIGSTKSZ;
-  ss.ss_sp = malloc(SIGSTKSZ);
+  ss.ss_sp = handler_stack;
   struct sigaction sa;
   sa.sa_sigaction = handle_signal;
   sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
@@ -273,16 +276,24 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
                    get_mem_dist(_server_heap_bottom, target_heap, heap_size),
                reg_dist = 0;
 
-        FILE *debug = fopen("err.txt", "a"); 
-
-        int i;
-        for (i = 0; i < _ug_num_regs; i++) {
-          fprintf(debug, "%d, %d\n", rewrite_reg_data[0], target_reg_data[0]);
-          reg_dist += get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i); 
+        int i, j;
+        for (i = 0; i < _ug_num_output_regs; i++) {
+          size_t dist = get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i); 
+          if (dist == 0) continue;
+          
+          // do relax comparison 
+          int mismatched = 0;
+          for (j = _ug_num_output_regs; j < _ug_num_regs; j++) {
+            if (_ug_reg_info[i].regclass == _ug_reg_info[j].regclass) {
+              if (get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, j, i) == 0) {
+                reg_dist += MISMATCH_PENALTY;
+                mismatched = 1;
+                break;
+              }
+            }
+          }
+          if (!mismatched) reg_dist += dist;
         }
-
-        fclose(debug);
-
 
         respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
       }

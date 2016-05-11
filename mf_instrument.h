@@ -15,6 +15,9 @@ class Instrumenter {
     }
   }
 
+  // set of register we will dump
+  std::vector<unsigned> Regs;
+
 protected:
   llvm::TargetMachine *TM;
   const llvm::MCRegisterInfo *MRI;
@@ -33,7 +36,7 @@ public:
     initRegisters();
   }
 
-  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName); 
+  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName, const llvm::TargetRegisterInfo *TRI); 
 
   unsigned getOpcode(const std::string &Name) const {
     for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {

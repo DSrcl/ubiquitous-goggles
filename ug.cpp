@@ -129,36 +129,10 @@ int main(int argc, char **argv) {
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
 
-  std::ofstream debug("seed.txt");
-  auto seed = 1462398274;//std::time(NULL);
-  debug << seed << "\n";
-  debug.close();
-
-  std::srand(seed);
   Searcher Synthesizer(TM.get(),
            M.get(),
            &MF,
            TargetTy,
            &Client);
   Synthesizer.synthesize();
-
-
-  /*
-  Transformation Transform(TM.get(), &MF);
-  for (unsigned i = 0; i < 10; i++) {
-    Transform.Insert();
-  }
-  auto now = std::chrono::system_clock::now();
-  errs() << "Testing rewrite\n";
-  Client.testRewrite(M.get(), TargetTy, &MF); 
-  auto elapsed = std::chrono::system_clock::now() - now;
-  errs() << "Elapsed: " << elapsed.count() << "\n";
-  for (auto R : Results) {
-    errs() << "signal: " << R.signal << "\n";
-    errs() << "stack: " << R.stack_dist << "\n";
-    errs() << "heap: " << R.heap_dist << "\n";
-    errs() << "success: " << R.success << "\n";
-    errs() << "msg: " << R.msg << "\n";
-  }
-  */
 }

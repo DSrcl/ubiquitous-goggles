@@ -48,26 +48,45 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment) {
   return Aligned;
 }
 
-void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName) {
+void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &OutputRegs, const std::string &BufferName, const TargetRegisterInfo *TRI) {
   auto &Ctx = M.getContext();
+
+  // set of registers in the same classes as OutputRegs
+  std::set<unsigned> EquivalentRegs;
+  for (auto Reg : OutputRegs) {
+    // FIXME what if a target actually uses the reference to mf?
+    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg), *(MachineFunction *)nullptr);
+    for (unsigned ER : *RC) {
+      if (std::find(OutputRegs.begin(), OutputRegs.end(), ER) != OutputRegs.end())
+        continue;
+      EquivalentRegs.insert(ER);
+    }
+  }
+
+  // set of register we will dump
+  // which we will layout like this
+  // [output regs| regs in the same classes as output regs]
+  Regs = OutputRegs;
+  Regs.insert(Regs.end(), EquivalentRegs.begin(), EquivalentRegs.end());
 
   RegInfo.resize(Regs.size());
   std::vector<Constant *> RegInfoInitializer(Regs.size());
 
   auto *Int64Ty = Type::getInt64Ty(Ctx);
-  auto *RegInfoTy = StructType::get(Ctx, std::vector<Type *>{Int64Ty, Int64Ty});
+  auto *RegInfoTy = StructType::get(Ctx, std::vector<Type *>{Int64Ty, Int64Ty, Int64Ty});
 
   unsigned CurOffset = 0;
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
     unsigned Reg = Regs[i];
-    const auto &RC = MRI->getRegClass(Reg);
-    unsigned RegSize = RC.getSize();
-    CurOffset = align(CurOffset, RC.getAlignment());
+    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg), *(MachineFunction *)nullptr);
+    unsigned RegSize = RC->getSize();
+    CurOffset = align(CurOffset, RC->getAlignment());
     RegInfo[i].first = CurOffset;
     RegInfo[i].second = RegSize;
     RegInfoInitializer[i] = ConstantStruct::get(
         RegInfoTy, std::vector<Constant *>{ConstantInt::get(Int64Ty, CurOffset),
-                                           ConstantInt::get(Int64Ty, RegSize)});
+                                           ConstantInt::get(Int64Ty, RegSize),
+                                           ConstantInt::get(Int64Ty, RC->getID())});
     CurOffset += RegSize;
   }
 
@@ -79,10 +98,15 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
                          ConstantAggregateZero::get(RegDataTy), BufferName);
 
   auto *RegInfoArrTy = ArrayType::get(RegInfoTy, Regs.size());
+
   // declare `reg_info`
   new GlobalVariable(
       M, RegInfoArrTy, true /* constant */, GlobalVariable::ExternalLinkage,
       ConstantArray::get(RegInfoArrTy, RegInfoInitializer), "_ug_reg_info");
+
+  // declare `num_output_regs`
+  new GlobalVariable(M, Int64Ty, true, GlobalVariable::ExternalLinkage,
+                     ConstantInt::get(Int64Ty, OutputRegs.size()), "_ug_num_output_regs");
 
   // declare `num_regs`
   new GlobalVariable(M, Int64Ty, true, GlobalVariable::ExternalLinkage,
@@ -95,19 +119,20 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
 // * emit code to dump `Regs` at the end of `MBB`
 void Instrumenter::dumpRegisters(llvm::Module &M,
                                  llvm::MachineBasicBlock &MBB,
-                                 const std::vector<unsigned> &Regs,
+                                 const std::vector<unsigned> &OutputRegs,
                                  const std::string &BufferName) {
   assert(FreeReg && "FreeReg uninitialized");
-  
-  if (RegData.find(&M) == RegData.end()) {
-    calculateRegBufferLayout(M, Regs, BufferName);
-  }
 
   auto *MF = MBB.getParent();
-
   auto &Subtarget = MF->getSubtarget();
   auto *TII = Subtarget.getInstrInfo();
   auto *TRI = Subtarget.getRegisterInfo();
+  
+  if (RegData.find(&M) == RegData.end()) {
+    calculateRegBufferLayout(M, OutputRegs, BufferName, TRI);
+  }
+
+
   // load address of `reg_data` into `FreeReg`
   auto *LoadAddr =
       TII->getGlobalPICAddr(*MF, FreeReg, &MF->getTarget(), RegData[&M]);

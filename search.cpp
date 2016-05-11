@@ -32,22 +32,13 @@ unsigned Searcher::calculateCost(std::vector<response> &responses)
       exit(1);
     }
 
-    if (resp.signal == SIGILL) {
-      cost = Sigill_penalty;
-      break;
-    } else if (resp.signal == SIGBUS) {
-      cost += Sigbus_penalty;
-    } else if (resp.signal == SIGSEGV) {
-      cost += Sigsegv_penalty; 
-    } else if (resp.signal == SIGFPE) {
-      cost += Sigfpe_penalty;
-    } else if (resp.signal == 0) {
-      cost += (resp.reg_dist + resp.stack_dist + resp.heap_dist);
+    if (resp.signal != 0) {
+      cost += Signal_penalty;
     } else {
-      errs() << "******* signal = " << resp.signal << "\n";
-      cost = Unknown_penalty;
+      cost += (resp.reg_dist + resp.stack_dist + resp.heap_dist);
     }
   }
+
   return cost;
 }
 
@@ -89,8 +80,8 @@ MachineFunction *Searcher::synthesize()
       // instruction
 
       double NumInstrs = Transform.getNumInstrs();
-      double DelProb = NumInstrs / MaxInstrs * pu,
-             RepProb = NumInstrs / MaxInstrs * (1-pu);
+      double DelProb = NumInstrs / (double)MaxInstrs * pu,
+             RepProb = NumInstrs / (double)MaxInstrs * (1-pu);
       double r = rand();
       if (r < DelProb) {
         Transform.Delete();
@@ -101,17 +92,14 @@ MachineFunction *Searcher::synthesize()
       }
     }
 
-    /*
     for (auto &I : *Transform.getFunction()->begin()) {
       errs() << I;
     }
-    */
 
     auto Result = Client->testRewrite(M, TargetTy, Transform.getFunction());
     unsigned newCost = calculateCost(Result);
     bool Accept;
-    if (newCost == Sigill_penalty) {
-      // never accept a rewrite with illegal intruction
+    if (newCost >= Signal_penalty) {
       Accept = false;
     } else if (newCost <= cost) { 
       Accept = true;
@@ -126,11 +114,11 @@ MachineFunction *Searcher::synthesize()
       cost = newCost;
     }
 
+    /*
     for (auto &I : *Transform.getFunction()->begin()) {
       errs() << I;
     }
-
-
+    */
 
     errs() << "!!! cost: " << cost << ", new cost: " << newCost <<"\n";
 
