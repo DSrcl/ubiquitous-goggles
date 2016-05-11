@@ -50,8 +50,9 @@ double Searcher::rand()
 // default search strategy
 MachineFunction *Searcher::synthesize()
 { 
-  unsigned cost = 100;
-  const unsigned MaxInstrs = 10;
+  unsigned cost = 100,
+           MaxInstrs = 10,
+           Itr = 0;
   do {
     double r = rand();
 
@@ -92,9 +93,11 @@ MachineFunction *Searcher::synthesize()
       }
     }
 
+    /*
     for (auto &I : *Transform.getFunction()->begin()) {
       errs() << I;
     }
+    */
 
     auto Result = Client->testRewrite(M, TargetTy, Transform.getFunction());
     unsigned newCost = calculateCost(Result);
@@ -114,13 +117,13 @@ MachineFunction *Searcher::synthesize()
       cost = newCost;
     }
 
-    /*
     for (auto &I : *Transform.getFunction()->begin()) {
       errs() << I;
     }
-    */
 
-    errs() << "!!! cost: " << cost << ", new cost: " << newCost <<"\n";
+    Itr++;
+
+    errs() << "!!! cost: " << cost << ", new cost: " << newCost << ", " << "itr: " << Itr << "\n";
 
   } while (cost != 0);
 
