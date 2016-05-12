@@ -11,8 +11,10 @@
 #include <llvm/MC/MCRegisterInfo.h>
 #include <llvm/Support/raw_ostream.h>
 
-class Transformation {
+#include "mf_instrument.h"
 
+class Transformation {
+protected:
   llvm::MachineFunction *MF;
   llvm::TargetMachine *TM;
   const llvm::MCInstrInfo *MII;
@@ -68,7 +70,7 @@ class Transformation {
       16, -16, 32, -32, 64, -64, 128, -128
   };
 
-  void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo);
+  virtual void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo);
 
   unsigned chooseNonBranchOpcode();
 
@@ -112,4 +114,21 @@ public:
   bool Delete();
 };
 
+class X86_64Transformation : public Transformation {
+  X86_64Instrumenter TheInstrumenter;
+  unsigned RIP, EIP, IP;
+
+  unsigned randReg(const llvm::MCOperandInfo &);
+
+public:
+  X86_64Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : Transformation(TheTM, TheMF), TheInstrumenter(TheTM) {
+    RIP = TheInstrumenter.getRegister("RIP");
+    EIP = TheInstrumenter.getRegister("EIP");
+    IP = TheInstrumenter.getRegister("IP");
+  }
+  
+  void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo) override;
+};
+
+Transformation *getTransformation(llvm::TargetMachine *TM, llvm::MachineFunction *MF);
 #endif

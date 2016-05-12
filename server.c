@@ -30,7 +30,7 @@
 #define MAXFD 256
 #define MAX_CLIENT 10
 #define MAX_WORKER 32
-#define MISMATCH_PENALTY 1
+#define MISALIGN_PENALTY 1
 
 #define X86_64
 
@@ -137,9 +137,7 @@ size_t get_reg_dist(struct reg_info info[], uint8_t *a, uint8_t *b, int ai,
 int cli_fd;
 
 void handle_signal(int signo, siginfo_t *siginfo, void *context) {
-  crash_signal = signo;
-  mprotect(frame_begin, frame_size, PROT_READ | PROT_WRITE);
-  siglongjmp(jb, 42);
+  _Exit(1);
 }
 
 void register_signal_handler() {
@@ -282,17 +280,17 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
           if (dist == 0) continue;
           
           // do relax comparison 
-          int mismatched = 0;
-          for (j = _ug_num_output_regs; j < _ug_num_regs; j++) {
-            if (_ug_reg_info[i].regclass == _ug_reg_info[j].regclass) {
-              if (get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, j, i) == 0) {
-                reg_dist += MISMATCH_PENALTY;
-                mismatched = 1;
-                break;
+          if (MISALIGN_PENALTY < dist) {
+            for (j = _ug_num_output_regs; j < _ug_num_regs; j++) {
+              if (_ug_reg_info[i].regclass == _ug_reg_info[j].regclass) {
+                if (get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, j, i) == 0) {
+                  dist = MISALIGN_PENALTY;
+                  break;
+                }
               }
             }
           }
-          if (!mismatched) reg_dist += dist;
+          reg_dist += dist;
         }
 
         respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
@@ -300,8 +298,8 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
 
       int retval;
       waitpid(pid, &retval, 0);
-      if (WIFSIGNALED(retval)) {
-        struct response *resp = make_report(0, 0, 0, WTERMSIG(retval));
+      if (retval != 0) {
+        struct response *resp = make_report(0, 0, 0, 1);
         write(cli_fd, resp, sizeof(struct response));
         free(resp);
       }

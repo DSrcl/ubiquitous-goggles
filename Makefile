@@ -9,7 +9,6 @@ CXX = clang++
 
 OBJS = mf_compiler.o mf_instrument.o transform.o replay_cli.o search.o
 BC = server.bc
-TESTS = mf_compiler_test 
 TOOLS = create-server ug
 
 all: $(TOOLS) $(OBJS) $(TESTS) $(BC) malloc.o
@@ -18,9 +17,6 @@ ug: $(OBJS)
 
 server.bc: server.c common.h
 	clang -c -O3 -emit-llvm -o $@ $<
-
-mf_compiler_test: mf_compiler.o mf_instrument.o mf_compiler_test.o transform.o search.o replay_cli.o
-	$(CXX) $^ $(LDFLAGS) -o $@ -g
 
 malloc.o: malloc.c
 	# force malloc to use sbrk only

@@ -7,9 +7,12 @@ int add(int a, int b)
 
 int main()
 {
-	int sum = 0;
-	for (int i = 0; i < 10; i++) {
-		sum += add(sum, i);
-	}
-	printf("sum = %d\n", sum);
+  volatile int x;
+  int i, j;
+  for (i = 200; i < 210; i++) {
+    for (j = i+1; j < 210; j++) {
+      x = add(i, j);
+    }
+  }
+  return 0;
 }

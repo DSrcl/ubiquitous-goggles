@@ -26,8 +26,11 @@ class Searcher {
 protected:
   llvm::Module *M;
   ReplayClient *Client;
-  Transformation Transform;
+  std::unique_ptr<Transformation> Transform;
   llvm::FunctionType *TargetTy;
+  void transformRewrite();
+  llvm::MachineFunction *copyFunction(llvm::MachineFunction *MF);
+  unsigned calculateLatency(llvm::MachineFunction *MF);
   
 public:
   Searcher(llvm::TargetMachine *TM,
@@ -36,6 +39,7 @@ public:
            llvm::FunctionType *FnTy,
            ReplayClient *Cli);
   virtual llvm::MachineFunction *synthesize();
+  virtual llvm::MachineFunction *optimize(int MaxItrs);
 };
 
 #endif

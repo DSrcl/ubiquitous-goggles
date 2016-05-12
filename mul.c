@@ -8,7 +8,7 @@ int main()
   volatile int product = 1; 
   int i;
   for (i = 1; i <= 10; i++) {
-    product = mul(i-1, i);
+    product = mul(product / 2, i);
   }
   return 0;
 }

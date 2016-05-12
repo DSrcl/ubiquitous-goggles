@@ -135,4 +135,11 @@ int main(int argc, char **argv) {
            TargetTy,
            &Client);
   Synthesizer.synthesize();
+  auto Optimized = std::unique_ptr<MachineFunction>(Synthesizer.optimize(2000));
+  errs() << "\n---final optimized rewrite\n";
+  for (const auto &MBB : *Optimized) {
+    for (const auto &MI : MBB) {
+      errs() << MI;
+    }
+  }
 }

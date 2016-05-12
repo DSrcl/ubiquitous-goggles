@@ -48,6 +48,9 @@ static bool isSupported(const MCInstrInfo *MII, unsigned Opc) {
     Name.find("XOR") == 0 ||
     Name.find("AND") == 0 ||
     Name.find("OR") == 0 ||
+    Name.find("CMOVGE") == 0 ||
+    Name.find("CMOVLE") == 0 ||
+    Name.find("CMOVNE") == 0 ||
     Name.find("MOV64") == 0 ||
     Name.find("MOV32") == 0;
 }
@@ -285,9 +288,6 @@ void Transformation::randOperand(MachineOperand &Operand,
                                  const MCOperandInfo &OpInfo) {
   if (Operand.isImm()) {
     int64_t NewImm = Immediates[choose(Immediates.size())];
-    if (OpInfo.OperandType == MCOI::OPERAND_MEMORY) {
-      NewImm = std::abs(NewImm);
-    }
     Operand.setImm(NewImm);
   } else {
     assert(Operand.isReg());
@@ -450,4 +450,34 @@ bool Transformation::Delete() {
 
   NumInstrs--;
   return true;
+}
+
+unsigned X86_64Transformation::randReg(const MCOperandInfo &OpInfo) {
+  const auto *RC = getRegClass(OpInfo);
+  unsigned NewReg;
+  do {
+    NewReg = RC->getRegister(choose(RC->getNumRegs()));
+  } while (NewReg == RIP || NewReg == EIP || NewReg == IP);
+  return NewReg;
+}
+
+void X86_64Transformation::randOperand(MachineOperand &Operand,
+                                       const MCOperandInfo &OpInfo) {
+  if (Operand.isImm()) {
+    int64_t NewImm = Immediates[choose(Immediates.size())];
+    Operand.setImm(NewImm);
+  } else {
+    assert(Operand.isReg());
+    Operand.setReg(randReg(OpInfo));
+  }
+}
+
+Transformation *getTransformation(TargetMachine *TM, MachineFunction *MF) { auto Arch = TM->getTargetTriple().getArch();
+  switch (Arch) {
+  case Triple::x86_64:
+    return new X86_64Transformation(TM, MF);
+    break;
+  default:
+    llvm_unreachable("target not supported");
+  }
 }
