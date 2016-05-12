@@ -5,10 +5,12 @@ int mul(int a, int b)
 
 int main()
 { 
-  volatile int product = 1; 
-  int i;
-  for (i = 1; i <= 10; i++) {
-    product = mul(product / 2, i);
+  volatile int x;
+  int i, j;
+  for (i = 200; i < 210; i++) {
+    for (j = i+1; j < 210; j++) {
+      x = mul(i, j);
+    }
   }
   return 0;
 }

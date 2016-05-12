@@ -1,10 +1,13 @@
 # vim stuff
 *.swp
 *.swo
+*.x
 
 *.bc
 *.s
 *.ll
+*.d
+*.dSYM
 
 # Compiled Object files
 *.slo
