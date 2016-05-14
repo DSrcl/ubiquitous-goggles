@@ -74,9 +74,9 @@ struct CopyMFInitializer : MachineFunctionInitializer {
   bool Reuse;
 
   CopyMFInitializer(MachineFunction &MF, bool ReuseFunction)
-    : TheMF(&MF), Reuse(ReuseFunction) {}
+      : TheMF(&MF), Reuse(ReuseFunction) {}
 
-  bool initializeMachineFunction(MachineFunction &MF) { 
+  bool initializeMachineFunction(MachineFunction &MF) {
     copyFunction(MF);
 
     return false;
@@ -108,8 +108,7 @@ struct CopyMFInitializer : MachineFunctionInitializer {
 // return true if success
 bool compileToObjectFile(Module &M, MachineFunction &MF,
                          const std::string &OutFilename, TargetMachine *TM,
-                         bool PrintAssemly,
-                         bool ReuseFunction) {
+                         bool PrintAssemly, bool ReuseFunction) {
   auto *Printer = getAsmPrinter(M, OutFilename, TM);
   if (!Printer)
     return false;

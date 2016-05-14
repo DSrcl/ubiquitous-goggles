@@ -32,27 +32,18 @@ static unsigned choose(unsigned NumChoice) {
   return (unsigned)(rand() % (int)NumChoice);
 }
 
-
 /////// cheat
 // check if an opcode is supported
 static bool isSupported(const MCInstrInfo *MII, unsigned Opc) {
   std::string Name = MII->getName(Opc);
-  return Name.find("ADD32") == 0 ||
-    Name.find("ADD64") == 0 ||
-    Name.find("SUB32") == 0 ||
-    Name.find("SUB64") == 0 ||
-    Name.find("DIV32") == 0 ||
-    Name.find("DIV64") == 0 ||
-    Name.find("IMUL32") == 0 ||
-    Name.find("IMUL64") == 0 ||
-    Name.find("XOR") == 0 ||
-    Name.find("AND") == 0 ||
-    Name.find("OR") == 0 ||
-    Name.find("CMOVGE") == 0 ||
-    Name.find("CMOVLE") == 0 ||
-    Name.find("CMOVNE") == 0 ||
-    Name.find("MOV64") == 0 ||
-    Name.find("MOV32") == 0;
+  return Name.find("ADD32") == 0 || Name.find("ADD64") == 0 ||
+         Name.find("SUB32") == 0 || Name.find("SUB64") == 0 ||
+         Name.find("DIV32") == 0 || Name.find("DIV64") == 0 ||
+         Name.find("IMUL32") == 0 || Name.find("IMUL64") == 0 ||
+         Name.find("XOR") == 0 || Name.find("AND") == 0 ||
+         Name.find("OR") == 0 || Name.find("CMOVGE") == 0 ||
+         Name.find("CMOVLE") == 0 || Name.find("CMOVNE") == 0 ||
+         Name.find("MOV64") == 0 || Name.find("MOV32") == 0;
 }
 
 const TargetRegisterClass *
@@ -70,7 +61,7 @@ Transformation::getRegClass(const MCOperandInfo &Op) {
 
 // cleans up memory
 void Transformation::Accept() {
-  switch(PrevTransformation) {
+  switch (PrevTransformation) {
   case NOP:
   case INSERT:
   case SWAP:
@@ -82,10 +73,10 @@ void Transformation::Accept() {
     MF->DeleteMachineInstr(Old);
     break;
   }
-  case DELETE: { 
+  case DELETE: {
     MF->DeleteMachineInstr(New);
   }
-  } 
+  }
 }
 
 void Transformation::Undo() {
@@ -127,7 +118,7 @@ void Transformation::Undo() {
 
   if (PrevTransformation == INSERT) {
     NumInstrs--;
-  } else if (PrevTransformation == DELETE) { 
+  } else if (PrevTransformation == DELETE) {
     NumInstrs++;
   }
 }
@@ -141,9 +132,7 @@ Transformation::select(Transformation::InstrIterator Except, bool IncludeEnd) {
   auto Begin = MBB.instr_begin();
 
   do {
-    unsigned Idx = IncludeEnd ?
-      choose(NumInstrs+1)
-      : choose(NumInstrs);
+    unsigned Idx = IncludeEnd ? choose(NumInstrs + 1) : choose(NumInstrs);
 
     Selected = Begin;
     std::advance(Selected, Idx);
@@ -157,10 +146,9 @@ void Transformation::doSwap(InstrIterator &A, InstrIterator &B) {
     return;
 
   auto &MBB = *A->getParent();
-  assert(A != MBB.instr_end() && B != MBB.instr_end()
-         && "can't swap with `MBB.instr_end()`");
-  InstrIterator AA = MF->CloneMachineInstr(A),
-                BB = MF->CloneMachineInstr(B);
+  assert(A != MBB.instr_end() && B != MBB.instr_end() &&
+         "can't swap with `MBB.instr_end()`");
+  InstrIterator AA = MF->CloneMachineInstr(A), BB = MF->CloneMachineInstr(B);
   replaceInst(MBB, A, BB, true);
   replaceInst(MBB, B, AA, true);
   A = AA;
@@ -227,8 +215,8 @@ bool Transformation::MutateOpcode() {
 
   // select a random but "equivalent" opcode
   errs() << "++++++++ Trying to swap opcode for " << *Instr << "\n";
-  auto Opc = OpcodeClasses.member_begin(OpcodeClasses.findValue(
-      OpcodeClasses.getLeaderValue(OldOpcode)));
+  auto Opc = OpcodeClasses.member_begin(
+      OpcodeClasses.findValue(OpcodeClasses.getLeaderValue(OldOpcode)));
   assert(Opc != OpcodeClasses.member_end());
   unsigned ClassSize = std::distance(Opc, OpcodeClasses.member_end());
   std::advance(Opc, choose(ClassSize));
@@ -272,8 +260,7 @@ bool Transformation::MutateOperand() {
 
   // two address code
   if (Desc.getOperandConstraint(0, MCOI::TIED_TO) &&
-      New->getOperand(0).isReg() &&
-      New->getOperand(1).isReg()) {
+      New->getOperand(0).isReg() && New->getOperand(1).isReg()) {
     if (OpIdx == 0) {
       New->getOperand(1).setReg(New->getOperand(0).getReg());
     } else if (OpIdx == 1) {
@@ -360,8 +347,7 @@ MachineInstr *Transformation::randInstr() {
 
   // two address code
   if (Desc.getOperandConstraint(0, MCOI::TIED_TO)) {
-    auto &Dest = New->getOperand(0), 
-         &Src = New->getOperand(1);
+    auto &Dest = New->getOperand(0), &Src = New->getOperand(1);
     if (Dest.isReg() && Src.isReg())
       Src.setReg(Dest.getReg());
   }
@@ -385,7 +371,7 @@ bool Transformation::Replace() {
   return true;
 }
 
-bool Transformation::Move() { 
+bool Transformation::Move() {
   if (NumInstrs == 1) {
     PrevTransformation = NOP;
     return false;
@@ -395,7 +381,7 @@ bool Transformation::Move() {
 
   auto Instr = select(MBB.instr_end());
   NextLoc = Instr->getNextNode();
-  
+
   // move
   InstrIterator NewLoc;
   do {
@@ -472,7 +458,8 @@ void X86_64Transformation::randOperand(MachineOperand &Operand,
   }
 }
 
-Transformation *getTransformation(TargetMachine *TM, MachineFunction *MF) { auto Arch = TM->getTargetTriple().getArch();
+Transformation *getTransformation(TargetMachine *TM, MachineFunction *MF) {
+  auto Arch = TM->getTargetTriple().getArch();
   switch (Arch) {
   case Triple::x86_64:
     return new X86_64Transformation(TM, MF);

@@ -94,8 +94,8 @@ int main(int argc, char **argv) {
 
   // 1. do `llvm-link `testcase` server.bc | llc -filetype=obj -o server.o`
   run("llvm-link server.bc " + TestcaseFilename + " -o - " + "| " +
-      CreateServer + " - -o - -f" + TargetName + "| opt -O3 -o - | llc -filetype=obj -o " +
-      ServerObj);
+      CreateServer + " - -o - -f" + TargetName +
+      "| opt -O3 -o - | llc -filetype=obj -o " + ServerObj);
 
   LLVMContext &Context = getGlobalContext();
   SMDiagnostic Err;
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
   run("cc " + DumpRegsObj + " malloc.o " + ServerObj + " -o " + ServerExe);
 
   // 5. run the server
-  run("./"+ServerExe);
+  run("./" + ServerExe);
 
   // FIXME synchronize with the server
   sleep(1);
@@ -129,11 +129,7 @@ int main(int argc, char **argv) {
   auto MBB = MF.CreateMachineBasicBlock();
   MF.push_back(MBB);
 
-  Searcher Synthesizer(TM.get(),
-           M.get(),
-           &MF,
-           TargetTy,
-           &Client);
+  Searcher Synthesizer(TM.get(), M.get(), &MF, TargetTy, &Client);
   Synthesizer.synthesize();
   auto Optimized = std::unique_ptr<MachineFunction>(Synthesizer.optimize(2000));
   errs() << "\n---final optimized rewrite\n";

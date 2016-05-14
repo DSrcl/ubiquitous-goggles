@@ -48,16 +48,20 @@ unsigned Instrumenter::align(unsigned Addr, unsigned Alignment) {
   return Aligned;
 }
 
-void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigned> &OutputRegs, const std::string &BufferName, const TargetRegisterInfo *TRI) {
+void Instrumenter::calculateRegBufferLayout(
+    Module &M, const std::vector<unsigned> &OutputRegs,
+    const std::string &BufferName, const TargetRegisterInfo *TRI) {
   auto &Ctx = M.getContext();
 
   // set of registers in the same classes as OutputRegs
   std::set<unsigned> EquivalentRegs;
   for (auto Reg : OutputRegs) {
     // FIXME what if a target actually uses the reference to mf?
-    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg), *(MachineFunction *)nullptr);
+    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg),
+                                              *(MachineFunction *)nullptr);
     for (unsigned ER : *RC) {
-      if (std::find(OutputRegs.begin(), OutputRegs.end(), ER) != OutputRegs.end())
+      if (std::find(OutputRegs.begin(), OutputRegs.end(), ER) !=
+          OutputRegs.end())
         continue;
       EquivalentRegs.insert(ER);
     }
@@ -73,20 +77,23 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
   std::vector<Constant *> RegInfoInitializer(Regs.size());
 
   auto *Int64Ty = Type::getInt64Ty(Ctx);
-  auto *RegInfoTy = StructType::get(Ctx, std::vector<Type *>{Int64Ty, Int64Ty, Int64Ty});
+  auto *RegInfoTy =
+      StructType::get(Ctx, std::vector<Type *>{Int64Ty, Int64Ty, Int64Ty});
 
   unsigned CurOffset = 0;
   for (unsigned i = 0, e = Regs.size(); i != e; i++) {
     unsigned Reg = Regs[i];
-    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg), *(MachineFunction *)nullptr);
+    auto *RC = TRI->getLargestLegalSuperClass(TRI->getMinimalPhysRegClass(Reg),
+                                              *(MachineFunction *)nullptr);
     unsigned RegSize = RC->getSize();
     CurOffset = align(CurOffset, RC->getAlignment());
     RegInfo[i].first = CurOffset;
     RegInfo[i].second = RegSize;
     RegInfoInitializer[i] = ConstantStruct::get(
-        RegInfoTy, std::vector<Constant *>{ConstantInt::get(Int64Ty, CurOffset),
-                                           ConstantInt::get(Int64Ty, RegSize),
-                                           ConstantInt::get(Int64Ty, RC->getID())});
+        RegInfoTy,
+        std::vector<Constant *>{ConstantInt::get(Int64Ty, CurOffset),
+                                ConstantInt::get(Int64Ty, RegSize),
+                                ConstantInt::get(Int64Ty, RC->getID())});
     CurOffset += RegSize;
   }
 
@@ -106,7 +113,8 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
 
   // declare `num_output_regs`
   new GlobalVariable(M, Int64Ty, true, GlobalVariable::ExternalLinkage,
-                     ConstantInt::get(Int64Ty, OutputRegs.size()), "_ug_num_output_regs");
+                     ConstantInt::get(Int64Ty, OutputRegs.size()),
+                     "_ug_num_output_regs");
 
   // declare `num_regs`
   new GlobalVariable(M, Int64Ty, true, GlobalVariable::ExternalLinkage,
@@ -117,8 +125,7 @@ void Instrumenter::calculateRegBufferLayout(Module &M, const std::vector<unsigne
 // * declare `reg_info(struct{ size_t offset, size}[])` in `M`
 // * declare `num_regs`
 // * emit code to dump `Regs` at the end of `MBB`
-void Instrumenter::dumpRegisters(llvm::Module &M,
-                                 llvm::MachineBasicBlock &MBB,
+void Instrumenter::dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
                                  const std::vector<unsigned> &OutputRegs,
                                  const std::string &BufferName) {
   assert(FreeReg && "FreeReg uninitialized");
@@ -127,11 +134,10 @@ void Instrumenter::dumpRegisters(llvm::Module &M,
   auto &Subtarget = MF->getSubtarget();
   auto *TII = Subtarget.getInstrInfo();
   auto *TRI = Subtarget.getRegisterInfo();
-  
+
   if (RegData.find(&M) == RegData.end()) {
     calculateRegBufferLayout(M, OutputRegs, BufferName, TRI);
   }
-
 
   // load address of `reg_data` into `FreeReg`
   auto *LoadAddr =
@@ -147,7 +153,7 @@ void Instrumenter::dumpRegisters(llvm::Module &M,
 }
 
 X86_64Instrumenter::X86_64Instrumenter(TargetMachine *TM) : Instrumenter(TM) {
-  FreeReg = getRegister("R15");
+  FreeReg = getRegister("R11");
   // find out opcodes
   Callq = getOpcode("CALL64pcrel32");
   Movabsq = getOpcode("MOV64ri");

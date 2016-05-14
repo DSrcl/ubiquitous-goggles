@@ -57,7 +57,7 @@ struct ReplayClient::ClientImpl {
   // send `libpath` to worker waiting on `sockpath`
   // return the socket used
   void runTest(int sock, const std::string &libpath) {
-    if (send(sock, libpath.c_str(), libpath.size()+1, 0) < 0) {
+    if (send(sock, libpath.c_str(), libpath.size() + 1, 0) < 0) {
       std::perror("send lib path to socket");
       exit(1);
     }
@@ -90,9 +90,9 @@ struct ReplayClient::ClientImpl {
     return TestResults;
   }
 
-  ClientImpl(TargetMachine *TheTM,
-             const std::string &WorkerFilename,
-             const std::string &JmpbufFilename) : TM(TheTM) {
+  ClientImpl(TargetMachine *TheTM, const std::string &WorkerFilename,
+             const std::string &JmpbufFilename)
+      : TM(TheTM) {
     std::string line;
     std::ifstream WorkerFile(WorkerFilename);
     std::ifstream JmpbufFile(JmpbufFilename);
@@ -131,7 +131,8 @@ struct ReplayClient::ClientImpl {
     M->getOrInsertFunction("rewrite", FnTy);
 
     auto &MBB = *Rewrite->begin();
-    // FIXME actually compile `Rewrite` multiple times for different worker process
+    // FIXME actually compile `Rewrite` multiple times for different worker
+    // process
     // for now just assume all the worker uses the same stack frame
     const auto &W = Workers[0];
     auto RetRegs = Instrumenter_->getReturnRegs(FnTy);
@@ -147,7 +148,7 @@ struct ReplayClient::ClientImpl {
     compileToObjectFile(*M, *Rewrite, RewriteObj, TM, false, false);
     const std::string RewriteLib = std::tmpnam(nullptr);
     errs() << "linking rewrite\n";
-    std::system(("cc -shared "+RewriteObj+" -o "+RewriteLib).c_str());
+    std::system(("cc -shared " + RewriteObj + " -o " + RewriteLib).c_str());
     std::remove(RewriteObj.c_str());
     return RewriteLib;
   }
@@ -163,25 +164,20 @@ struct ReplayClient::ClientImpl {
       }
     }
   }
-  
 };
 
-ReplayClient::ReplayClient(TargetMachine *TM,
-                           const std::string &WorkerFile,
+ReplayClient::ReplayClient(TargetMachine *TM, const std::string &WorkerFile,
                            const std::string &JmpbufFile)
     : Impl(new ClientImpl(TM, WorkerFile, JmpbufFile)) {}
 
-
 // kill all the workers
-ReplayClient::~ReplayClient()
-{
-  Impl->killAllWorkers();
-}
+ReplayClient::~ReplayClient() { Impl->killAllWorkers(); }
 
-std::vector<response> ReplayClient::testRewrite(Module *M, FunctionType *FnTy, MachineFunction *Rewrite)
-{ 
+std::vector<response> ReplayClient::testRewrite(Module *M, FunctionType *FnTy,
+                                                MachineFunction *Rewrite) {
   // make a copy of rewrite
-  MachineFunction MF(Rewrite->getFunction(), Rewrite->getTarget(), 0, Rewrite->getMMI());
+  MachineFunction MF(Rewrite->getFunction(), Rewrite->getTarget(), 0,
+                     Rewrite->getMMI());
   for (auto &MBB : *Rewrite) {
     auto *MBB_ = MF.CreateMachineBasicBlock();
     MF.push_back(MBB_);

@@ -7,19 +7,13 @@
 
 using namespace llvm;
 
-Searcher::Searcher(TargetMachine *TM,
-                   Module *MM,
-                   MachineFunction *MF,
-                   FunctionType *FnTy,
-                   ReplayClient *Cli) :
-  M(MM),
-  Client(Cli),
-  Transform(std::unique_ptr<Transformation>(getTransformation(TM, MF))),
-  TargetTy(FnTy)
-{}
+Searcher::Searcher(TargetMachine *TM, Module *MM, MachineFunction *MF,
+                   FunctionType *FnTy, ReplayClient *Cli)
+    : M(MM), Client(Cli),
+      Transform(std::unique_ptr<Transformation>(getTransformation(TM, MF))),
+      TargetTy(FnTy) {}
 
-unsigned Searcher::calculateCost(std::vector<response> &responses)
-{
+unsigned Searcher::calculateCost(std::vector<response> &responses) {
   unsigned cost = 0;
   for (const auto &resp : responses) {
     if (!resp.success) {
@@ -37,26 +31,22 @@ unsigned Searcher::calculateCost(std::vector<response> &responses)
   return cost;
 }
 
-double Searcher::rand()
-{
-  return (double)std::rand() / (RAND_MAX);
-}
+double Searcher::rand() { return (double)std::rand() / (RAND_MAX); }
 
-void Searcher::transformRewrite()
-{
+void Searcher::transformRewrite() {
   unsigned MaxInstrs = 15;
   double r = rand();
 
   // propose a rewrite
-  if (Transform->getNumInstrs() == 0) { 
+  if (Transform->getNumInstrs() == 0) {
     Transform->Insert();
-  } else if (r <= pc) { 
+  } else if (r <= pc) {
     // opcode
     Transform->MutateOpcode();
   } else if (r <= pc + po) {
     // operand
     Transform->MutateOperand();
-  } else if (r <= pc + po + ps) { 
+  } else if (r <= pc + po + ps) {
     // swap
 
     // probability of selecting an instruction
@@ -67,16 +57,16 @@ void Searcher::transformRewrite()
     } else {
       Transform->Move();
     }
-  } else { 
+  } else {
     // instruction
 
     double NumInstrs = Transform->getNumInstrs();
     double DelProb = NumInstrs / (double)MaxInstrs * pu,
-           RepProb = NumInstrs / (double)MaxInstrs * (1-pu);
+           RepProb = NumInstrs / (double)MaxInstrs * (1 - pu);
     double r = rand();
     if (r < DelProb) {
       Transform->Delete();
-    } else if (r < DelProb + RepProb) { 
+    } else if (r < DelProb + RepProb) {
       Transform->Replace();
     } else {
       Transform->Insert();
@@ -85,8 +75,7 @@ void Searcher::transformRewrite()
 }
 
 // default search strategy
-MachineFunction *Searcher::synthesize()
-{ 
+MachineFunction *Searcher::synthesize() {
   unsigned cost = 10000, Itr = 0;
 
   do {
@@ -95,13 +84,13 @@ MachineFunction *Searcher::synthesize()
     auto Result = Client->testRewrite(M, TargetTy, Transform->getFunction());
     unsigned newCost = calculateCost(Result);
 
-    bool Accept; 
+    bool Accept;
     if (newCost >= Signal_penalty) {
       Accept = false;
-    } else if (newCost <= cost) { 
+    } else if (newCost <= cost) {
       Accept = true;
-    } else { 
-      Accept = (rand() < std::exp(-beta * double(newCost)/double(cost)));
+    } else {
+      Accept = (rand() < std::exp(-beta * double(newCost) / double(cost)));
     }
 
     if (!Accept) {
@@ -117,19 +106,17 @@ MachineFunction *Searcher::synthesize()
 
     Itr++;
 
-    errs() << "!!! cost: " << cost << ", new cost: " << newCost << ", " << "itr: " << Itr << "\n";
+    errs() << "!!! cost: " << cost << ", new cost: " << newCost << ", "
+           << "itr: " << Itr << "\n";
 
   } while (cost != 0);
-
 
   return Transform->getFunction();
 }
 
-MachineFunction *Searcher::copyFunction(MachineFunction *MF)
-{
-  MachineFunction *Copied = new MachineFunction(MF->getFunction(),
-                                                MF->getTarget(),
-                                                1, MF->getMMI());
+MachineFunction *Searcher::copyFunction(MachineFunction *MF) {
+  MachineFunction *Copied =
+      new MachineFunction(MF->getFunction(), MF->getTarget(), 1, MF->getMMI());
   for (auto &MBB : *MF) {
     auto *MBB_ = Copied->CreateMachineBasicBlock();
     Copied->push_back(MBB_);
@@ -141,14 +128,12 @@ MachineFunction *Searcher::copyFunction(MachineFunction *MF)
   return Copied;
 }
 
-unsigned Searcher::calculateLatency(MachineFunction *MF)
-{
+unsigned Searcher::calculateLatency(MachineFunction *MF) {
   assert(MF->size() == 1 && "branches not supported");
   return MF->begin()->size() * 5;
 }
 
-MachineFunction *Searcher::optimize(int MaxItrs)
-{
+MachineFunction *Searcher::optimize(int MaxItrs) {
   unsigned cost = 100000, bestCorrectCost;
   MachineFunction *bestCorrect = copyFunction(Transform->getFunction());
   bestCorrectCost = calculateLatency(bestCorrect);
@@ -192,16 +177,17 @@ MachineFunction *Searcher::optimize(int MaxItrs)
 
     if (dist == 0 && newCost < bestCorrectCost) {
       bestCorrectCost = newCost;
-      if (bestCorrect) delete bestCorrect;
+      if (bestCorrect)
+        delete bestCorrect;
       bestCorrect = copyFunction(Transform->getFunction());
     }
 
     for (auto &I : *Transform->getFunction()->begin()) {
       errs() << I;
     }
-    
+
     errs() << "----- cost: " << newCost << ", dist: " << dist
-      << ", instrs: " << Transform->getNumInstrs() << "\n";
+           << ", instrs: " << Transform->getNumInstrs() << "\n";
   }
 
   return bestCorrect;
