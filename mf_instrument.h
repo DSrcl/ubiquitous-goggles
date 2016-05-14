@@ -2,11 +2,14 @@
 #define _MF_DUMP_REGS_H_
 
 #include <llvm/MC/MCRegisterInfo.h>
-#include <llvm/CodeGen/MachineBasicBlock.h> 
+#include <llvm/CodeGen/MachineBasicBlock.h>
 #include <llvm/MC/MCInstrInfo.h>
 #include <llvm/MC/MCRegisterInfo.h>
 #include <set>
 
+// an instrumenter is responsible for inserting code sequences
+// 1) to make a rewrite "runnable" for the server
+// 2) to dump live-out registers into a global buffer
 class Instrumenter {
   std::map<std::string, unsigned> Registers;
   void initRegisters() {
@@ -36,7 +39,10 @@ public:
     initRegisters();
   }
 
-  void calculateRegBufferLayout(llvm::Module &M, const std::vector<unsigned> &Regs, const std::string &BufferName, const llvm::TargetRegisterInfo *TRI); 
+  void calculateRegBufferLayout(llvm::Module &M,
+                                const std::vector<unsigned> &Regs,
+                                const std::string &BufferName,
+                                const llvm::TargetRegisterInfo *TRI);
 
   unsigned getOpcode(const std::string &Name) const {
     for (unsigned i = 0; i < MII->getNumOpcodes(); i++) {
@@ -51,9 +57,11 @@ public:
     return Registers.at(Name);
   }
 
+  // instrument the rewrite to return back to the server using longjmp
   virtual void instrumentToReturn(llvm::MachineFunction &MF,
                                   int64_t JmpbfuAddr) const = 0;
 
+  // dump registers to a global buffer
   void dumpRegisters(llvm::Module &M, llvm::MachineBasicBlock &MBB,
                      const std::vector<unsigned> &Regs,
                      const std::string &BufferName);
@@ -73,6 +81,7 @@ public:
                                 int64_t FrameBegin,
                                 int64_t FrameSize) const = 0;
 
+  // align `Addr`
   static unsigned align(unsigned Addr, unsigned Alignment);
 };
 

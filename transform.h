@@ -21,7 +21,8 @@ protected:
   const llvm::MCRegisterInfo *MRI;
   const llvm::TargetRegisterInfo *TRI;
   const llvm::TargetInstrInfo *TII;
-  // allows us to quickly select an opcode that's random but "syntactically equivalent" of a given opcode
+  // allows us to quickly select an opcode that's random but "syntactically
+  // equivalent" of a given opcode
   llvm::EquivalenceClasses<unsigned> OpcodeClasses;
 
   unsigned NumInstrs;
@@ -30,7 +31,7 @@ protected:
     NOP,
     MUT_OPCODE,
     MUT_OPERAND,
-    SWAP, 
+    SWAP,
     REPLACE,
     MOVE,
     INSERT,
@@ -51,7 +52,7 @@ protected:
   InstrIterator Swapped1, Swapped2;
 
   // select a random instruction
-  InstrIterator select(InstrIterator Except, bool IncludeEnd=true);
+  InstrIterator select(InstrIterator Except, bool IncludeEnd = true);
 
   // for delete
   llvm::MachineBasicBlock *Parent;
@@ -64,29 +65,35 @@ protected:
   // build equivalence classes for opcodes
   void buildOpcodeClasses();
 
-  const std::vector<int64_t> Immediates {
-    0, 1, -1, 2, -2, 3, -3, 4, -4,
-      5, -5, 6, -6, 7, -7, 8, -8,
-      16, -16, 32, -32, 64, -64, 128, -128
-  };
+  // pool from which we can select a random immediate
+  const std::vector<int64_t> Immediates{0,   1,  -1,  2,  -2,  3,   -3,  4,  -4,
+                                        5,   -5, 6,   -6, 7,   -7,  8,   -8, 16,
+                                        -16, 32, -32, 64, -64, 128, -128};
 
-  virtual void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo);
+  // randomize an operand
+  virtual void randOperand(llvm::MachineOperand &Op,
+                           const llvm::MCOperandInfo &OpInfo);
 
+  // get a random opcode
   unsigned chooseNonBranchOpcode();
 
   // replace `Old` with `New`
-  static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old, InstrIterator New, bool Erase=false) {
+  static void replaceInst(llvm::MachineBasicBlock &MBB, InstrIterator Old,
+                          InstrIterator New, bool Erase = false) {
     MBB.insert(Old, New);
     Old->removeFromParent();
-    if (Erase) MBB.getParent()->DeleteMachineInstr(Old);
+    if (Erase)
+      MBB.getParent()->DeleteMachineInstr(Old);
   }
 
+  // create a random instruction
   llvm::MachineInstr *randInstr();
 
   const llvm::TargetRegisterClass *getRegClass(const llvm::MCOperandInfo &Op);
 
 public:
-  Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : MF(TheMF), TM(TheTM) {
+  Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF)
+      : MF(TheMF), TM(TheTM) {
     assert(MF->size() == 1 && "no jumps for now");
 
     NumInstrs = MF->begin()->size();
@@ -96,7 +103,7 @@ public:
     TII = MF->getSubtarget().getInstrInfo();
     TRI = MF->getSubtarget().getRegisterInfo();
 
-    buildOpcodeClasses();  
+    buildOpcodeClasses();
   }
 
   unsigned getNumInstrs() { return NumInstrs; }
@@ -121,14 +128,17 @@ class X86_64Transformation : public Transformation {
   unsigned randReg(const llvm::MCOperandInfo &);
 
 public:
-  X86_64Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF) : Transformation(TheTM, TheMF), TheInstrumenter(TheTM) {
+  X86_64Transformation(llvm::TargetMachine *TheTM, llvm::MachineFunction *TheMF)
+      : Transformation(TheTM, TheMF), TheInstrumenter(TheTM) {
     RIP = TheInstrumenter.getRegister("RIP");
     EIP = TheInstrumenter.getRegister("EIP");
     IP = TheInstrumenter.getRegister("IP");
   }
-  
-  void randOperand(llvm::MachineOperand &Op, const llvm::MCOperandInfo &OpInfo) override;
+
+  void randOperand(llvm::MachineOperand &Op,
+                   const llvm::MCOperandInfo &OpInfo) override;
 };
 
-Transformation *getTransformation(llvm::TargetMachine *TM, llvm::MachineFunction *MF);
+Transformation *getTransformation(llvm::TargetMachine *TM,
+                                  llvm::MachineFunction *MF);
 #endif

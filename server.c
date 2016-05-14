@@ -213,6 +213,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
   if (can_spawn && fork() == 0) { // body of worker process
     register_signal_handler();
 
+    // wait for the parent process to dump target function's memory output
     sem_wait(sem);
     is_parent = 0;
 
@@ -274,6 +275,7 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
                    get_mem_dist(_server_heap_bottom, target_heap, heap_size),
                reg_dist = 0;
 
+        // calculate register distance
         int i, j;
         for (i = 0; i < _ug_num_output_regs; i++) {
           size_t dist = get_reg_dist(_ug_reg_info, rewrite_reg_data, target_reg_data, i, i); 
@@ -296,6 +298,13 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
         respond(cli_fd, make_report(reg_dist, stack_dist, heap_dist, crash_signal));
       }
 
+      // in case the child crash, report the result back to the client
+      //
+      // FIXME
+      // ideally we shouldn't have to wait for the child process since the child
+      // should handle whatever signals raised during its execution and exit normally
+      // however for some unknown reasons (hopefully we will find out...) some signals
+      // are not caught by the signal handler, causing the child to crash
       int retval;
       waitpid(pid, &retval, 0);
       if (retval != 0) {
@@ -339,6 +348,8 @@ uint32_t spawn_impl(uint32_t (*orig_func)(void), char *funcname) {
 uint32_t _server_spawn_worker(uint32_t (*orig_func)(void), char *funcname) {
   // make sure the spawn function's frame uses different pages than the
   // testcases'
+  //
+  // the reason is mprotect only allow you to protect whole pages
   volatile char placeholder[getpagesize()];
   // make sure the compiler doesn't remove placeholder's allocation
   placeholder[42] = 42;

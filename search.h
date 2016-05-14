@@ -11,6 +11,7 @@
 class Searcher {
   const unsigned Signal_penalty {1000000};
 
+  // various constants controlling the search algorithm
   // just read the paper dammit
   const float pc {0.16};
   const float po {0.5};
@@ -39,6 +40,8 @@ public:
            llvm::FunctionType *FnTy,
            ReplayClient *Cli);
   virtual llvm::MachineFunction *synthesize();
+
+  // optimize a function with the assumption that the function starts being correct
   virtual llvm::MachineFunction *optimize(int MaxItrs);
 };
 
